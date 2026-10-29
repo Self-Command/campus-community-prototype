@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 频道资料</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-channel.css">
+</head>
+<body>
+  <div class="app-shell">
+    <main>
+      <header class="appbar">
+        <div class="appbar-left">
+          <button class="icon-button" data-channel-link="campus-channel-manage.html" aria-label="返回">
+            <svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+        </div>
+        <div class="appbar-center"><strong>频道资料</strong></div>
+        <div class="appbar-right"><span class="channel-tag" data-role-label>频道管理员</span></div>
+      </header>
+
+      <section class="page channel-page">
+        <section class="channel-sheet">
+          <div class="channel-block">
+            <span class="channel-kicker">CHANNEL PROFILE</span>
+            <h1 class="channel-headline"><span data-channel-name>校学生会</span>资料设置</h1>
+            <p class="channel-copy">名称、简介、封面、头像、联系人、公告和加入规则都在一个线性表单里改，不再拆成很多包裹块。</p>
+          </div>
+        </section>
+
+        <section class="channel-sheet">
+          <div class="channel-section-head">
+            <div>
+              <h2>基础资料</h2>
+              <p>这些字段直接决定频道详情页、帖子来源和认证复核展示。</p>
+            </div>
+          </div>
+          <div class="channel-form">
+            <div class="channel-field"><label>频道名称</label><input value="校学生会"></div>
+            <div class="channel-field"><label>频道类型</label><input value="垂直频道" readonly></div>
+            <div class="channel-field"><label>频道类别</label><select><option selected>学生组织</option><option>兴趣社团</option><option>学校部门</option></select></div>
+            <div class="channel-field"><label>归属单位</label><input value="计算机学院团委"></div>
+            <div class="channel-field"><label>频道简介</label><textarea>负责学生事务、志愿服务、活动报名、意见收集和校园公告发布。</textarea></div>
+            <div class="channel-field"><label>频道公告</label><textarea>新成员请先阅读频道规则与活动报名说明；重要活动统一以置顶公告为准。</textarea></div>
+          </div>
+        </section>
+
+        <section class="channel-sheet">
+          <div class="channel-section-head">
+            <div>
+              <h2>视觉与联系信息</h2>
+              <p>封面和头像是两个独立入口，不再做三格上传。</p>
+            </div>
+          </div>
+          <div class="channel-form">
+            <div class="channel-field">
+              <label>频道封面</label>
+              <div>当前已上传 1 张主封面</div>
+              <div class="channel-field-meta">建议 1200 × 400，用于频道详情页顶部和认证复核。</div>
+            </div>
+            <div class="channel-field">
+              <label>频道头像</label>
+              <div>当前已上传方形头像</div>
+              <div class="channel-field-meta">用于频道列表、帖子来源和成员页。</div>
+            </div>
+            <div class="channel-field"><label>联系人</label><input value="周老师"></div>
+            <div class="channel-field"><label>联系电话</label><input value="138-0000-1208"></div>
+            <div class="channel-field"><label>联系邮箱</label><input value="studentunion@campus.edu"></div>
+          </div>
+        </section>
+
+        <section class="channel-sheet">
+          <div class="channel-section-head">
+            <div>
+              <h2>加入与展示</h2>
+              <p>加入规则是垂直频道属性，不是第三种频道类型。</p>
+            </div>
+          </div>
+          <div class="channel-form">
+            <div class="channel-field"><label>加入规则</label><select><option>直接加入</option><option selected>申请审核</option></select></div>
+            <div class="channel-field"><label>加入说明</label><textarea>提交申请后会进入学生会管理员审核。请填写真实学院和加入原因。</textarea></div>
+            <div class="channel-field"><label>频道首页分类</label><input value="动态 / 活动 / 投票 / 公告"></div>
+          </div>
+        </section>
+
+        <div class="channel-action-bar">
+          <button class="button tertiary" type="button" data-action-toast="已放弃本次修改">取消</button>
+          <button class="button" type="button" data-action-toast="频道资料已保存">保存资料</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script src="campus-channel-admin-data.js"></script>
+  <script>
+    (() => {
+      const ctx = window.CampusChannelAdminData?.getContext();
+      if (!ctx) return;
+      window.CampusChannelAdminData.applyContext(document, ctx);
+    })();
+  </script>
+</body>
+</html>

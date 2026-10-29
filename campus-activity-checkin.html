@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 活动签到</title>
+  <link rel="stylesheet" href="campus-native.css">
+</head>
+<body>
+  <div class="app-shell">
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-activity-detail.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>活动签到</strong></div>
+        <div class="appbar-right"></div>
+      </header>
+
+      <section class="page">
+        <div class="section-stack">
+          <div class="detail-card">
+            <h3>签到窗口</h3>
+            <p>毕业季旧物交换 · 14:00 - 14:30。当前开启“扫码 + 位置”双校验，通过后实时刷新管理员端签到名单。</p>
+            <div class="tag-row space-top"><span class="tag green">窗口已开启</span><span class="tag">范围：活动中心 80m</span><span class="tag">补签需管理员处理</span></div>
+          </div>
+
+          <div class="choice-grid columns-3">
+            <button class="choice-card active" type="button"><strong>扫码签到</strong><span>扫描现场二维码</span></button>
+            <button class="choice-card active" type="button"><strong>位置签到</strong><span>校验 GPS 在范围内</span></button>
+            <button class="choice-card" type="button"><strong>拍照签到</strong><span>当前活动未开启</span></button>
+          </div>
+
+          <div class="kv-grid">
+            <div class="kv-item"><strong>当前状态</strong><span>二维码待扫描，位置未校验</span></div>
+            <div class="kv-item"><strong>异常处理</strong><span>超时、越界、重复签到将返回明确提示</span></div>
+          </div>
+
+          <div class="button-row">
+            <button class="button tertiary" type="button" style="flex:1" data-action-toast="二维码扫描器已打开">开始扫码</button>
+            <button class="button" type="button" style="flex:1" data-action-toast="正在校验当前位置">校验位置</button>
+          </div>
+
+          <div class="warning-strip"><svg class="i banner-icon" viewBox="0 0 24 24"><path d="M12 3 3 20h18L12 3Z"/><path d="M12 9v4m0 4h.01"/></svg>若不在签到范围内，系统会提示“您不在签到范围内，请前往活动地点”。活动结束后会自动关闭签到入口。</div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+</body>
+</html>

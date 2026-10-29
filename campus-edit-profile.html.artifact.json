@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "campus-edit-profile.html",
+  "entry": "campus-edit-profile.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-21T02:40:18.694Z",
+  "updatedAt": "2026-06-21T02:40:18.694Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

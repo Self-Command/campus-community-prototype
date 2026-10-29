@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "campus-news.html",
+  "entry": "campus-news.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-21T02:43:04.441Z",
+  "updatedAt": "2026-06-21T02:43:04.441Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

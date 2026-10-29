@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "campus-lost-found-detail.html",
+  "entry": "campus-lost-found-detail.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-21T03:06:38.845Z",
+  "updatedAt": "2026-06-21T03:06:38.845Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

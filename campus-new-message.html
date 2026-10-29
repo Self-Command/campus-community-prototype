@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 新建私信</title>
+  <link rel="stylesheet" href="campus-native.css">
+</head>
+<body>
+  <div class="app-shell" data-tab-scope>
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-messages.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>新建私信</strong></div>
+        <div class="appbar-right"><a class="text-link" href="campus-chat-detail.html?conversationId=conv_gu_ning&userId=club_member">下一步</a></div>
+      </header>
+      <section class="page">
+        <div class="search compact-search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg><input data-list-search="#new-message-list" data-empty-target="#new-message-empty" placeholder="搜索用户姓名、用户名、频道"></div>
+        <div class="detail-card space-top"><h3>发起前说明</h3><p>私信权限由角色、频道关系、账号风险等级共同决定。平台管理员可私信所有用户，普通学生按后台策略开放。</p></div>
+        <div id="new-message-list" class="list space-top">
+          <button class="list-item" data-searchable data-nav="campus-chat-detail.html?conversationId=conv_gu_ning&userId=club_member"><span class="avatar green">顾</span><span class="list-copy"><span class="list-title">顾宁 <span>@guning</span></span><span class="list-subtitle">摄影社成员 · 可直接发起私信</span></span></button>
+          <button class="list-item" data-searchable data-nav="campus-chat-detail.html?conversationId=conv_su_xin&userId=FACULTY_MEMBER"><span class="avatar purple">苏</span><span class="list-copy"><span class="list-title">苏昕老师 <span>@suxin</span></span><span class="list-subtitle">教师 · 可按教学身份主动私信学生</span></span></button>
+          <button class="list-item" data-searchable><span class="avatar warm">周</span><span class="list-copy"><span class="list-title">周予安 <span>@zhouyuan</span></span><span class="list-subtitle">当前关闭陌生人私信，需要先互相关注</span></span></button>
+        </div>
+        <div class="empty" id="new-message-empty" hidden><div class="empty-icon"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg></div><h3>没有匹配对象</h3><p>可以换个姓名、用户名或频道关键词重试。</p></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+</body>
+</html>

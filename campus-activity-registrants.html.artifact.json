@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "APP-UI/campus-activity-registrants.html",
+  "entry": "APP-UI/campus-activity-registrants.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-22T00:18:13.654Z",
+  "updatedAt": "2026-06-22T00:18:13.654Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

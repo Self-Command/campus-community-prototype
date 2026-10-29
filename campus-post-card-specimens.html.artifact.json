@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "APP-UI/campus-post-card-specimens.html",
+  "entry": "APP-UI/campus-post-card-specimens.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-21T08:22:08.639Z",
+  "updatedAt": "2026-06-21T08:22:08.639Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

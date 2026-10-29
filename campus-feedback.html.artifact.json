@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "campus-feedback.html",
+  "entry": "campus-feedback.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-21T02:40:18.696Z",
+  "updatedAt": "2026-06-21T02:40:18.696Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

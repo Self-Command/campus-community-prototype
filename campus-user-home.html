@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 用户主页</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-posts.css">
+</head>
+<body>
+  <div class="app-shell" data-tab-scope>
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-user-home-back aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>用户主页</strong></div>
+        <div class="appbar-right"><button class="icon-button" data-action-toast="可举报、拉黑或分享主页" aria-label="更多"><svg class="i" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button></div>
+      </header>
+      <section class="page">
+        <div class="profile-cover"></div>
+        <section class="profile-summary" data-profile-summary>
+          <span class="avatar warm" data-profile-avatar>周</span>
+          <div class="profile-name-row"><h2 data-profile-name>周若晴</h2><span class="identity teacher" data-profile-role>老师</span><span class="pill green" data-profile-channel>教学交流</span></div>
+          <div class="profile-handle" data-profile-handle>@faculty_member · 计算机学院 · 副教授</div>
+          <p class="profile-bio" data-profile-bio>这里展示该用户公开发布的动态、回复与可见互动记录。</p>
+          <div class="profile-actions"><button class="button">关注</button><button class="button tertiary" data-profile-message>发私信</button></div>
+        </section>
+        <div class="segmented" data-tab-group><button class="active" data-tab="posts">帖子</button><button data-tab="replies">回复</button><button data-tab="likes">点赞</button></div>
+        <section data-tab-panel="posts" class="service-board space-top">
+          <div class="feed" data-user-posts></div>
+        </section>
+        <section data-tab-panel="replies" hidden class="service-board space-top"><article class="list-card"><h3>在“从南门到湖边的无障碍通行路线”下的回复</h3><p>提醒同学取景时注意车道和通行，不要在路口长时间停留。</p><div class="status-row"><span>评论跟随帖子来源场景展示身份</span><span>一层回复</span></div></article></section>
+        <section data-tab-panel="likes" hidden class="service-board space-top"><div class="center-empty"><h3>点赞列表不可见</h3><p>对方未公开点赞列表，按隐私设置仅本人可见。</p></div></section>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script src="campus-post-fixtures.js"></script>
+  <script src="campus-posts.js"></script>
+  <script>
+    (() => {
+      const params = new URLSearchParams(location.search);
+      const requestedId = params.get('userId') || 'FACULTY_MEMBER';
+      document.querySelector('[data-user-home-back]')?.addEventListener('click', () => {
+        if (history.length > 1) history.back();
+        else location.href = 'campus-home.html';
+      });
+      const posts = [
+        ...(window.CampusPostFixtures?.all || []),
+        ...(window.CampusPosts?.catalogFixtures || []),
+        ...(window.CampusPosts?.fixtures || [])
+      ];
+      const normalize = (value = '') => String(value).toLowerCase();
+      const profileIdFor = (post) => post.author?.profileId || post.specimen?.profileKey || post.displayIdentity?.displayName || '';
+      let matchedPosts = posts.filter((post) => normalize(profileIdFor(post)) === normalize(requestedId));
+      const sourcePost = matchedPosts[0] || posts.find((post) => normalize(post.displayIdentity?.displayName) === normalize(requestedId)) || posts.find((post) => profileIdFor(post) === 'FACULTY_MEMBER') || posts[0];
+      if (!sourcePost) return;
+      const sourceId = profileIdFor(sourcePost);
+      if (!matchedPosts.length) matchedPosts = posts.filter((post) => profileIdFor(post) === sourceId);
+      const identity = sourcePost.displayIdentity || {};
+      const author = sourcePost.author || {};
+      const avatar = document.querySelector('[data-profile-avatar]');
+      const name = document.querySelector('[data-profile-name]');
+      const role = document.querySelector('[data-profile-role]');
+      const channel = document.querySelector('[data-profile-channel]');
+      const handle = document.querySelector('[data-profile-handle]');
+      const bio = document.querySelector('[data-profile-bio]');
+      const list = document.querySelector('[data-user-posts]');
+      const roleClass = identity.role === '老师' ? 'teacher' : identity.role === '工作人员' || identity.role === '管理员' ? 'staff' : '';
+      const profileMeta = String(identity.metaLine || '').replace(/ · [^·]*前$/, '');
+      if (avatar) { avatar.className = `avatar ${author.avatarTone || ''}`.trim(); avatar.textContent = author.initial || '用'; }
+      if (name) name.textContent = identity.displayName || '用户';
+      if (role) { role.className = `identity ${roleClass}`.trim(); role.textContent = identity.role || '成员'; }
+      if (channel) channel.textContent = identity.verified?.label || sourcePost.channel?.name || '校园社区';
+      if (handle) handle.textContent = `@${normalize(sourceId).replaceAll('_', '-')} · ${profileMeta || '校园社区成员'}`;
+      if (bio) bio.textContent = `${identity.displayName || '该用户'}的个人主页。这里聚合 TA 公开发布的动态、评论回复和可见互动记录。`;
+      const messageButton = document.querySelector('[data-profile-message]');
+      if (messageButton) messageButton.dataset.nav = `campus-chat-detail.html?conversationId=conv_${encodeURIComponent(sourceId)}&userId=${encodeURIComponent(sourceId)}`;
+      if (list) {
+        const render = window.CampusPosts?.renderPostCard;
+        list.innerHTML = matchedPosts.length && render
+          ? matchedPosts.slice(0, 8).map(render).join('')
+          : '<section class="center-empty"><h3>暂未公开动态</h3><p>该用户还没有可向你展示的帖子。</p></section>';
+      }
+    })();
+  </script>
+</body>
+</html>

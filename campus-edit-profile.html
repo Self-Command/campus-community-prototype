@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 编辑资料</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <style>
+    .profile-editor { padding-bottom: 30px; }
+    .profile-editor-cover { position: relative; height: 164px; margin: -12px -16px 0; overflow: hidden; background: linear-gradient(135deg, #d7e8ff, #e9f2ff 55%, #dfeefe); }
+    .profile-editor-cover::after { content: ""; position: absolute; right: -32px; bottom: -66px; width: 210px; height: 210px; border: 26px solid rgba(255,255,255,.52); border-radius: 50%; }
+    .profile-cover-action { position: absolute; z-index: 1; right: 14px; bottom: 14px; min-height: 34px; padding: 0 11px; border-radius: 999px; background: rgba(255,255,255,.88); color: var(--ink); font-size: 12px; font-weight: 750; backdrop-filter: blur(12px); }
+    .profile-editor-avatar { position: relative; display: flex; align-items: end; gap: 10px; min-height: 74px; margin-top: -38px; }
+    .profile-editor-avatar .avatar { width: 78px; height: 78px; border: 4px solid var(--bg); font-size: 20px; }
+    .profile-avatar-edit { min-height: 34px; padding: 0 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--blue); font-size: 12px; font-weight: 750; }
+    .profile-upload-status { margin: 10px 0 0; color: var(--muted); font-size: 11px; }
+    .profile-editor-section { margin-top: 22px; }
+    .profile-editor-section h2 { margin: 0 0 9px; font-size: 16px; }
+    .profile-editor-hint { margin: -3px 0 10px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .profile-edit-fields { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .profile-edit-field { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 10px; align-items: center; min-height: 58px; border-bottom: 1px solid var(--line); }
+    .profile-edit-field:last-child { border-bottom: 0; }
+    .profile-edit-field label { font-size: 14px; font-weight: 700; }
+    .profile-edit-field input, .profile-edit-field textarea, .profile-edit-field select { width: 100%; border: 0; outline: 0; background: transparent; color: var(--ink); text-align: right; }
+    .profile-edit-field textarea { min-height: 70px; padding: 12px 0; text-align: left; line-height: 1.55; resize: vertical; }
+    .profile-edit-field.multiline { align-items: start; padding: 3px 0; }
+    .profile-field-lock { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; font-weight: 500; }
+    .profile-username-state { margin: 10px 0 0; padding: 10px 0; color: var(--muted); font-size: 12px; line-height: 1.5; border-bottom: 1px solid var(--line); }
+    .profile-username-state.pending { color: var(--amber); }
+    .profile-username-state.rejected { color: var(--red); }
+    .profile-identity-preview { display: flex; gap: 9px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--line); color: var(--ink-2); font-size: 12px; line-height: 1.55; }
+    .profile-identity-preview .i { width: 18px; color: var(--blue); }
+    .profile-identity-preview strong { color: var(--ink); }
+    .profile-privacy-list { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .profile-privacy-row { display: flex; align-items: center; gap: 12px; min-height: 62px; border-bottom: 1px solid var(--line); }
+    .profile-privacy-row:last-child { border-bottom: 0; }
+    .profile-privacy-row span { min-width: 0; flex: 1; }
+    .profile-privacy-row strong { display: block; font-size: 14px; }
+    .profile-privacy-row small { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; line-height: 1.4; }
+    @media (max-width: 400px) { .profile-edit-field { grid-template-columns: 88px minmax(0, 1fr); } }
+  </style>
+</head>
+<body>
+  <div class="app-shell"><main>
+    <header class="appbar"><div class="appbar-left"><button class="icon-button" data-nav="campus-profile.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div><div class="appbar-center"><strong>编辑资料</strong></div><div class="appbar-right"><button class="button" style="min-height:34px;padding:0 12px" type="submit" form="profile-form">保存</button></div></header>
+    <section class="page profile-editor" data-state-root>
+      <form id="profile-form" data-submit-message="资料已保存" data-success-nav="campus-profile.html">
+        <input id="profile-banner-file" type="file" accept="image/*" hidden>
+        <input id="profile-avatar-file" type="file" accept="image/*" hidden>
+        <div class="profile-editor-cover"><button class="profile-cover-action" type="button" data-profile-upload="profile-banner-file">更换封面</button></div>
+        <div class="profile-editor-avatar"><span class="avatar warm">林</span><button class="profile-avatar-edit" type="button" data-profile-upload="profile-avatar-file">更换头像</button></div>
+        <p class="profile-upload-status" data-profile-upload-status>封面和头像更换后，保存资料即可提交；图片审核期间继续显示当前版本。</p>
+        <section class="profile-editor-section"><h2>基础资料</h2><div class="profile-edit-fields"><div class="profile-edit-field"><label for="profile-username">用户名</label><input id="profile-username" name="username" value="linmo_2023" maxlength="20" required></div><div class="profile-edit-field"><label for="profile-gender">性别</label><select id="profile-gender" name="gender" aria-label="选择性别"><option>保密</option><option selected>女</option><option>男</option></select></div><div class="profile-edit-field"><label for="profile-department">学院 / 部门</label><input id="profile-department" name="department" value="计算机学院"></div><div class="profile-edit-field"><label for="profile-class">班级 / 职位</label><input id="profile-class" name="classInfo" value="软件工程 2023 级 2 班"></div><div class="profile-edit-field multiline"><label for="profile-bio">个性签名</label><textarea id="profile-bio" name="bio" maxlength="120">软件工程 2023 级。摄影社成员，负责学生会视觉内容。</textarea></div></div><p class="profile-username-state" data-username-state>用户名修改间隔和审核规则由平台配置；当前用户名仍可正常展示。</p></section>
+        <section class="profile-editor-section"><h2>身份展示</h2><p class="profile-editor-hint">选择个人主页优先展示的垂直频道身份；显示名称仍受认证频道的实名策略约束。</p><div class="profile-edit-fields"><div class="profile-edit-field"><label for="primary-identity">主要展示身份</label><select id="primary-identity" name="primaryIdentity" aria-label="选择主要展示身份"><option value="校学生会 · 宣传组管理员" selected>校学生会 · 宣传组管理员</option><option value="摄影社 · 成员">摄影社 · 成员</option><option value="志愿服务中心 · 成员">志愿服务中心 · 成员</option><option value="仅展示基础身份">仅展示基础身份</option></select></div><div class="profile-edit-field"><label for="identity-order">频道身份展示</label><select id="identity-order" name="identityOrder" aria-label="选择频道身份展示方式"><option selected>展示主要身份和认证信息</option><option>仅展示主要身份</option><option>按加入频道顺序展示</option></select></div></div><p class="profile-identity-preview"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg><span>个人主页将优先展示：<strong data-primary-identity-preview>校学生会 · 宣传组管理员</strong><br>认证垂直频道启用实名策略时，真实姓名展示优先于个人隐私选择。</span></p></section>
+        <section class="profile-editor-section"><h2>主页可见性</h2><div class="profile-privacy-list"><div class="profile-privacy-row"><span><strong>显示真实姓名</strong><small>若认证频道启用实名策略，此项由频道策略锁定</small></span><button class="switch" type="button" data-switch="edit-profile-realname" role="switch" aria-label="显示真实姓名"><i></i></button></div><div class="profile-privacy-row"><span><strong>显示班级信息</strong><small>活动报名仍会按授权带入，不影响公开主页</small></span><button class="switch on" type="button" data-switch="edit-profile-class" role="switch" aria-label="显示班级信息"><i></i></button></div><div class="profile-privacy-row"><span><strong>显示已加入频道</strong><small>展示数量由内容与互动配置决定</small></span><button class="switch on" type="button" data-switch="edit-profile-channels" role="switch" aria-label="显示已加入频道"><i></i></button></div><div class="profile-privacy-row"><span><strong>公开点赞列表</strong><small>关闭后仅自己可见</small></span><button class="switch" type="button" data-switch="edit-profile-like-public" role="switch" aria-label="公开点赞列表"><i></i></button></div></div></section>
+      </form>
+    </section>
+  </main></div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script>
+    (() => {
+      const form = document.getElementById('profile-form');
+      const identity = document.getElementById('primary-identity');
+      const preview = document.querySelector('[data-primary-identity-preview]');
+      const username = document.getElementById('profile-username');
+      const usernameState = document.querySelector('[data-username-state]');
+      const setPreview = () => { if (preview && identity) preview.textContent = identity.value; };
+      identity?.addEventListener('change', setPreview);
+      document.querySelectorAll('[data-profile-upload]').forEach((button) => button.addEventListener('click', () => document.getElementById(button.dataset.profileUpload)?.click()));
+      document.querySelectorAll('#profile-banner-file, #profile-avatar-file').forEach((input) => input.addEventListener('change', () => {
+        const files = [...input.files];
+        if (files.length) document.querySelector('[data-profile-upload-status]').textContent = `${input.id.includes('banner') ? '新封面' : '新头像'}已选择：${files[0].name}，保存后提交审核。`;
+      }));
+      const state = new URLSearchParams(window.location.search).get('usernameState');
+      if (state === 'pending') { username.disabled = true; usernameState.textContent = '用户名修改审核中。审核通过前继续展示当前用户名，暂不能再次提交修改。'; usernameState.classList.add('pending'); }
+      if (state === 'rejected') { usernameState.textContent = '上次用户名修改未通过审核：含有不符合规范的词汇。请修改后重新提交。'; usernameState.classList.add('rejected'); }
+      form?.addEventListener('input', () => setPreview());
+    })();
+  </script>
+</body>
+</html>

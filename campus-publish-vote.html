@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 发布投票</title>
+  <link rel="stylesheet" href="campus-native.css">
+</head>
+<body>
+  <div class="app-shell compose-app" data-tab-scope>
+    <main>
+      <header class="compose-appbar">
+        <a class="compose-close" href="campus-home.html" aria-label="取消发布"><svg class="i" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></a>
+        <div class="compose-appbar-title"><strong>发布投票</strong><span data-draft-status>草稿会自动保存</span></div>
+        <button class="compose-publish" form="vote-form" type="submit">发布</button>
+      </header>
+
+      <section class="publish-page" aria-label="发布投票">
+        <form id="vote-form" class="compose-form" data-compose-root data-compose-kind="vote" data-draft-key="publish-vote-v2" novalidate>
+          <div class="compose-target" aria-label="发布设置">
+            <label class="compose-select"><span>发布到</span><select name="channel" aria-label="发布到"><option value="cs">计算机学院学生会</option><option value="public">公共频道</option><option value="library">图书馆读者频道</option></select></label>
+            <span class="compose-role-hint">仅频道管理员及以上可发布投票</span>
+          </div>
+
+          <section class="compose-hero-card" aria-label="发布投票说明">
+            <span class="notice-icon"><svg class="i" viewBox="0 0 24 24"><path d="M5 20V10m7 10V4m7 16v-7"/></svg></span>
+            <div><h2>投票也是帖子的一种业务插槽</h2><p>卡片只展示选项摘要；详情页负责投票、结果可见性、匿名策略和截止后统计。</p></div>
+          </section>
+          <div class="publish-guidance" aria-label="投票状态">
+            <span><b>发布后</b><small>审核通过前不进入公共信息流</small></span>
+            <span><b>投票后</b><small>参与者不可修改选择，失败保留原状态</small></span>
+            <span><b>截止后</b><small>按结果可见性展示公开、投后或仅管理员结果</small></span>
+          </div>
+
+          <div class="compose-field"><input name="title" maxlength="50" required placeholder="投票标题" aria-label="投票标题"><span class="compose-error" data-error-for="title" role="alert"></span></div>
+          <div class="compose-editor compact-editor">
+            <textarea name="description" rows="3" maxlength="500" data-compose-content placeholder="补充背景、适用人群与注意事项（可选）" aria-label="投票说明"></textarea>
+            <div class="compose-editor-footer"><span></span><span><b data-char-count>0</b>/500</span></div>
+          </div>
+
+          <section class="compose-section vote-options-section" aria-labelledby="vote-options-title">
+            <div class="compose-section-head"><h2 id="vote-options-title">投票选项</h2><span data-option-count>2 / 10</span></div>
+            <div class="vote-option-list" data-vote-options>
+              <div class="vote-option"><span class="option-order">1</span><input name="voteOption" maxlength="50" required placeholder="选项 1" aria-label="投票选项 1"><button class="option-action" type="button" data-option-move="up" aria-label="上移选项"><svg class="i" viewBox="0 0 24 24"><path d="m6 14 6-6 6 6"/></svg></button><button class="option-action" type="button" data-option-remove aria-label="删除选项"><svg class="i" viewBox="0 0 24 24"><path d="M6 7h12m-8 4v5m4-5v5M9 7l1-2h4l1 2m-7 0 1 13h6l1-13"/></svg></button></div>
+              <div class="vote-option"><span class="option-order">2</span><input name="voteOption" maxlength="50" required placeholder="选项 2" aria-label="投票选项 2"><button class="option-action" type="button" data-option-move="up" aria-label="上移选项"><svg class="i" viewBox="0 0 24 24"><path d="m6 14 6-6 6 6"/></svg></button><button class="option-action" type="button" data-option-remove aria-label="删除选项"><svg class="i" viewBox="0 0 24 24"><path d="M6 7h12v5M9 7l1-2h4l1 2m-7 0 1 13h6l1-13"/></svg></button></div>
+            </div>
+            <button class="add-option" type="button" data-option-add><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>添加选项</button>
+            <span class="compose-error" data-error-for="voteOption" role="alert"></span>
+          </section>
+
+          <section class="compose-section" aria-labelledby="vote-rules-title">
+            <h2 id="vote-rules-title">投票规则</h2>
+            <div class="publish-choice" data-vote-mode-group aria-label="投票类型">
+              <button type="button" class="active" data-vote-mode="single" aria-pressed="true"><b>单选</b><span>每人只能选择一个选项</span></button>
+              <button type="button" data-vote-mode="multiple" aria-pressed="false"><b>多选</b><span>可限制最多选择数量</span></button>
+            </div>
+            <input type="hidden" name="voteMode" value="single">
+            <label class="compose-field" data-max-choice hidden><span>最多可选</span><input name="maxSelections" type="number" min="2" max="10" placeholder="例如：3"><span class="compose-error" data-error-for="maxSelections" role="alert"></span></label>
+            <label class="compose-field"><span>截止时间</span><input name="endAt" type="datetime-local" required><span class="compose-error" data-error-for="endAt" role="alert"></span></label>
+            <label class="compose-field"><span>结果可见性</span><select name="resultVisibility" required><option value="ALL">全程可见</option><option value="AFTER_VOTE">投票后可见</option><option value="ADMIN_ONLY">仅管理员可见</option></select></label>
+            <label class="publish-switch"><span><b>匿名投票</b><small>不向参与者展示具体投票人</small></span><input name="anonymous" type="checkbox" role="switch" aria-label="匿名投票"></label>
+          </section>
+
+          <section class="compose-section compose-collapsible" aria-labelledby="vote-restriction-title">
+            <button class="compose-section-toggle" type="button" data-compose-toggle="vote-restrictions" aria-expanded="false"><span><b id="vote-restriction-title">参与资格限制</b><small>可按学院、班级或频道成员限制</small></span><svg class="i" viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></svg></button>
+            <div id="vote-restrictions" hidden>
+              <label class="compose-field"><span>允许参与的范围</span><input name="eligibleGroups" maxlength="300" placeholder="不填则不限制；例如：计算机学院、2024级1班、摄影社"></label>
+            </div>
+          </section>
+
+          <section class="compose-note" aria-label="发布说明"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg><p>投票至少 2 项，最多 10 项。发布后参与者不可修改投票；截止后系统会自动结束并计算结果。</p></section>
+        </form>
+
+        <section class="publish-result" data-publish-result hidden aria-live="polite">
+          <span class="result-mark"><svg class="i" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span>
+          <h1>投票已提交审核</h1>
+          <p>审核通过后会按所选规则开放投票。截止时间到达后，系统将自动结束投票。</p>
+          <div class="result-actions"><a class="button full" href="campus-home.html">返回首页</a><a class="button tertiary full" href="campus-draft-box.html">查看草稿箱</a></div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+</body>
+</html>

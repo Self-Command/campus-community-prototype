@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "campus-account-cancellation.html",
+  "entry": "campus-account-cancellation.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-21T02:40:18.695Z",
+  "updatedAt": "2026-06-21T02:40:18.695Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

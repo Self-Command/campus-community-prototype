@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 发布失物招领</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-services.css">
+</head>
+<body>
+  <div class="service-app" data-service-theme="lost">
+    <main>
+      <header class="appbar"><div class="appbar-left"><button class="icon-button" data-nav="campus-lost-found.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div><div class="appbar-center"><strong>发布失物招领</strong></div><div class="appbar-right"><button class="text-link" type="submit" form="lost-form">提交</button></div></header>
+      <form id="lost-form" class="service-compose" data-submit-message="失物信息已提交审核" data-success-nav="campus-lost-found.html" data-state-root>
+        <p class="compose-note"><svg class="i" viewBox="0 0 24 24"><path d="M12 3 3 20h18L12 3Z"/><path d="M12 9v4m0 4h.01"/></svg>请只填写寻找或认领所必需的信息。发布后可标记“已找到 / 已归还”，系统会关闭公开入口。</p>
+        <section class="compose-group"><div class="compose-group-label">发布类型</div><div class="compose-field"><div class="compose-choice" data-choice-group data-choice-input="#lost-type"><button class="active" type="button" data-value="LOST">我丢了</button><button type="button" data-value="FOUND">我捡到了</button></div><input id="lost-type" type="hidden" value="LOST"></div></section>
+        <section class="compose-group"><div class="compose-group-label">物品信息</div><div class="compose-field"><div class="media-picker" data-media-picker><button type="button" data-open-media-picker aria-label="添加物品图片"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><span class="media-slot" data-media-slot hidden></span><span class="media-slot" data-media-slot hidden></span><input type="file" accept="image/*" multiple></div><small>最多 3 张；拾到证件时请遮挡敏感号码。</small></div><div class="compose-field"><label for="lost-title">物品名称</label><input id="lost-title" required maxlength="50" placeholder="例如：蓝色保温杯"></div><div class="compose-field inline"><label for="lost-category">物品分类</label><span class="field-control"><select id="lost-category" required><option>证件</option><option>钥匙</option><option>数码</option><option>钱包</option><option>衣物</option><option>其他</option></select></span></div><div class="compose-field"><label for="lost-description">物品描述</label><textarea id="lost-description" required maxlength="300" placeholder="颜色、品牌、独特特征及需要注意的情况"></textarea></div></section>
+        <section class="compose-group"><div class="compose-group-label">时间与联系</div><div class="compose-pair"><div class="compose-field"><label for="lost-time">丢失 / 拾到时间</label><input id="lost-time" required type="datetime-local"></div><div class="compose-field"><label for="lost-location">地点</label><input id="lost-location" required placeholder="可选预设地点或输入"></div></div><div class="compose-field"><label for="lost-contact">联系方式</label><input id="lost-contact" required placeholder="手机号或 QQ；展示时会脱敏"></div></section>
+        <div class="compose-submitbar"><button class="button secondary" type="button" data-action-toast="草稿已保存">存草稿</button><button class="button" type="submit">提交审核</button></div>
+      </form>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script src="campus-services.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 草稿箱</title>
+  <link rel="stylesheet" href="campus-native.css">
+</head>
+<body>
+  <div class="app-shell" data-tab-scope>
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-profile.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>草稿箱</strong></div>
+        <div class="appbar-right"></div>
+      </header>
+      <section class="page">
+        <div class="segmented" data-tab-group>
+          <button class="active" data-tab="editing">编辑中</button>
+          <button data-tab="rejected">审核未通过</button>
+          <button data-tab="deleted">已删除占位</button>
+        </div>
+        <section data-tab-panel="editing" class="service-board space-top">
+          <article class="list-card"><h3>图书馆自习区照明建议</h3><p>自动保存于 2 小时前。包含 3 张图片、1 个投票附件。</p><div class="status-row"><span class="tag blue">普通帖子</span><span>草稿 ID：draft_post_1024</span></div><div class="button-row"><a class="button tertiary" href="campus-publish-post.html" style="flex:1">继续编辑</a><button class="button secondary" style="flex:1" data-action-toast="删除前需要再次确认">删除草稿</button></div></article>
+          <article class="list-card"><h3>摄影社夜拍路线草案</h3><p>离线编辑后已同步云端。支持继续发布到指定频道。</p><div class="status-row"><span class="tag green">频道草稿</span><span>最后编辑：昨天 21:18</span></div></article>
+        </section>
+        <section data-tab-panel="rejected" hidden class="service-board space-top">
+          <article class="list-card"><div class="tag-row"><span class="tag red">REJECTED</span><span class="tag">仅自己可见</span></div><h3 class="space-top">求助：寻找遗失的蓝色水杯</h3><p>拒绝原因：正文包含完整手机号，违反隐私规则；图片 2 存在他人学生证正面。</p><div class="timeline space-top"><div class="timeline-item"><i></i><div class="timeline-copy"><strong>08:20 提交审核</strong><span>系统进入校园服务内容审核队列。</span></div></div><div class="timeline-item"><i></i><div class="timeline-copy"><strong>08:42 人工拒绝</strong><span>审核员建议改为“查看联系方式”按钮，不直接暴露号码。</span></div></div></div><div class="button-row"><a class="button tertiary" href="campus-help-publish.html" style="flex:1">重新编辑</a><button class="button secondary" style="flex:1" data-action-toast="申诉入口已创建">发起申诉</button></div></article>
+        </section>
+        <section data-tab-panel="deleted" hidden class="service-board space-top">
+          <div class="center-empty"><div class="empty-icon"><svg class="i banner-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg></div><h3>已删除内容不再恢复</h3><p>删除后的草稿只保留操作日志，前台显示“内容已删除”占位，不再允许重新编辑。</p></div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 发布动态</title>
+  <link rel="stylesheet" href="campus-native.css">
+</head>
+<body>
+  <div class="app-shell compose-app" data-tab-scope>
+    <main>
+      <header class="compose-appbar">
+        <a class="compose-close" href="campus-home.html" aria-label="取消发布"><svg class="i" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></a>
+        <div class="compose-appbar-title"><strong>发布动态</strong><span data-draft-status>草稿会自动保存</span></div>
+        <button class="compose-publish" form="post-form" type="submit">发布</button>
+      </header>
+
+      <section class="publish-page" aria-label="发布动态">
+        <form id="post-form" class="compose-form" data-compose-root data-compose-kind="post" data-draft-key="publish-post-v2" novalidate>
+          <div class="compose-target" aria-label="发布设置">
+            <label class="compose-select"><span>发布到</span><select name="channel" aria-label="发布到"><option value="public">公共频道</option><option value="photo">摄影社频道</option><option value="cs">计算机学院学生会</option></select></label>
+            <label class="compose-select"><span>谁可以看</span><select name="visibility" aria-label="可见范围"><option value="PUBLIC">全部人</option><option value="FOLLOWERS_ONLY">仅关注者</option><option value="CHANNEL_ONLY">仅频道成员</option></select></label>
+          </div>
+
+          <section class="compose-hero-card" aria-label="发布动态说明">
+            <span class="notice-icon"><svg class="i" viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 3z"/></svg></span>
+            <div><h2>动态会进入信息流摘要</h2><p>列表只展示摘要、媒体预览、频道来源与互动数据；完整正文、评论和更多操作在详情页展开。</p></div>
+          </section>
+          <div class="publish-guidance" aria-label="发布状态">
+            <span><b>审核前</b><small>仅作者可见，可从草稿箱继续修改</small></span>
+            <span><b>通过后</b><small>按可见范围进入首页、频道或个人主页</small></span>
+            <span><b>被处理</b><small>举报、删除、驳回会通过通知中心同步</small></span>
+          </div>
+
+          <div class="compose-editor">
+            <textarea id="post-content" name="content" rows="4" maxlength="2000" required data-compose-content placeholder="分享新鲜事…" aria-label="正文内容"></textarea>
+            <div class="compose-editor-footer"><span class="compose-error" data-error-for="content" role="alert"></span><span><b data-char-count>0</b>/2000</span></div>
+          </div>
+
+          <div class="media-preview" data-media-preview hidden aria-live="polite"></div>
+          <input id="post-media" class="visually-hidden" type="file" accept="image/jpeg,image/png,image/gif,image/webp,video/mp4,video/quicktime" multiple data-media-input data-media-limit="9">
+
+          <div class="compose-context" data-compose-context hidden></div>
+          <input type="hidden" name="location" value="" data-context-field>
+          <div class="compose-tools" aria-label="编辑工具">
+            <button type="button" data-media-trigger="post-media"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="m5 17 4-4 3 3 3-3 4 4"/></svg>图片</button>
+            <button type="button" data-media-trigger="post-media"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/></svg>视频</button>
+            <button type="button" data-insert-topic="#校园生活#"><svg class="i" viewBox="0 0 24 24"><path d="M5 4h14M5 20h14M9 4 7 20m10-16-2 16"/></svg>话题</button>
+            <button type="button" data-set-context="图书馆一层"><svg class="i" viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg>位置</button>
+          </div>
+
+          <section class="compose-note" aria-label="发布说明"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg><p>发布后会进入审核；通过前仅你可见。图片最多 9 张，视频发布权限由频道规则决定。</p></section>
+        </form>
+
+        <section class="publish-result" data-publish-result hidden aria-live="polite">
+          <span class="result-mark"><svg class="i" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span>
+          <h1>已提交审核</h1>
+          <p>内容通过审核后会按你选择的范围展示。你可以在草稿箱查看处理结果。</p>
+          <div class="result-actions"><a class="button full" href="campus-home.html">返回首页</a><a class="button tertiary full" href="campus-draft-box.html">查看草稿箱</a></div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+</body>
+</html>

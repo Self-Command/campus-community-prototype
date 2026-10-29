@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 我的收藏</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-posts.css">
+  <link rel="stylesheet" href="campus-personal.css">
+</head>
+<body>
+  <div class="app-shell" data-tab-scope>
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-profile.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>我的收藏</strong></div>
+        <div class="appbar-right"></div>
+      </header>
+      <section class="personal-page">
+        <div class="personal-filter" data-tab-group aria-label="收藏分类"><button class="active" data-tab="posts">帖子</button><button data-tab="activities">活动</button><button data-tab="services">校园服务</button></div>
+        <section data-tab-panel="posts" class="personal-post-feed"><div class="feed" data-post-list data-post-ids="spec-faculty_member-normal_link,spec-student_member-normal_gallery"></div></section>
+        <section data-tab-panel="activities" hidden>
+          <div class="personal-list">
+            <a class="personal-row" href="campus-activity-detail.html"><span class="personal-thumb activity-one">交</span><span class="personal-copy"><h2>毕业季旧物交换</h2><p>6 月 25 日 · 学生活动中心</p><span class="personal-meta"><span class="status">报名中</span><span>收藏后会提醒截止时间</span></span></span><span class="personal-tail"><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span></a>
+            <a class="personal-row" href="campus-activity-detail.html"><span class="personal-thumb activity-two">夜</span><span class="personal-copy"><h2>校园夜跑挑战赛</h2><p>7 月 3 日 · 东田径场</p><span class="personal-meta"><span class="status">报名中</span><span>还剩 22 个名额</span></span></span><span class="personal-tail"><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span></a>
+          </div>
+        </section>
+        <section data-tab-panel="services" hidden>
+          <div class="personal-market">
+            <a class="personal-market-item" href="campus-secondhand-detail.html"><div class="personal-market-visual market-one">平</div><h2>iPad mini 6</h2><div class="personal-price"><strong>¥2200</strong><span>95 新</span></div><p class="personal-market-meta">二手市场 · 4 人想要</p></a>
+            <a class="personal-market-item" href="campus-help-detail.html"><div class="personal-market-visual market-two">助</div><h2>求一位英语演讲搭档</h2><div class="personal-price"><strong>互助</strong><span>今天</span></div><p class="personal-market-meta">求助 · 计算机学院</p></a>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script src="campus-post-fixtures.js"></script>
+  <script src="campus-posts.js"></script>
+</body>
+</html>

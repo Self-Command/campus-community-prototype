@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "campus-secondhand-detail.html",
+  "entry": "campus-secondhand-detail.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-21T03:06:38.842Z",
+  "updatedAt": "2026-06-21T03:06:38.842Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

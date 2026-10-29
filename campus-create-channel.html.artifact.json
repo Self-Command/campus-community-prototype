@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "campus-create-channel.html",
+  "entry": "campus-create-channel.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-21T02:44:25.848Z",
+  "updatedAt": "2026-06-21T02:44:25.848Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

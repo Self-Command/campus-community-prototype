@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "campus-my-votes.html",
+  "entry": "campus-my-votes.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-21T02:38:03.638Z",
+  "updatedAt": "2026-06-21T02:38:03.638Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

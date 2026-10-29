@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 我的活动</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-personal.css">
+</head>
+<body>
+  <div class="app-shell" data-tab-scope>
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-profile.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>我的活动</strong></div>
+        <div class="appbar-right"></div>
+      </header>
+      <section class="personal-page">
+        <div class="personal-filter" data-tab-group aria-label="活动筛选"><button class="active" data-tab="registered">已报名</button><button data-tab="created">我创建的</button><button data-tab="history">已结束</button></div>
+        <section data-tab-panel="registered">
+          <p class="personal-section-note">报名状态、候补顺序与签到结果以活动详情的最新数据为准。</p>
+          <div class="personal-list">
+            <a class="personal-row" href="campus-activity-detail.html"><span class="personal-thumb activity-one">交</span><span class="personal-copy"><h2>毕业季旧物交换</h2><p>6 月 25 日 14:00 · 学生活动中心</p><span class="personal-meta"><span class="status">已报名</span><span>签到未开始</span></span></span><span class="personal-tail">查看详情<br><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span></a>
+            <a class="personal-row" href="campus-activity-detail.html"><span class="personal-thumb activity-two">研</span><span class="personal-copy"><h2>考研经验分享会</h2><p>7 月 1 日 19:00 · 图书馆报告厅</p><span class="personal-meta"><span class="status">候补第 3 位</span><span>递补后将通知你</span></span></span><span class="personal-tail">查看详情<br><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span></a>
+            <a class="personal-row" href="campus-activity-detail.html"><span class="personal-thumb activity-three">实</span><span class="personal-copy"><h2>实验室开放日</h2><p>报名资格未满足，管理员已移出名单</p><span class="personal-meta"><span class="status">已移除</span><span>可在详情查看原因与申诉</span></span></span><span class="personal-tail">查看说明<br><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span></a>
+          </div>
+        </section>
+        <section data-tab-panel="created" hidden>
+          <p class="personal-section-note">创建的活动可进入管理页处理报名名单、签到记录和活动状态。</p>
+          <div class="personal-list">
+            <a class="personal-row" href="campus-activity-manage.html"><span class="personal-thumb activity-two">摄</span><span class="personal-copy"><h2>摄影社夜拍工作坊</h2><p>已报名 38 人 · 候补 4 人 · 报名中</p><span class="personal-meta"><span class="status">活动管理</span><span>名单、签到、设置</span></span></span><span class="personal-tail">管理<br><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span></a>
+            <a class="personal-row" href="campus-activity-manage.html"><span class="personal-thumb activity-one">招</span><span class="personal-copy"><h2>社团招新说明会</h2><p>报名截止 · 签到已开启</p><span class="personal-meta"><span class="status">进行中</span><span>待签到 23 人</span></span></span><span class="personal-tail">管理<br><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span></a>
+          </div>
+        </section>
+        <section data-tab-panel="history" hidden>
+          <div class="personal-list">
+            <a class="personal-row" href="campus-activity-detail.html"><span class="personal-thumb activity-three">歌</span><span class="personal-copy"><h2>校园歌手大赛</h2><p>活动已取消 · 场地维修</p><span class="personal-meta"><span class="status">已取消</span><span>历史记录已保留</span></span></span><span class="personal-tail">查看详情<br><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span></a>
+            <a class="personal-row" href="campus-activity-detail.html"><span class="personal-thumb activity-one">志</span><span class="personal-copy"><h2>学院志愿服务日</h2><p>活动已结束 · 已完成签到</p><span class="personal-meta"><span class="status">已结束</span><span>加分结果已归档</span></span></span><span class="personal-tail">查看记录<br><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span></a>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+</body>
+</html>

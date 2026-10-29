@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 二手市场</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-services.css">
+</head>
+<body>
+  <div class="service-app" data-service-theme="market">
+    <main>
+      <header class="appbar"><div class="appbar-left"><button class="icon-button" data-nav="campus-home.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div><div class="appbar-center"><strong>二手市场</strong></div><div class="appbar-right"><a class="text-link" href="campus-secondhand-publish.html">发布</a></div></header>
+      <section class="service-page" data-state-root>
+        <div class="service-search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg><input data-list-search="#market-grid" data-empty-target="#market-empty" placeholder="搜索商品、卖家或交易地点"></div>
+        <div class="service-chipbar" data-service-filter-group data-service-filter-target="#market-grid" aria-label="商品分类"><button class="service-chip active" data-service-filter="all" type="button">全部</button><button class="service-chip" data-service-filter="digital" type="button">数码</button><button class="service-chip" data-service-filter="book" type="button">书籍教材</button><button class="service-chip" data-service-filter="life" type="button">生活用品</button><button class="service-chip" data-service-filter="sport" type="button">运动器材</button></div>
+        <div class="service-sort"><span>共 86 件在售商品</span><button type="button" data-action-toast="当前按最新发布排序"><svg class="i" viewBox="0 0 24 24"><path d="M7 8h10M7 12h7M7 16h4"/></svg>最新发布</button></div>
+        <div class="market-grid" id="market-grid">
+          <a class="market-item" href="campus-secondhand-detail.html" data-searchable data-service-item="digital"><div class="market-media" data-media="digital"><span class="market-badge">95 新</span></div><div class="market-copy"><h2>iPad mini 6 · 64G 深空灰</h2><div class="market-price"><strong>¥2200</strong><del>¥3799</del></div><div class="market-seller"><i>林</i>林墨 · 活动中心面交</div></div></a>
+          <a class="market-item" href="campus-secondhand-detail.html" data-searchable data-service-item="book"><div class="market-media" data-media="book"><span class="market-badge">少量笔记</span></div><div class="market-copy"><h2>算法导论（第 4 版）</h2><div class="market-price"><strong>¥58</strong><del>¥128</del></div><div class="market-seller"><i>周</i>周予安 · 图书馆附近</div></div></a>
+          <a class="market-item" href="campus-secondhand-detail.html" data-searchable data-service-item="sport"><div class="market-media" data-media="cycle"><span class="market-badge">可议价</span></div><div class="market-copy"><h2>通勤折叠自行车</h2><div class="market-price"><strong>¥320</strong><del>¥699</del></div><div class="market-seller"><i>程</i>程阳 · 东门自提</div></div></a>
+          <a class="market-item" href="campus-secondhand-detail.html" data-searchable data-service-item="life"><div class="market-media" data-media="digital"><span class="market-badge">配件齐全</span></div><div class="market-copy"><h2>宿舍小冰箱 50L</h2><div class="market-price"><strong>¥180</strong><del>¥399</del></div><div class="market-seller"><i>沈</i>沈乔 · 南苑宿舍区</div></div></a>
+        </div>
+        <div class="empty" id="market-empty" hidden><div class="empty-icon"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg></div><h3>没有找到在售商品</h3><p>可以换个关键词，或到“我的二手”查看已售出的历史记录。</p></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script src="campus-services.js"></script>
+</body>
+</html>

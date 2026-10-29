@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 新闻详情</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-services.css">
+</head>
+<body>
+  <div class="service-app" data-service-theme="news">
+    <main class="service-detail" data-state-root>
+      <header class="appbar"><div class="appbar-left"><button class="icon-button" data-nav="campus-news.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div><div class="appbar-center"><strong>校园新闻</strong></div><div class="appbar-right"><button class="icon-button" type="button" data-action-toast="已打开分享面板" aria-label="分享"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></button></div></header>
+      <article>
+        <header class="news-lead"><span class="svc-status">校园公告</span><h1>图书馆期末周服务时间调整</h1><div class="news-source"><span>学生处</span><span>·</span><time datetime="2026-06-21T09:00">今天 09:00</time><span>·</span><span>阅读 1,286</span></div></header>
+        <div class="news-cover" aria-label="图书馆期末周服务时间调整封面"></div>
+        <section class="news-copy"><p>为满足期末复习期间的学习需求，图书馆主馆自 6 月 23 日起调整开放时间为 07:30—22:30。各分馆及自习室预约规则保持不变。</p><h2>服务安排</h2><p>主馆夜间延长开放区域为一层、二层东侧和三层自习区。闭馆前 30 分钟停止入馆，请同学们合理安排学习时间。</p><p>如遇设备故障或座位使用问题，可通过图书馆服务台或校园社区反馈入口提交。馆内请保持安静，共同维护复习环境。</p></section>
+        <button class="news-attachment" type="button" data-action-toast="开始下载附件"><span class="service-list-icon"><svg class="i" viewBox="0 0 24 24"><path d="M8 3h6l4 4v14H8zM14 3v5h5M10 13h4M10 17h4"/></svg></span><span><strong>期末周图书馆服务安排.pdf</strong><small>PDF · 184 KB</small></span><svg class="i" style="margin-left:auto;color:var(--svc-muted)" viewBox="0 0 24 24"><path d="M12 4v11m-4-4 4 4 4-4M6 20h12"/></svg></button>
+      </article>
+      <div class="detail-actionbar"><button class="icon-button" type="button" data-save aria-label="收藏"><svg class="i" viewBox="0 0 24 24"><path d="M6 4h12v16l-6-4-6 4z"/></svg></button><button class="button secondary" type="button" data-action-toast="新闻已收藏">收藏</button><button class="button" type="button" data-action-toast="已打开分享面板">分享新闻</button></div>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script src="campus-services.js"></script>
+</body>
+</html>

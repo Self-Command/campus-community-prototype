@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 帮助中心</title>
+  <link rel="stylesheet" href="campus-native.css">
+</head>
+<body>
+  <div class="app-shell" data-tab-scope>
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-profile.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>帮助中心</strong></div>
+        <div class="appbar-right"></div>
+      </header>
+      <section class="page">
+        <div class="search compact-search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg><input placeholder="搜索账号、发布、频道、活动、私信问题"></div>
+        <div class="choice-grid columns-2 space-top">
+          <button class="choice-card active" type="button"><strong>账号与隐私</strong><span>用户名、实名显示、注销与登录问题</span></button>
+          <button class="choice-card" type="button"><strong>发布与审核</strong><span>草稿、审核中、拒绝原因与申诉</span></button>
+          <button class="choice-card" type="button"><strong>频道与活动</strong><span>加入审核、报名资格、签到方式</span></button>
+          <button class="choice-card" type="button"><strong>私信与通知</strong><span>消息权限、图片审核、免打扰设置</span></button>
+        </div>
+        <div class="faq-list space-top-lg">
+          <details class="faq-item" open><summary>为什么发布后自己看不到帖子？</summary><div class="faq-answer">所有 UGC 默认先审后发。PENDING 状态仅作者和审核员可见；REJECTED 会进入草稿箱“审核未通过”分区，并附拒绝理由和重编入口。</div></details>
+          <details class="faq-item"><summary>活动报名为什么要求我先补资料？</summary><div class="faq-answer">学生报名会自动带入真实姓名、学号、班级。若任一字段缺失，系统先跳转资料完善页，确保活动主办方能拿到完整名单。</div></details>
+          <details class="faq-item"><summary>为什么我看不到某个频道？</summary><div class="faq-answer">频道类型只有公开频道和垂直频道。垂直频道可能开启申请审核；你可以提交申请理由，等待频道管理员审批。被禁言或频道解散时也会出现不可见或只读状态。</div></details>
+          <details class="faq-item"><summary>私信图片为什么显示审核中？</summary><div class="faq-answer">文本私信默认即时投递，图片会进入内容审核策略。高风险内容可能继续转人工审核，审核中只显示占位提示。</div></details>
+        </div>
+        <div class="button-row space-top-lg"><a class="button tertiary" href="campus-feedback.html" style="flex:1">提交反馈</a><a class="button" href="campus-about.html" style="flex:1">查看平台说明</a></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+</body>
+</html>

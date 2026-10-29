@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "campus-chat-profile.html",
+  "entry": "campus-chat-profile.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-22T17:51:44.899+08:00",
+  "updatedAt": "2026-06-22T17:51:44.899+08:00",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

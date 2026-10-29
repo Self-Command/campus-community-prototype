@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "APP-UI/campus-activity-checkins.html",
+  "entry": "APP-UI/campus-activity-checkins.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-22T00:17:19.109Z",
+  "updatedAt": "2026-06-22T00:17:19.109Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

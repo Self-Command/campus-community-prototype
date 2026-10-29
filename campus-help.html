@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 互助求助</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-services.css">
+</head>
+<body>
+  <div class="service-app" data-service-theme="help">
+    <main>
+      <header class="appbar"><div class="appbar-left"><button class="icon-button" data-nav="campus-home.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div><div class="appbar-center"><strong>互助求助</strong></div><div class="appbar-right"><a class="text-link" href="campus-help-publish.html">发布</a></div></header>
+      <section class="service-page" data-state-root>
+        <div class="service-search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg><input data-list-search="#help-list" data-empty-target="#help-empty" placeholder="搜索求助、技能或地点"></div>
+        <div class="service-chipbar" data-service-filter-group data-service-filter-target="#help-list" aria-label="求助类型"><button class="service-chip active" data-service-filter="all" type="button">全部</button><button class="service-chip" data-service-filter="study" type="button">学业互助</button><button class="service-chip" data-service-filter="life" type="button">生活互助</button><button class="service-chip" data-service-filter="ride" type="button">拼车拼单</button><button class="service-chip" data-service-filter="skill" type="button">技能交换</button></div>
+        <p class="section-caption">正在求助</p>
+        <div class="service-list" id="help-list">
+          <a class="service-list-item" href="campus-help-detail.html" data-searchable data-service-item="ride"><span class="service-list-icon"><svg class="i" viewBox="0 0 24 24"><path d="M5 18h14M7 18l1-7h8l1 7M9 11l1-3h4l1 3"/></svg></span><span class="service-list-copy"><h2>周五晚从东门拼车去高铁站</h2><p>希望 20:00 左右出发，可平摊车费，优先匹配路线一致的同学。</p><span class="service-list-meta"><span>顾宁</span><span>回复 2</span><span>有效至 06-24 20:00</span></span></span><span class="service-list-aside"><span class="svc-status">有效中</span><svg class="i" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span></a>
+          <a class="service-list-item" href="campus-help-detail.html" data-searchable data-service-item="study"><span class="service-list-icon"><svg class="i" viewBox="0 0 24 24"><path d="M6 5h12v14H6zM9 9h6M9 13h4"/></svg></span><span class="service-list-copy"><h2>高数补习 2 次</h2><p>期末前需要线下答疑，重点是级数和微分方程。</p><span class="service-list-meta"><span>周予安</span><span>回复 4</span><span>悬赏 50 元</span></span></span><span class="service-list-aside"><span class="svc-status">有效中</span><svg class="i" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span></a>
+          <a class="service-list-item" href="campus-help-detail.html" data-searchable data-service-item="life"><span class="service-list-icon"><svg class="i" viewBox="0 0 24 24"><path d="M4 13h16M7 13V8h10v5M8 17h.01M16 17h.01"/></svg></span><span class="service-list-copy"><h2>帮忙搬实验器材</h2><p>求助已经完成，回复入口关闭，保留处理与感谢记录。</p><span class="service-list-meta"><span>今天 11:20</span><span>完成者：沈星</span></span></span><span class="service-list-aside"><span class="svc-status muted">已解决</span><svg class="i" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span></a>
+        </div>
+        <div class="empty" id="help-empty" hidden><div class="empty-icon"><svg class="i" viewBox="0 0 24 24"><path d="M9 10h6M12 7v6"/></svg></div><h3>没有匹配的求助</h3><p>可以换个关键词，或发布新的求助。</p><a class="button" href="campus-help-publish.html">发布求助</a></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script src="campus-services.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 投票详情</title>
+  <link rel="stylesheet" href="campus-native.css">
+</head>
+<body>
+  <div class="app-shell" data-tab-scope>
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-home.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>投票详情</strong></div>
+        <div class="appbar-right"></div>
+      </header>
+      <section class="page">
+        <div class="detail-card" data-poll>
+          <div class="tag-row"><span class="tag blue">进行中</span><span class="tag">匿名投票</span><span class="tag">结果投后可见</span></div>
+          <h2 style="margin:12px 0 6px;font-size:22px;letter-spacing:-.04em">图书馆期末周是否延长开放至 23:00？</h2>
+          <p class="muted-copy">学生事务中心发起。已投票 1,028 人，截止时间 6 月 30 日 23:00，多选限制：单选。</p>
+          <div class="poll-options space-top">
+            <button class="poll-option" type="button" data-poll-option><i style="--result:64%"></i><span>支持延长 <b>64%</b></span></button>
+            <button class="poll-option" type="button" data-poll-option><i style="--result:23%"></i><span>维持现状 <b>23%</b></span></button>
+            <button class="poll-option" type="button" data-poll-option><i style="--result:13%"></i><span>希望 24 小时开放 <b>13%</b></span></button>
+          </div>
+          <button class="button full space-top" type="button" data-action-toast="投票已提交，结果已刷新">提交投票</button>
+        </div>
+        <div class="detail-stack space-top-lg">
+          <div class="info-strip"><svg class="i banner-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg>当前设置为“投后可见结果”。匿名投票不展示具体投票人，只展示统计数量。</div>
+          <div class="detail-card"><h3>参与资格</h3><p>当前资格模式：NONE。所有正常账号均可参与；若未来开启资格限制，系统会按学院 / 频道 / 班级校验。</p></div>
+          <div class="detail-card"><h3>投票结果分支</h3><div class="tag-row"><span class="tag amber">未投票：隐藏结果</span><span class="tag green">已投票：展示统计</span><span class="tag red">已截止：禁用提交</span></div><p style="margin-top:10px">MVP 固定 `allow_change_vote=false`，提交后不显示改投入口。若结果可见性为截止后可见，已投用户也只看到“已记录你的选择”。</p></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+</body>
+</html>

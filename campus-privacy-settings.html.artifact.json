@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "APP-UI/campus-privacy-settings.html",
+  "entry": "APP-UI/campus-privacy-settings.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-22T00:49:08.292Z",
+  "updatedAt": "2026-06-22T00:49:08.292Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

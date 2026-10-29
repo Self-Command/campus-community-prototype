@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 报名名单</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-activity-admin.css">
+</head>
+<body>
+  <div class="app-shell"><main>
+    <header class="appbar"><div class="appbar-left"><button class="icon-button" data-nav="campus-activity-manage.html" aria-label="返回活动管理"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div><div class="appbar-center"><strong>报名名单</strong></div><div class="appbar-right"><button class="text-action" type="button" data-activity-export="报名名单已导出，导出范围与操作人已写入审计">导出</button></div></header>
+    <section class="page activity-page" data-state-root>
+      <header class="activity-context"><p class="activity-kicker">摄影社夜拍工作坊</p><h1>报名名单</h1><p>仅活动发起者和具备权限的频道管理员可查看真实姓名、学号、班级、手机号及自定义字段。</p></header>
+      <div class="activity-summary"><span><strong>144</strong><small>已确认</small></span><span><strong>7</strong><small>候补中</small></span><span><strong>3</strong><small>已取消</small></span></div>
+      <section class="activity-toolbar" data-activity-filter-root>
+        <label class="activity-search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg><input data-activity-search placeholder="搜索姓名、学号或班级" aria-label="搜索报名人员"></label>
+        <div class="activity-filter-row" aria-label="报名状态筛选"><button class="activity-filter active" data-activity-filter="all">全部</button><button class="activity-filter" data-activity-filter="confirmed">已确认</button><button class="activity-filter" data-activity-filter="waitlist">候补</button><button class="activity-filter" data-activity-filter="cancelled">已取消</button></div>
+        <div class="activity-data-list" aria-label="报名人员">
+          <button class="activity-person-row" data-activity-row data-activity-state="confirmed" data-activity-person="participant-dialog" data-person-name="林墨" data-person-status="已确认" data-person-meta="2023102048 · 软件工程 2023 级 2 班" data-person-extra="手机号 138****2216 · 自定义字段：有单反相机" data-person-row-id="linmo" data-person-chat="campus-chat-detail.html?userId=linmo"><span class="activity-person-avatar">林</span><span class="activity-person-copy"><strong>林墨</strong><small>2023102048 · 软件工程 2023 级 2 班</small></span><span class="activity-status ok" data-person-status-cell>已确认</span></button>
+          <button class="activity-person-row" data-activity-row data-activity-state="waitlist" data-activity-person="participant-dialog" data-person-name="顾宁" data-person-status="候补第 2 位" data-person-meta="2023102041 · 数字媒体 2023 级 1 班" data-person-extra="手机号 139****1083 · 自定义字段：可协助布光" data-person-row-id="guning" data-person-chat="campus-chat-detail.html?userId=guning"><span class="activity-person-avatar">顾</span><span class="activity-person-copy"><strong>顾宁</strong><small>2023102041 · 数字媒体 2023 级 1 班</small></span><span class="activity-status wait" data-person-status-cell>候补</span></button>
+          <button class="activity-person-row" data-activity-row data-activity-state="cancelled" data-activity-person="participant-dialog" data-person-name="周予安" data-person-status="已取消" data-person-meta="2023102011 · 新闻学 2023 级 3 班" data-person-extra="取消时间：6 月 26 日 14:28 · 本次取消不计入限制" data-person-row-id="zhouyan" data-person-chat="campus-chat-detail.html?userId=zhouyan"><span class="activity-person-avatar">周</span><span class="activity-person-copy"><strong>周予安</strong><small>2023102011 · 新闻学 2023 级 3 班</small></span><span class="activity-status muted" data-person-status-cell>已取消</span></button>
+          <button class="activity-person-row" data-activity-row data-activity-state="confirmed" data-activity-person="participant-dialog" data-person-name="沈星" data-person-status="已确认" data-person-meta="2023102088 · 视觉传达 2023 级 1 班" data-person-extra="手机号 136****8315 · 自定义字段：无" data-person-row-id="shenxing" data-person-chat="campus-chat-detail.html?userId=shenxing"><span class="activity-person-avatar">沈</span><span class="activity-person-copy"><strong>沈星</strong><small>2023102088 · 视觉传达 2023 级 1 班</small></span><span class="activity-status ok" data-person-status-cell>已确认</span></button>
+        </div>
+      </section>
+      <button class="button full secondary" type="button" data-open-activity-dialog="add-participant-dialog">手动添加活动人员</button>
+    </section>
+  </main></div>
+  <dialog id="participant-dialog" class="activity-dialog"><section class="activity-dialog-body"><header class="activity-dialog-head"><h2 data-person-name>活动参与者</h2><button type="button" data-close-activity-dialog="participant-dialog" aria-label="关闭">×</button></header><div class="activity-detail-lines"><div><span>报名状态</span><strong data-person-status>—</strong></div><div><span>身份信息</span><strong data-person-meta>—</strong></div><div><span>报名补充</span><strong data-person-extra>—</strong></div></div><input type="hidden" data-person-row-id><div class="button-row"><a class="button secondary" style="flex:1" href="campus-chat-detail.html" data-person-chat>发送消息</a><button class="button tertiary" style="flex:1" type="button" data-activity-person-action="current">移出活动</button></div><p class="activity-dialog-result">移除是否释放名额与通知用户，按活动配置执行。</p></section></dialog>
+  <dialog id="add-participant-dialog" class="activity-dialog"><form class="activity-dialog-body" data-activity-form data-activity-message="已加入活动名单；锁定资料和操作记录已同步"><header class="activity-dialog-head"><h2>手动添加人员</h2><button type="button" data-close-activity-dialog="add-participant-dialog" aria-label="关闭">×</button></header><div class="activity-field"><label for="participant-search">搜索已认证用户</label><input id="participant-search" required placeholder="姓名、学号或手机号"></div><div class="activity-field"><label for="participant-reason">添加说明</label><textarea id="participant-reason" required placeholder="例如：经活动负责人确认，补录现场报名人员"></textarea></div><button class="button full" type="submit">确认添加</button></form></dialog>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script><script src="campus-activity-admin.js"></script>
+</body>
+</html>

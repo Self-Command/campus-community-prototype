@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 话题详情</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-posts.css">
+</head>
+<body>
+  <div class="app-shell">
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-search.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>#校园生活</strong></div>
+        <div class="appbar-right"></div>
+      </header>
+
+      <section class="page">
+        <div class="hero-banner">
+          <span class="eyebrow" style="background:rgba(255,255,255,.18);color:#fff">PUBLIC · 已过滤审核中内容</span>
+          <h2>#校园生活</h2>
+          <p>聚合全站公开可见且审核通过的帖子，按最新或热门排序；无权限、已删除、审核中内容不进入话题流。</p>
+          <div class="meta-row"><span>参与帖子 1.2k</span><span>今日讨论 23</span><span>热度 8.5k</span></div>
+        </div>
+
+        <div class="segmented space-top">
+          <button class="active">最新</button>
+          <button>热门</button>
+        </div>
+
+        <div class="feed space-top" data-post-list data-post-ids="spec-student_member-normal_gallery,spec-staff_member-normal_text,spec-certified_channel_member-normal_video"></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script src="campus-post-fixtures.js"></script>
+  <script src="campus-posts.js"></script>
+</body>
+</html>

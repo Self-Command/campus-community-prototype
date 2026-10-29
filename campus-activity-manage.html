@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 活动管理</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-activity-admin.css">
+</head>
+<body>
+  <div class="app-shell">
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-my-activities.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>活动管理</strong></div>
+        <div class="appbar-right"><button class="icon-button" data-nav="campus-activity-detail.html" aria-label="查看活动页"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div>
+      </header>
+      <section class="page activity-page" data-state-root>
+        <header class="activity-context">
+          <p class="activity-kicker">活动进行中</p>
+          <h1>摄影社夜拍工作坊</h1>
+          <p>6 月 29 日 19:00 · 图书馆北门集合 · 创建者管理入口</p>
+        </header>
+        <div class="activity-summary" aria-label="活动概览"><span><strong>144</strong><small>已确认</small></span><span><strong>7</strong><small>候补中</small></span><span><strong>86</strong><small>已签到</small></span></div>
+        <section class="activity-section" aria-label="活动管理入口">
+          <div class="activity-section-head"><h2>管理此活动</h2><p>进入对应页面处理</p></div>
+          <nav class="activity-action-list" aria-label="管理功能">
+            <a class="activity-action-row" href="campus-activity-registrants.html"><span class="activity-row-icon"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span><span class="activity-action-copy"><strong>报名名单</strong><small>查看完整报名信息、候补、移除与导出</small></span><svg class="i activity-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></a>
+            <a class="activity-action-row" href="campus-activity-checkins.html"><span class="activity-row-icon green"><svg class="i" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/><circle cx="12" cy="12" r="9"/></svg></span><span class="activity-action-copy"><strong>签到记录</strong><small>发起签到、补签、取消签到与导出</small></span><svg class="i activity-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></a>
+            <a class="activity-action-row" href="campus-activity-settings.html"><span class="activity-row-icon amber"><svg class="i" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg></span><span class="activity-action-copy"><strong>活动设置</strong><small>编辑信息、报名规则、延期、取消与删除</small></span><svg class="i activity-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></a>
+          </nav>
+        </section>
+        <p class="activity-note"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg><span>人员、签到和状态变更均需在对应流程完成；系统记录操作人、时间、原因及变更前后状态。</span></p>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+</body>
+</html>

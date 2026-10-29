@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "campus-job-apply.html",
+  "entry": "campus-job-apply.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-21T03:06:38.827Z",
+  "updatedAt": "2026-06-21T03:06:38.827Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

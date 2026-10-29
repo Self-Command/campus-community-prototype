@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "APP-UI/campus-activity-settings.html",
+  "entry": "APP-UI/campus-activity-settings.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-22T00:17:19.110Z",
+  "updatedAt": "2026-06-22T00:17:19.110Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

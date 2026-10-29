@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 会话资料</title>
+  <link rel="stylesheet" href="campus-native.css">
+</head>
+<body>
+  <div class="app-shell" data-tab-scope>
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-chat-detail.html?conversationId=conv_gu_ning&userId=club_member" aria-label="返回聊天"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>会话资料</strong></div>
+        <div class="appbar-right"></div>
+      </header>
+      <section class="page">
+        <section class="chat-profile-hero">
+          <span class="avatar green">顾</span>
+          <h2>顾宁</h2>
+          <p>@club-member · 摄影社成员<br>你们同在“校园影像”频道，具备互发私信权限。</p>
+        </section>
+
+        <div class="chat-quick-actions" aria-label="会话快捷操作">
+          <a href="campus-user-home.html?userId=club_member"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg><span>个人主页</span></a>
+          <button type="button" data-action-toast="已进入聊天记录搜索"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg><span>查找记录</span></button>
+          <button type="button" data-action-toast="图片与文件面板已打开"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="m5 17 5-5 3 3 2-2 4 4"/></svg><span>媒体文件</span></button>
+          <button type="button" data-action-toast="已分享该用户主页"><svg class="i" viewBox="0 0 24 24"><path d="M4 12v7h16v-7M12 16V4m0 0 4 4m-4-4-4 4"/></svg><span>分享</span></button>
+        </div>
+
+        <section class="menu-group">
+          <div class="menu-title">会话设置</div>
+          <div class="setting"><div class="setting-copy"><strong>消息免打扰</strong><span>开启后仍接收消息，但不产生推送提醒</span></div><button class="switch" data-switch="chat-mute" type="button" role="switch" aria-label="消息免打扰"><i></i></button></div>
+          <div class="setting"><div class="setting-copy"><strong>置顶聊天</strong><span>将此会话固定在私信列表顶部</span></div><button class="switch on" data-switch="chat-pin" type="button" role="switch" aria-label="置顶聊天"><i></i></button></div>
+          <button class="menu-item" type="button" data-action-toast="聊天记录搜索已打开"><span class="menu-icon"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg></span><span class="menu-copy"><strong>查找聊天记录</strong><span>按关键词、图片、文件和时间筛选</span></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+        </section>
+
+        <section class="detail-card">
+          <h3>最近媒体</h3>
+          <div class="chat-media-grid" aria-label="最近媒体">
+            <button class="chat-media-tile" type="button" data-action-toast="海报预览已打开" aria-label="海报预览"></button>
+            <button class="chat-media-tile" type="button" data-action-toast="活动照片预览已打开" aria-label="活动照片预览"></button>
+            <button class="chat-media-tile" type="button" data-action-toast="频道封面预览已打开" aria-label="频道封面预览"></button>
+          </div>
+        </section>
+
+        <section class="detail-card">
+          <h3>权限与风控</h3>
+          <div class="checklist">
+            <div class="check-item"><span class="check-badge done">1</span><div class="check-body"><strong>互发权限已通过</strong><span>命中同频道成员策略：允许文字和图片消息。</span></div></div>
+            <div class="check-item"><span class="check-badge done">2</span><div class="check-body"><strong>图片消息需审核</strong><span>图片审核期间只对发送者可见，违规内容可触发风控。</span></div></div>
+            <div class="check-item"><span class="check-badge">3</span><div class="check-body"><strong>删除只影响当前账号视图</strong><span>举报、风控和审计相关记录按后台保留策略处理。</span></div></div>
+          </div>
+        </section>
+
+        <section class="menu-group">
+          <div class="menu-title">安全与治理</div>
+          <button class="menu-item" type="button" data-action-toast="举报原因面板已打开"><span class="menu-icon amber"><svg class="i" viewBox="0 0 24 24"><path d="M12 3 3 20h18L12 3Z"/><path d="M12 9v4m0 4h.01"/></svg></span><span class="menu-copy"><strong>举报此会话</strong><span>可附带最近聊天记录作为证据</span></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+          <button class="menu-item" type="button" data-action-toast="已拉黑，对方不会收到通知"><span class="menu-icon violet"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/><path d="m5 5 14 14"/></svg></span><span class="menu-copy"><strong>拉黑用户</strong><span>对方不会收到通知，仍保留必要审计记录</span></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+          <button class="menu-item" type="button" data-action-toast="已清空本地聊天记录"><span class="menu-icon"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M9 7V5h6v2m-7 0 1 12h6l1-12"/></svg></span><span class="menu-copy"><strong>清空聊天记录</strong><span>仅清空当前账号本地视图，不影响对方</span></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+          <button class="menu-item" type="button" data-action-toast="会话已从你的列表删除"><span class="menu-icon amber"><svg class="i" viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 3z"/><path d="M8 8h8"/></svg></span><span class="menu-copy"><strong>删除会话</strong><span>后端仅删除当前用户会话视图</span></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+        </section>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+</body>
+</html>

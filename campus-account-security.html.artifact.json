@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "APP-UI/campus-account-security.html",
+  "entry": "APP-UI/campus-account-security.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-22T00:49:08.291Z",
+  "updatedAt": "2026-06-22T00:49:08.291Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

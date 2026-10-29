@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "campus-help.html",
+  "entry": "campus-help.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-21T02:43:04.437Z",
+  "updatedAt": "2026-06-21T02:43:04.437Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 我的二手发布</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-personal.css">
+</head>
+<body>
+  <div class="app-shell" data-tab-scope>
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-profile.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>我的二手发布</strong></div>
+        <div class="appbar-right"><a class="text-button" href="campus-secondhand-publish.html">发布</a></div>
+      </header>
+      <section class="personal-page">
+        <div class="personal-filter" data-tab-group aria-label="二手状态"><button class="active" data-tab="onsale">在售</button><button data-tab="reviewing">审核中</button><button data-tab="sold">已售出</button></div>
+        <section data-tab-panel="onsale">
+          <p class="personal-section-note">买家联系、想要和商品状态集中在这里；标记售出后将自动从公开市场下架。</p>
+          <div class="personal-market" data-market-onsale>
+            <article class="personal-market-item" data-market-item="ipad"><a href="campus-secondhand-detail.html" style="color:inherit;text-decoration:none"><div class="personal-market-visual market-one">平</div><h2>iPad mini 6</h2><div class="personal-price"><strong>¥2200</strong><span>95 新</span></div><p class="personal-market-meta">4 人想要 · 12 人浏览</p></a><button class="personal-action primary" style="width:100%;margin-top:9px" type="button" data-mark-sold="ipad">标记售出</button></article>
+            <article class="personal-market-item" data-market-item="book"><a href="campus-secondhand-detail.html" style="color:inherit;text-decoration:none"><div class="personal-market-visual market-two">书</div><h2>算法导论（第 4 版）</h2><div class="personal-price"><strong>¥48</strong><span>九成新</span></div><p class="personal-market-meta">1 人想要 · 刚刚编辑</p></a><button class="personal-action primary" style="width:100%;margin-top:9px" type="button" data-mark-sold="book">标记售出</button></article>
+          </div>
+        </section>
+        <section data-tab-panel="reviewing" hidden>
+          <div class="personal-market">
+            <article class="personal-market-item"><div class="personal-market-visual market-two">耳</div><h2>降噪蓝牙耳机</h2><div class="personal-price"><strong>¥180</strong><span>待审核</span></div><p class="personal-market-meta">仅自己与审核人员可见</p></article>
+          </div>
+        </section>
+        <section data-tab-panel="sold" hidden>
+          <div class="personal-market" data-market-sold>
+            <article class="personal-market-item"><div class="personal-market-visual market-two">书</div><h2>高等数学同济版</h2><div class="personal-price"><strong>¥20</strong><span>已售出</span></div><p class="personal-market-meta">成交记录已保留</p></article>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script>
+    (() => {
+      const sold = document.querySelector('[data-market-sold]');
+      document.querySelectorAll('[data-mark-sold]').forEach((button) => button.addEventListener('click', () => {
+        const item = button.closest('[data-market-item]');
+        if (!item || !sold) return;
+        button.disabled = true;
+        button.textContent = '已售出';
+        const meta = item.querySelector('.personal-market-meta');
+        if (meta) meta.textContent = '已下架 · 成交记录已保留';
+        window.setTimeout(() => sold.append(item), 150);
+      }));
+    })();
+  </script>
+</body>
+</html>

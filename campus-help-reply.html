@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 回复求助</title>
+  <link rel="stylesheet" href="campus-native.css">
+</head>
+<body>
+  <div class="app-shell">
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-help-detail.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>回复求助</strong></div>
+        <div class="appbar-right"><button class="button" style="min-height:34px;padding:0 12px" form="help-reply-form" type="submit">发送</button></div>
+      </header>
+
+      <section class="page">
+        <form id="help-reply-form" class="section-stack" data-submit-message="已通知对方你愿意提供帮助" data-success-nav="campus-help-detail.html">
+          <div class="detail-card">
+            <h3>当前求助</h3>
+            <p>周五晚从东门拼车去高铁站。提交后会生成一条求助回复，并通过消息页通知发布者；你的联系方式仅在对方查看后解锁并记录日志。</p>
+          </div>
+
+          <div class="field"><label>可提供的帮助</label><textarea required maxlength="300" placeholder="说明你的出发时间、路线、人数或能提供的具体协助"></textarea></div>
+          <div class="field"><label>联系方式</label><input required placeholder="手机号 / 微信 / QQ"></div>
+          <div class="field"><label>补充备注</label><textarea maxlength="120" placeholder="例如：可带一个 24 寸行李箱、最晚能等到 20:20"></textarea></div>
+
+          <div class="info-strip"><svg class="i banner-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg>如果求助已关闭、过期或被删除，系统会阻止发送并提示当前状态。回复内容同样进入审核。</div>
+        </form>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+</body>
+</html>

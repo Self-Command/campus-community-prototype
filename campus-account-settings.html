@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 设置</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-personal.css">
+</head>
+<body>
+  <div class="app-shell">
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-profile.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>设置</strong></div>
+        <div class="appbar-right"></div>
+      </header>
+      <section class="settings-page-clean">
+        <button class="settings-profile-entry" type="button" data-nav="campus-edit-profile.html"><span class="avatar">林</span><span><strong>林墨</strong><small>已实名 · 计算机学院 · @linmo</small></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+
+        <section class="settings-group">
+          <div class="settings-group-title">账号</div>
+          <button class="settings-row" type="button" data-nav="campus-account-security.html"><span><strong>账号与安全</strong><small>手机号、密码、登录设备</small></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+          <button class="settings-row" type="button" data-nav="campus-privacy-settings.html"><span><strong>隐私与社交</strong><small>主页、私信、真实姓名与黑名单</small></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+          <button class="settings-row" type="button" data-nav="campus-notification-settings.html"><span><strong>通知设置</strong><small>互动、频道、活动和免打扰</small></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+        </section>
+
+        <section class="settings-group">
+          <div class="settings-group-title">内容与数据</div>
+          <a class="settings-row" href="campus-draft-box.html"><span><strong>草稿箱</strong><small>帖子、活动、投票和服务内容的本地草稿</small></span><span class="pill">2</span></a>
+          <button class="settings-row" type="button" data-nav="campus-data-settings.html"><span><strong>数据与存储</strong><small>清理缓存、导出个人数据</small></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+        </section>
+
+        <section class="settings-group">
+          <div class="settings-group-title">支持</div>
+          <a class="settings-row" href="campus-help-center.html"><span><strong>帮助中心</strong><small>账号、发布、频道、活动与私信</small></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></a>
+          <a class="settings-row" href="campus-feedback.html"><span><strong>意见反馈</strong><small>提交 Bug、功能建议与体验问题</small></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></a>
+          <a class="settings-row" href="campus-about.html"><span><strong>关于校园社区</strong><small>版本、协议与隐私政策</small></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></a>
+        </section>
+
+        <section class="settings-group">
+          <div class="settings-group-title">账号操作</div>
+          <button class="settings-row danger" type="button" data-open-logout><span><strong>退出登录</strong><small>只退出当前设备，不删除数据</small></span></button>
+          <a class="settings-row danger" href="campus-account-cancellation.html"><span><strong>注销账号</strong><small>需先满足活动、频道与违规处理条件</small></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></a>
+        </section>
+        <p class="settings-version">Campus Link 1.0.0 · 设置项按账号状态与后台能力策略展示。</p>
+      </section>
+    </main>
+  </div>
+  <dialog class="settings-dialog" data-logout-dialog aria-labelledby="logout-title"><header><strong id="logout-title">退出当前账号？</strong><button type="button" data-close-logout aria-label="关闭">×</button></header><div style="padding:18px"><p style="margin:0;color:var(--ink-2);line-height:1.6">退出后不会删除帖子、活动、投票和交易记录。你可以随时重新登录。</p><div class="button-row" style="margin-top:18px"><button class="button tertiary" type="button" data-close-logout style="flex:1">取消</button><button class="button" type="button" data-nav="campus-login.html" style="flex:1">确认退出</button></div></div></dialog>
+  <script src="campus-native.js"></script>
+  <script>
+    (() => { const dialog = document.querySelector('[data-logout-dialog]'); document.querySelector('[data-open-logout]')?.addEventListener('click', () => dialog?.showModal()); document.querySelectorAll('[data-close-logout]').forEach((button) => button.addEventListener('click', () => dialog?.close())); dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); }); })();
+  </script>
+</body>
+</html>

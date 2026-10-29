@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 创建频道</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-channel.css">
+</head>
+<body>
+  <div class="app-shell">
+    <main>
+      <header class="appbar">
+        <div class="appbar-left">
+          <button class="icon-button" data-nav="campus-channels.html" aria-label="返回">
+            <svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+        </div>
+        <div class="appbar-center"><strong>创建频道</strong></div>
+        <div class="appbar-right"></div>
+      </header>
+
+      <section class="page channel-page">
+        <section class="channel-sheet">
+          <div class="channel-block">
+            <span class="channel-kicker">CREATE CHANNEL</span>
+            <h1 class="channel-headline">创建频道</h1>
+            <p class="channel-copy">创建页也改成线性表单。频道类型只有公开频道和垂直频道；垂直频道可申请官方认证，加入规则单独配置。</p>
+          </div>
+        </section>
+
+        <form class="channel-sheet">
+          <div class="channel-form">
+            <div class="channel-field"><label>频道名称</label><input placeholder="例如：校学生会、校园摄影"></div>
+            <div class="channel-field"><label>频道类型</label><select><option>公开频道</option><option selected>垂直频道</option></select></div>
+            <div class="channel-field"><label>频道类别</label><select><option selected>学生组织</option><option>兴趣社团</option><option>学校部门</option></select></div>
+            <div class="channel-field"><label>加入规则</label><select><option>直接加入</option><option selected>申请审核</option></select></div>
+            <div class="channel-field"><label>频道简介</label><textarea placeholder="说明频道服务对象、主要内容和加入条件"></textarea></div>
+            <div class="channel-field"><label>联系人</label><input placeholder="指导老师或频道联系人"></div>
+            <div class="channel-field"><label>联系邮箱</label><input placeholder="channel@campus.edu"></div>
+          </div>
+        </form>
+
+        <section class="channel-sheet">
+          <div class="channel-section-head">
+            <div>
+              <h2>上传材料</h2>
+              <p>封面和头像是两个独立入口，不再做三格上传框。</p>
+            </div>
+          </div>
+          <div class="channel-row-list">
+            <a class="channel-row no-icon" href="#">
+              <div class="channel-row-main">
+                <div class="channel-row-title">频道封面</div>
+                <div class="channel-row-sub">建议 1200 × 400，用于频道详情页顶部和认证复核。</div>
+              </div>
+              <div class="channel-row-tail"><span class="channel-tag">未上传</span></div>
+            </a>
+            <a class="channel-row no-icon" href="#">
+              <div class="channel-row-main">
+                <div class="channel-row-title">频道头像</div>
+                <div class="channel-row-sub">用于频道列表、帖子来源和成员页。</div>
+              </div>
+              <div class="channel-row-tail"><span class="channel-tag">未上传</span></div>
+            </a>
+          </div>
+        </section>
+
+        <div class="channel-action-bar">
+          <button class="button tertiary" type="button" data-action-toast="草稿已保存">保存草稿</button>
+          <button class="button" type="button" data-action-toast="频道创建申请已提交审核">提交审核</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+</body>
+</html>

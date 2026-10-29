@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 发布权限</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-channel.css">
+</head>
+<body>
+  <div class="app-shell">
+    <main>
+      <header class="appbar">
+        <div class="appbar-left">
+          <button class="icon-button" data-channel-link="campus-channel-manage.html" aria-label="返回">
+            <svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+        </div>
+        <div class="appbar-center"><strong>发布权限</strong></div>
+        <div class="appbar-right"><span class="channel-tag" data-role-label>频道管理员</span></div>
+      </header>
+
+      <section class="page channel-page">
+        <section class="channel-sheet">
+          <div class="channel-block">
+            <span class="channel-kicker">PUBLISHING RULES</span>
+            <h1 class="channel-headline"><span data-channel-name>校学生会</span>发布权限</h1>
+            <p class="channel-copy">把帖子、视频、活动、投票和同步策略拆成清晰行，不再用很多解释块包起来。</p>
+          </div>
+        </section>
+
+        <section class="channel-sheet">
+          <div class="channel-section-head">
+            <div>
+              <h2>内容类型</h2>
+              <p>真实权限以后端能力为准，页面只展示当前模板。</p>
+            </div>
+          </div>
+          <div class="channel-form">
+            <div class="channel-field">
+              <label>普通帖子</label>
+              <select><option selected>频道成员可发</option><option>仅管理员可发</option></select>
+              <div class="channel-field-meta">文字、图文、链接帖统一进入审核。</div>
+            </div>
+            <div class="channel-field">
+              <label>视频帖子</label>
+              <select><option selected>仅认证成员可发</option><option>频道成员可发</option><option>关闭</option></select>
+              <div class="channel-field-meta">默认模板为认证垂直频道成员可发布视频。</div>
+            </div>
+            <div class="channel-field">
+              <label>活动 / 投票</label>
+              <select><option selected>仅管理员与创建者</option><option>仅创建者</option></select>
+              <div class="channel-field-meta">普通成员不出现活动与投票发帖入口。</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="channel-sheet">
+          <div class="channel-section-head">
+            <div>
+              <h2>展示策略</h2>
+              <p>只保留跟前台显示和后端配置直接相关的项。</p>
+            </div>
+          </div>
+          <div class="channel-form">
+            <div class="channel-field">
+              <label>同步公共信息流</label>
+              <select><option selected>管理员逐帖决定</option><option>频道内展示，不同步</option></select>
+            </div>
+            <div class="channel-field">
+              <label>置顶与公告</label>
+              <select><option selected>仅管理员可设置</option><option>创建者独占</option></select>
+            </div>
+            <div class="channel-field">
+              <label>频道首页分类</label>
+              <input value="动态 / 活动 / 投票 / 公告">
+              <div class="channel-field-meta">分类顺序要和频道详情页一致。</div>
+            </div>
+          </div>
+        </section>
+
+        <div class="channel-action-bar">
+          <button class="button tertiary" type="button" data-action-toast="已恢复默认模板">恢复默认</button>
+          <button class="button" type="button" data-action-toast="发布权限已保存">保存发布权限</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script src="campus-channel-admin-data.js"></script>
+  <script>
+    (() => {
+      const ctx = window.CampusChannelAdminData?.getContext();
+      if (!ctx) return;
+      window.CampusChannelAdminData.applyContext(document, ctx);
+    })();
+  </script>
+</body>
+</html>

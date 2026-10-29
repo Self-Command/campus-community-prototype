@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 活动详情</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <style>
+    .activity-detail { min-height: 100vh; padding-bottom: calc(92px + env(safe-area-inset-bottom, 0px)); background: var(--bg); color: var(--ink); }
+    .activity-bar { position: sticky; top: 0; z-index: 10; display: grid; grid-template-columns: 48px 1fr 48px; align-items: center; min-height: calc(56px + env(safe-area-inset-top, 0px)); padding: env(safe-area-inset-top, 0px) 10px 0; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(14px); }
+    .activity-bar h1 { margin: 0; text-align: center; font-size: 17px; letter-spacing: -.02em; }
+    .activity-bar .icon-button { justify-self: center; }
+    .activity-hero { position: relative; min-height: 206px; overflow: hidden; padding: 22px 18px; background: linear-gradient(135deg, #123d72 0%, #1769e0 58%, #65a8ff 100%); color: #fff; }
+    .activity-hero::after { content: ""; position: absolute; right: -38px; bottom: -58px; width: 210px; height: 210px; border: 38px solid rgba(255,255,255,.12); border-radius: 50%; }
+    .activity-hero > * { position: relative; z-index: 1; }
+    .activity-kicker { margin: 0; color: rgba(255,255,255,.78); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; font-weight: 750; letter-spacing: .09em; }
+    .activity-hero h2 { max-width: 320px; margin: 22px 0 0; font-size: clamp(29px, 8vw, 36px); line-height: 1.15; letter-spacing: -.045em; text-wrap: pretty; }
+    .activity-hero p { max-width: 280px; margin: 10px 0 0; color: rgba(255,255,255,.84); font-size: 13px; line-height: 1.6; }
+    .activity-page { max-width: 720px; margin: 0 auto; background: var(--surface); }
+    .activity-summary { padding: 19px 18px 4px; }
+    .activity-host { display: flex; align-items: center; gap: 10px; color: var(--ink-2); font-size: 13px; }
+    .activity-host .avatar { flex: none; width: 32px; height: 32px; font-size: 11px; }
+    .activity-host a { color: inherit; font-weight: 750; text-decoration: none; }
+    .activity-status { display: inline-flex; align-items: center; min-height: 24px; margin-top: 15px; padding: 0 8px; border-radius: 999px; background: var(--green-soft); color: var(--green); font-size: 11px; font-weight: 800; }
+    .activity-status.waitlist, .activity-status.postponed { background: var(--amber-soft); color: #805d19; }.activity-status.closed, .activity-status.cancelled { background: var(--red-soft); color: var(--red); }.activity-status.ongoing { background: var(--blue-soft); color: var(--blue); }.activity-status.ended { background: var(--surface-alt); color: var(--muted); }
+    .activity-facts { margin: 14px 0 0; border-top: 1px solid var(--line); }
+    .activity-fact { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 10px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .activity-fact svg { width: 18px; height: 18px; margin: 2px 0 0 6px; fill: none; stroke: var(--blue); stroke-width: 1.9; }
+    .activity-fact strong { display: block; font-size: 14px; line-height: 1.4; }.activity-fact span { display: block; margin-top: 3px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .activity-progress { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 9px; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 12px; }.activity-progress-track { overflow: hidden; height: 7px; border-radius: 999px; background: var(--surface-alt); }.activity-progress-track i { display: block; width: 72%; height: 100%; border-radius: inherit; background: var(--blue); }
+    .activity-section { padding: 22px 18px; border-bottom: 8px solid var(--bg); }.activity-section h3 { margin: 0; font-size: 17px; letter-spacing: -.025em; }.activity-section > p { margin: 10px 0 0; color: var(--ink-2); font-size: 14px; line-height: 1.72; text-wrap: pretty; }
+    .activity-rules { margin: 12px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }.activity-rules li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 8px; padding: 12px 0; border-bottom: 1px solid var(--line); color: var(--ink-2); font-size: 13px; line-height: 1.55; }.activity-rules b { color: var(--blue); font-variant-numeric: tabular-nums; }
+    .activity-flow { margin: 12px 0 0; padding: 0; list-style: none; }.activity-flow li { position: relative; padding: 0 0 18px 31px; color: var(--ink-2); font-size: 13px; line-height: 1.6; }.activity-flow li::before { content: attr(data-step); position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--blue-soft); color: var(--blue); font-size: 11px; font-weight: 800; }.activity-flow li::after { content: ""; position: absolute; left: 9px; top: 24px; bottom: 2px; width: 1px; background: var(--line); }.activity-flow li:last-child { padding-bottom: 0; }.activity-flow li:last-child::after { display: none; }.activity-flow strong { display: block; color: var(--ink); font-size: 14px; }
+    .activity-notice { padding: 14px 18px; border-bottom: 1px solid var(--line); background: var(--surface-alt); color: var(--ink-2); font-size: 13px; line-height: 1.55; }.activity-notice strong { color: var(--ink); }
+    .activity-footer { position: fixed; right: 0; bottom: 0; left: 0; z-index: 12; display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 8px; width: min(100%, 720px); margin: 0 auto; padding: 9px 12px calc(9px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 96%, transparent); backdrop-filter: blur(14px); }.activity-footer button { min-height: 46px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink-2); }.activity-footer a { display: grid; min-height: 46px; place-items: center; border-radius: 12px; background: var(--blue); color: #fff; font-size: 15px; font-weight: 800; text-decoration: none; }.activity-footer a.is-disabled { background: var(--surface-alt); color: var(--muted); pointer-events: none; }
+    @media (min-width: 721px) { .activity-detail { background: var(--bg); }.activity-bar { max-width: 720px; margin: 0 auto; }.activity-hero { border-radius: 0 0 18px 18px; }.activity-page { min-height: 100vh; }.activity-footer { border-right: 1px solid var(--line); border-left: 1px solid var(--line); } }
+  </style>
+</head>
+<body>
+  <div class="activity-detail" data-activity-detail>
+    <header class="activity-bar">
+      <button class="icon-button" type="button" data-activity-back aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+      <h1>活动详情</h1>
+      <button class="icon-button" type="button" data-more-menu="post" aria-label="更多"><svg class="i" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button>
+    </header>
+    <main class="activity-page">
+      <section class="activity-hero" aria-label="活动封面">
+        <p class="activity-kicker">校园活动 · 旧物循环</p>
+        <h2>毕业季旧物交换</h2>
+        <p>把仍有价值的物品带到现场，交换、捐赠或交给公益回收。</p>
+      </section>
+      <section class="activity-summary" aria-label="活动关键信息">
+        <div class="activity-host"><span class="avatar blue">学</span><span>主办方：<a href="campus-user-home.html?userId=CHANNEL_CREATOR">计算机学院学生会</a></span></div>
+        <span class="activity-status" data-activity-status>报名中</span>
+        <div class="activity-facts">
+          <div class="activity-fact"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg><div><strong>6 月 28 日（周六）14:00–17:00</strong><span>报名将在 6 月 27 日 18:00 截止</span></div></div>
+          <div class="activity-fact"><svg viewBox="0 0 24 24"><path d="M12 21s7-4.6 7-11a7 7 0 1 0-14 0c0 6.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2"/></svg><div><strong>大学生活动中心一楼</strong><span>签到入口在东侧服务台；支持二维码与位置签到</span></div></div>
+          <div class="activity-fact"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20c.6-4 3.1-6 7-6s6.4 2 7 6"/></svg><div><strong>面向全校师生开放</strong><span>满足任一学院、班级或频道条件即可报名</span></div></div>
+        </div>
+        <div class="activity-progress" aria-label="报名进度"><div class="activity-progress-track"><i></i></div><span>144 / 200 人</span></div>
+      </section>
+      <section class="activity-section"><h3>活动介绍</h3><p>现场分为物品登记、自由交换和公益回收三个区域。报名成功后会收到入场提醒；如名额已满，系统会按顺序进入候补并在有人取消时自动递补。</p></section>
+      <section class="activity-section"><h3>到场流程</h3><ol class="activity-flow"><li data-step="1"><strong>提交报名</strong>实名信息自动带入，手机号用于主办方联系。</li><li data-step="2"><strong>收到提醒</strong>报名成功、候补转正、延期或取消都会同步通知。</li><li data-step="3"><strong>现场签到</strong>活动开始后，在东侧服务台扫码或在指定范围内位置签到。</li></ol></section>
+      <section class="activity-section"><h3>报名与签到说明</h3><ul class="activity-rules"><li><b>01</b><span>报名成功后，活动开始前 24 小时内不可取消；延期后的取消不计入取消次数。</span></li><li><b>02</b><span>普通用户仅能查看已报名人数；活动创建者和管理员可查看完整报名名单与自定义字段。</span></li><li><b>03</b><span>签到开启后可使用二维码、位置或拍照方式，实际可用方式以活动发布配置为准。</span></li></ul></section>
+      <p class="activity-notice" data-activity-notice><strong>你尚未报名。</strong> 现在提交后，系统会先完成资格校验，再返回确认或候补结果。</p>
+    </main>
+    <footer class="activity-footer"><button type="button" data-activity-contact aria-label="联系主办方"><svg class="i" viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 3z"/></svg></button><a href="campus-activity-signup.html?postId=post-activity-01" data-activity-primary>立即报名</a></footer>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script>
+    (() => {
+      const params = new URLSearchParams(location.search);
+      const state = params.get('signupState') || 'unregistered';
+      const status = document.querySelector('[data-activity-status]');
+      const notice = document.querySelector('[data-activity-notice]');
+      const primary = document.querySelector('[data-activity-primary]');
+      const toast = document.querySelector('[data-toast-region]');
+      const states = {
+        unregistered: { label: '报名中', cls: '', notice: '<strong>你尚未报名。</strong> 现在提交后，系统会先完成资格校验，再返回确认或候补结果。', action: '立即报名', href: 'campus-activity-signup.html?postId=post-activity-01' },
+        confirmed: { label: '已确认报名', cls: '', notice: '<strong>你已报名成功。</strong> 活动开始前会收到提醒；可在我的活动中查看报名资料。', action: '查看报名信息', href: 'campus-my-activities.html' },
+        waitlist: { label: '候补中', cls: 'waitlist', notice: '<strong>你正在候补。</strong> 有人取消时会按顺序自动递补，并发送通知。', action: '查看候补状态', href: 'campus-my-activities.html' },
+        closed: { label: '报名已截止', cls: 'closed', notice: '<strong>报名已截止。</strong> 你仍可查看活动安排；活动开始后，已确认报名者可签到。', action: '查看报名安排', href: 'campus-my-activities.html' },
+        ineligible: { label: '暂不满足资格', cls: 'closed', notice: '<strong>当前不满足报名条件。</strong> 请先补齐学院、班级或频道成员信息后重试。', action: '完善资料', href: 'campus-edit-profile.html' },
+        ongoing: { label: '活动进行中', cls: 'ongoing', notice: '<strong>签到已开启。</strong> 请在现场完成二维码或位置签到，超过有效时间将无法补签。', action: '去签到', href: 'campus-activity-checkin.html?postId=post-activity-01' },
+        postponed: { label: '活动已延期', cls: 'postponed', notice: '<strong>活动时间已更新。</strong> 已报名用户可以在新的截止时间前无损取消报名。', action: '查看新安排', href: 'campus-my-activities.html' },
+        cancelled: { label: '活动已取消', cls: 'cancelled', notice: '<strong>活动已取消。</strong> 已报名名额已释放，主办方会向报名与候补用户发送取消原因。', action: '查看我的活动', href: 'campus-my-activities.html', disabled: true },
+        ended: { label: '活动已结束', cls: 'ended', notice: '<strong>活动已结束。</strong> 可继续查看活动资料与自己的签到结果。', action: '查看活动记录', href: 'campus-my-activities.html', disabled: true }
+      };
+      const current = states[state] || states.unregistered;
+      status.textContent = current.label; status.className = `activity-status ${current.cls || ''}`;
+      notice.innerHTML = current.notice; primary.textContent = current.action; primary.href = current.href; primary.classList.toggle('is-disabled', Boolean(current.disabled));
+      const notify = (message) => { toast.textContent = message; toast.classList.add('show'); window.setTimeout(() => toast.classList.remove('show'), 2200); };
+      document.addEventListener('click', (event) => {
+        if (event.target.closest('[data-activity-back]')) { history.length > 1 ? history.back() : location.href = 'campus-home.html'; return; }
+        if (event.target.closest('[data-activity-contact]')) { location.href = 'campus-chat-detail.html?userId=CHANNEL_CREATOR'; return; }
+      });
+    })();
+  </script>
+</body>
+</html>
