@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "campus-activity-list.html",
+  "entry": "campus-activity-list.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-21T02:44:25.851Z",
+  "updatedAt": "2026-06-21T02:44:25.851Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

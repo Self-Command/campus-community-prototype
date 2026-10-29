@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 投票结果</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <style>
+    .vote-results-page { padding-bottom: 30px; }
+    .vote-result-head { padding: 10px 0 16px; border-bottom: 1px solid var(--line); }
+    .vote-result-kicker { display: flex; align-items: center; gap: 7px; margin: 0 0 8px; color: var(--violet); font-size: 11px; font-weight: 800; letter-spacing: .07em; }
+    .vote-result-head h1 { margin: 0; font-size: 24px; line-height: 1.24; letter-spacing: -.045em; }
+    .vote-result-head p { margin: 9px 0 0; color: var(--ink-2); font-size: 13px; line-height: 1.6; }
+    .vote-result-meta { display: flex; flex-wrap: wrap; gap: 7px 12px; margin-top: 12px; color: var(--muted); font-size: 11px; }
+    .vote-stat-strip { display: grid; grid-template-columns: repeat(3, 1fr); margin: 14px 0 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .vote-stat-strip span { display: grid; gap: 3px; padding: 11px 8px; border-left: 1px solid var(--line); }
+    .vote-stat-strip span:first-child { border-left: 0; }
+    .vote-stat-strip strong { font-size: 17px; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+    .vote-stat-strip small { color: var(--muted); font-size: 11px; }
+    .vote-section { margin-top: 22px; }
+    .vote-section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+    .vote-section-head h2 { margin: 0; font-size: 16px; }
+    .vote-section-head span { color: var(--muted); font-size: 12px; }
+    .vote-rank-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+    .vote-rank-row { display: grid; grid-template-columns: 27px minmax(0, 1fr); gap: 10px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+    .vote-rank { width: 25px; height: 25px; display: grid; place-items: center; margin-top: 1px; border-radius: 50%; background: var(--surface-alt); color: var(--muted); font-size: 11px; font-weight: 800; }
+    .vote-rank.winner { background: var(--blue); color: #fff; }
+    .vote-choice { min-width: 0; }
+    .vote-choice-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; font-size: 14px; }
+    .vote-choice-head strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .vote-choice-head span { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .vote-bar { height: 7px; margin-top: 9px; overflow: hidden; border-radius: 999px; background: var(--surface-alt); }
+    .vote-bar i { display: block; height: 100%; border-radius: inherit; background: var(--blue); }
+    .vote-choice small { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; }
+    .vote-visibility { display: flex; gap: 9px; align-items: flex-start; padding: 13px 0; border-bottom: 1px solid var(--line); color: var(--ink-2); font-size: 12px; line-height: 1.55; }
+    .vote-visibility .i { width: 18px; color: var(--blue); }
+    .vote-voter-list { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .vote-voter-row { display: grid; grid-template-columns: 36px minmax(0, 1fr) auto; gap: 10px; align-items: center; min-height: 62px; border-bottom: 1px solid var(--line); }
+    .vote-voter-row:last-child { border-bottom: 0; }
+    .vote-voter-avatar { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: var(--blue-soft); color: var(--blue); font-size: 11px; font-weight: 800; }
+    .vote-voter-row b { display: block; font-size: 13px; }
+    .vote-voter-row small { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
+    .vote-voter-row time { color: var(--muted); font-size: 11px; }
+    .vote-access-state { display: grid; gap: 8px; padding: 28px 0; text-align: center; border-bottom: 1px solid var(--line); }
+    .vote-access-state h2 { margin: 0; font-size: 17px; }
+    .vote-access-state p { max-width: 310px; margin: 0 auto; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    @media (max-width: 420px) { .vote-stat-strip { grid-template-columns: 1fr; } .vote-stat-strip span { border-top: 1px solid var(--line); border-left: 0; } .vote-stat-strip span:first-child { border-top: 0; } }
+  </style>
+</head>
+<body>
+  <div class="app-shell"><main>
+    <header class="appbar"><div class="appbar-left"><button class="icon-button" data-nav="campus-vote-detail.html" aria-label="返回投票"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div><div class="appbar-center"><strong>投票结果</strong></div><div class="appbar-right"><button class="text-action" type="button" data-vote-export>导出统计</button></div></header>
+    <section class="page vote-results-page" data-state-root data-vote-result-root>
+      <header class="vote-result-head"><p class="vote-result-kicker">已截止 · 结果已公开</p><h1>图书馆期末周是否延长开放至 23:00？</h1><p>面向全体在校成员的匿名单选投票。以下为公开统计，不展示任何投票人身份或选择。</p><div class="vote-result-meta"><span>2026-06-23 12:00 开始</span><span>2026-06-30 23:00 截止</span><span>图书馆服务频道</span></div></header>
+      <div class="vote-stat-strip"><span><strong>1,028</strong><small>有效投票</small></span><span><strong>64%</strong><small>最高支持率</small></span><span><strong>3</strong><small>投票选项</small></span></div>
+      <section class="vote-section" data-vote-statistics><div class="vote-section-head"><h2>结果排序</h2><span>按票数降序</span></div><ol class="vote-rank-list"><li class="vote-rank-row"><span class="vote-rank winner">1</span><div class="vote-choice"><div class="vote-choice-head"><strong>支持延长至 23:00</strong><span>658 票 · 64%</span></div><div class="vote-bar"><i style="width:64%"></i></div><small>当前领先选项</small></div></li><li class="vote-rank-row"><span class="vote-rank">2</span><div class="vote-choice"><div class="vote-choice-head"><strong>维持现状</strong><span>236 票 · 23%</span></div><div class="vote-bar"><i style="width:23%"></i></div></div></li><li class="vote-rank-row"><span class="vote-rank">3</span><div class="vote-choice"><div class="vote-choice-head"><strong>希望 24 小时开放</strong><span>134 票 · 13%</span></div><div class="vote-bar"><i style="width:13%"></i></div></div></li></ol></section>
+      <section class="vote-section" data-vote-anonymous><div class="vote-visibility"><svg class="i" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span><strong>匿名投票</strong><br>投票人名单与个人选择不会向任何前台角色展示；导出仅包含选项统计和时间范围。</span></div></section>
+      <section class="vote-section" data-vote-voters hidden><div class="vote-section-head"><h2>投票明细</h2><span>非匿名 · 管理权限</span></div><div class="vote-voter-list"><div class="vote-voter-row"><span class="vote-voter-avatar">林</span><span><b>林墨</b><small>学生 · 支持延长至 23:00</small></span><time>20:18</time></div><div class="vote-voter-row"><span class="vote-voter-avatar">周</span><span><b>周若晴</b><small>教职工 · 维持现状</small></span><time>20:24</time></div></div></section>
+      <section class="vote-access-state" data-vote-restricted hidden><h2>结果暂不可查看</h2><p>此投票设置为“投票后可见”或“仅管理员可见”。完成投票或等待发布者公开后可再查看结果。</p><button class="button" data-nav="campus-vote-detail.html">返回投票</button></section>
+    </section>
+  </main></div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script>
+    (() => {
+      const params = new URLSearchParams(window.location.search);
+      const mode = params.get('mode') || 'anonymous';
+      const statistics = document.querySelector('[data-vote-statistics]');
+      const anonymous = document.querySelector('[data-vote-anonymous]');
+      const voters = document.querySelector('[data-vote-voters]');
+      const restricted = document.querySelector('[data-vote-restricted]');
+      const exportButton = document.querySelector('[data-vote-export]');
+      if (mode === 'detailed') { anonymous.hidden = true; voters.hidden = false; exportButton.textContent = '导出明细'; }
+      if (mode === 'restricted') { statistics.hidden = true; anonymous.hidden = true; restricted.hidden = false; exportButton.hidden = true; }
+      exportButton?.addEventListener('click', () => {
+        const original = exportButton.textContent;
+        exportButton.disabled = true;
+        exportButton.textContent = '正在生成…';
+        window.setTimeout(() => { exportButton.textContent = '已生成 CSV'; window.setTimeout(() => { exportButton.textContent = original; exportButton.disabled = false; }, 1800); }, 520);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 搜索</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-posts.css">
+</head>
+<body>
+  <div class="app-shell" data-tab-scope>
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-home.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>搜索</strong></div>
+        <div class="appbar-right"><button class="text-link" data-nav="campus-home.html" style="padding:0 6px">取消</button></div>
+      </header>
+      <section class="page">
+        <div class="search compact-search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg><input data-list-search="#search-results" data-empty-target="#search-empty" placeholder="搜索帖子、用户、频道和活动"></div>
+        <div class="section-heading"><h2>搜索历史</h2><button class="text-action" data-action-toast="搜索历史已清空">清空</button></div>
+        <div class="tag-row"><button class="tag">校园歌手大赛</button><button class="tag">计算机学院</button><button class="tag">二手自行车</button><button class="tag">期末考试安排</button></div>
+        <div class="section-heading space-top-lg"><h2>热门搜索</h2></div>
+        <div class="list">
+          <button class="list-item"><span class="notice-icon amber"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v14M12 4c4 0 8 4 8 8s-4 8-8 8-8-4-8-8"/></svg></span><span class="list-copy"><span class="list-title">期末考试安排</span><span class="list-subtitle">教学事务中心 · 热度上升</span></span></button>
+          <button class="list-item"><span class="notice-icon"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 10h8M8 14h5"/></svg></span><span class="list-copy"><span class="list-title">毕业晚会</span><span class="list-subtitle">活动结果 24 条</span></span></button>
+        </div>
+        <div class="message-tabs space-top-lg" data-tab-group><button class="message-tab active" data-tab="post">帖子</button><button class="message-tab" data-tab="user">用户</button><button class="message-tab" data-tab="channel">频道</button><button class="message-tab" data-tab="activity">活动</button></div>
+        <div class="state-strip">找到 123 个结果，默认只显示当前用户有权访问的审核通过内容。</div>
+        <section data-tab-panel="post" class="service-board space-top">
+          <div id="search-results" class="feed" data-post-list data-post-ids="spec-channel_creator-vote,spec-channel_admin-activity,spec-student_member-normal_gallery"></div>
+          <div class="empty" id="search-empty" hidden><div class="empty-icon"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg></div><h3>没有找到匹配结果</h3><p>换个关键词，或切换到用户、频道、活动标签继续查找。</p></div>
+        </section>
+        <section data-tab-panel="user" hidden class="service-board space-top">
+          <article class="list-card" data-nav="campus-user-home.html"><h3>苏昕老师</h3><p>@suxin · 计算机学院 · 默认展示真实姓名</p></article>
+          <article class="list-card" data-nav="campus-profile.html"><h3>林墨</h3><p>@linmo · 摄影社成员</p></article>
+        </section>
+        <section data-tab-panel="channel" hidden class="service-board space-top">
+          <article class="list-card" data-nav="campus-channel-detail.html"><h3>计算机学院学生会</h3><p>公开频道 · 1,428 位成员 · 认证频道</p></article>
+          <article class="list-card" data-nav="campus-channel-detail.html"><h3>校园摄影</h3><p>公开频道 · 367 位成员</p></article>
+        </section>
+        <section data-tab-panel="activity" hidden class="service-board space-top">
+          <div class="feed" data-post-list data-post-kind="ACTIVITY" data-limit="3"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script src="campus-post-fixtures.js"></script>
+  <script src="campus-posts.js"></script>
+</body>
+</html>

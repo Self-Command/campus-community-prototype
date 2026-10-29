@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "campus-notification-detail.html",
+  "entry": "campus-notification-detail.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-21T02:40:18.692Z",
+  "updatedAt": "2026-06-21T02:40:18.692Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

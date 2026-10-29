@@ -1,0 +1,23 @@
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# 依赖与构建产物
+node_modules/
+dist/
+build/
+.cache/
+
+# 本地环境与密钥
+.env
+.env.*
+*.local
+*.log
+
+# 导出产物
+*.pdf
+*.zip

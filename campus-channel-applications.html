@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 待处理</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-channel.css">
+</head>
+<body>
+  <div class="app-shell">
+    <main>
+      <header class="appbar">
+        <div class="appbar-left">
+          <button class="icon-button" data-channel-link="campus-channel-manage.html" aria-label="返回">
+            <svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+        </div>
+        <div class="appbar-center"><strong>待处理</strong></div>
+        <div class="appbar-right"><span class="channel-tag" data-role-label>频道管理员</span></div>
+      </header>
+
+      <section class="page channel-page">
+        <section class="channel-sheet">
+          <div class="channel-block">
+            <span class="channel-kicker">PENDING QUEUE</span>
+            <h1 class="channel-headline"><span data-channel-name>校学生会</span>待处理</h1>
+            <p class="channel-copy">这里先看待处理列表。申请类进入待处理详情页处理；内容举报进入帖子审核详情页查看完整帖子后再决定。</p>
+          </div>
+          <div class="channel-stat-row">
+            <div class="channel-stat"><strong data-channel-pending>4</strong><span>总待处理</span></div>
+            <div class="channel-stat"><strong>2</strong><span>申请类</span></div>
+            <div class="channel-stat"><strong>1</strong><span>内容举报</span></div>
+          </div>
+        </section>
+
+        <section class="channel-sheet">
+          <div class="channel-section-head">
+            <div>
+              <h2>全部待处理</h2>
+              <p>列表只做分流，不把审批按钮嵌在列表里。</p>
+            </div>
+          </div>
+          <div class="channel-row-list" data-application-list></div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <script src="campus-native.js"></script>
+  <script src="campus-channel-admin-data.js"></script>
+  <script>
+    (() => {
+      const api = window.CampusChannelAdminData;
+      const ctx = api?.getContext();
+      if (!api || !ctx) return;
+      api.applyContext(document, ctx);
+      const rows = api.applications.filter((item) => item.channelId === ctx.channelId);
+      const iconMap = { '入群申请': '申', '内容举报': '举', '认证补件': '认' };
+      document.querySelector('[data-application-list]').innerHTML = rows.map((item) => {
+        const href = item.kind === '内容举报'
+          ? `campus-post-review.html?channelId=${ctx.channelId}&role=${ctx.roleId}&case=content-1`
+          : `campus-channel-ticket-detail.html?channelId=${ctx.channelId}&role=${ctx.roleId}&ticket=${item.id}`;
+        return `
+          <a class="channel-row" href="${href}">
+            <span class="channel-row-icon">${iconMap[item.kind] || '待'}</span>
+            <span class="channel-row-main">
+              <span class="channel-row-title">${item.title}</span>
+              <span class="channel-row-sub">${item.summary}</span>
+              <span class="channel-row-note">${item.detail}</span>
+            </span>
+            <span class="channel-row-tail"><span class="channel-tag ${item.status === '待处理' ? 'warn' : item.status === '需复核' ? 'danger' : ''}">${item.status}</span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span>
+          </a>`;
+      }).join('');
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 发布招聘</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-services.css">
+</head>
+<body>
+  <div class="service-app" data-service-theme="jobs">
+    <main>
+      <header class="appbar"><div class="appbar-left"><button class="icon-button" data-nav="campus-jobs.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div><div class="appbar-center"><strong>发布招聘</strong></div><div class="appbar-right"><button class="text-link" type="submit" form="job-form">提交</button></div></header>
+      <form id="job-form" class="service-compose" data-submit-message="招聘信息已提交审核" data-success-nav="campus-jobs.html" data-state-root>
+        <p class="compose-note"><svg class="i" viewBox="0 0 24 24"><path d="M12 3 3 20h18L12 3Z"/><path d="M12 9v4m0 4h.01"/></svg>仅获得招聘发布权限的主体可提交。公开前将校验发布单位、岗位内容和联系方式。</p>
+        <section class="compose-group"><div class="compose-group-label">岗位基本信息</div><div class="compose-field"><label for="job-title">招聘标题</label><input id="job-title" required maxlength="50" placeholder="例如：实验室助理"></div><div class="compose-pair"><div class="compose-field"><label for="job-type">招聘类型</label><select id="job-type" required><option>兼职</option><option>实习</option><option>全职</option><option>勤工助学</option><option>志愿服务</option></select></div><div class="compose-field"><label for="position">职位名称</label><input id="position" required placeholder="例如：实验室助理"></div></div><div class="compose-field"><label for="company">招聘单位 / 部门</label><input id="company" required placeholder="例如：计算机学院实验中心"></div><div class="compose-pair"><div class="compose-field"><label for="salary">薪资待遇</label><input id="salary" required placeholder="例如：¥22/小时或面议"></div><div class="compose-field"><label for="count">招聘人数</label><input id="count" required type="number" min="1" placeholder="例如：2"></div></div></section>
+        <section class="compose-group"><div class="compose-group-label">工作内容</div><div class="compose-field"><label for="job-location">工作地点</label><input id="job-location" required placeholder="例如：实验楼 A203"></div><div class="compose-field"><label for="job-time">工作时间</label><input id="job-time" placeholder="可选，例如每周三次，下午时段"></div><div class="compose-field"><label for="job-duty">岗位职责</label><textarea id="job-duty" required maxlength="500" placeholder="描述工作内容、频次与职责范围"></textarea></div><div class="compose-field"><label for="job-requirements">任职要求</label><textarea id="job-requirements" required maxlength="500" placeholder="描述技能、资格、时间等要求"></textarea></div></section>
+        <section class="compose-group"><div class="compose-group-label">投递信息</div><div class="compose-field inline"><label for="deadline">投递截止时间</label><span class="field-control"><input id="deadline" required type="date"></span></div><div class="compose-field"><label for="job-contact">联系方式</label><input id="job-contact" required placeholder="邮箱或手机号；展示时按规则脱敏"></div><div class="compose-field"><label for="apply-note">投递方式说明</label><textarea id="apply-note" required maxlength="300" placeholder="例如：投递简历后 3 个工作日内通过站内通知反馈"></textarea></div></section>
+        <div class="compose-submitbar"><button class="button secondary" type="button" data-action-toast="草稿已保存">存草稿</button><button class="button" type="submit">提交审核</button></div>
+      </form>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script src="campus-services.js"></script>
+</body>
+</html>

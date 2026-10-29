@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 频道</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-channel.css">
+</head>
+<body>
+  <div class="app-shell" data-tab-scope>
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><strong>频道</strong></div>
+        <div class="appbar-right">
+          <button class="icon-button" data-nav="campus-search.html" aria-label="搜索频道"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg></button>
+          <button class="icon-button" data-nav="campus-create-channel.html" aria-label="创建频道"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </header>
+
+      <section class="page channel-page">
+        <div class="page-title">
+          <div>
+            <h2>我的频道</h2>
+            <p class="supporting">加入 4 个频道，其中 3 个有管理权限</p>
+          </div>
+        </div>
+
+        <label class="search compact-search">
+          <svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg>
+          <input data-list-search="#channel-page-scope" aria-label="搜索频道" placeholder="搜索频道名称、分类或管理权限">
+        </label>
+
+        <div class="message-tabs" data-tab-group aria-label="频道分类">
+          <button class="message-tab active" data-tab="joined">我加入的</button>
+          <button class="message-tab" data-tab="managed">我管理的</button>
+          <button class="message-tab" data-tab="discover">发现频道</button>
+        </div>
+
+        <div id="channel-page-scope">
+        <section data-tab-panel="joined">
+          <article class="channel-hero">
+            <div class="hero-label">本周关注 · 校学生会</div>
+            <h2>4 条与你相关的新讨论正在更新</h2>
+            <p>公开频道可直接浏览和加入；垂直频道按加入规则判断是否需要审核，频道内动态统一进入帖子详情页。</p>
+            <div class="channel-statline"><span>1,428 位成员</span><span>567 篇动态</span></div>
+          </article>
+
+          <div class="section-heading joined-heading">
+            <h2>已加入</h2>
+            <button class="text-action" data-refresh="#joined-channel-list">刷新</button>
+          </div>
+          <div id="joined-channel-list" class="joined-channel-list" aria-label="我加入的频道">
+            <article class="joined-channel-row" data-searchable data-channel-id="csu">
+              <button class="joined-channel-main" type="button" data-nav="campus-channel-detail.html?channelId=csu&role=admin" aria-label="进入校学生会频道">
+                <span class="channel-avatar">学</span>
+                <span class="joined-channel-copy">
+                  <span class="joined-channel-title"><strong>校学生会</strong><span data-cert-badge="学生会认证"></span></span>
+                  <span class="joined-channel-desc">迎新活动、志愿服务和学生事务统一在频道内发布</span>
+                  <span class="joined-channel-meta"><span>垂直频道</span><span>申请审核</span><span>1,428 人</span></span>
+                </span>
+              </button>
+              <span class="joined-channel-state"><span class="count-pill blue">管理员</span><span>4 条新动态</span></span>
+            </article>
+            <article class="joined-channel-row" data-searchable data-channel-id="volunteer">
+              <button class="joined-channel-main" type="button" data-nav="campus-channel-detail.html?channelId=volunteer" aria-label="进入志愿服务中心频道">
+                <span class="channel-avatar">志</span>
+                <span class="joined-channel-copy">
+                  <span class="joined-channel-title"><strong>志愿服务中心</strong><span data-cert-badge="学校部门认证"></span></span>
+                  <span class="joined-channel-desc">报名、签到和服务时长登记都在这里处理</span>
+                  <span class="joined-channel-meta"><span>垂直频道</span><span>申请审核</span><span>812 人</span></span>
+                </span>
+              </button>
+              <span class="joined-channel-state"><span class="count-pill green">成员</span><span>今日有活动签到</span></span>
+            </article>
+            <article class="joined-channel-row" data-searchable data-channel-id="photo">
+              <button class="joined-channel-main" type="button" data-nav="campus-channel-detail.html?channelId=photo" aria-label="进入校园摄影频道">
+                <span class="channel-avatar">摄</span>
+                <span class="joined-channel-copy">
+                  <span class="joined-channel-title"><strong>校园摄影</strong></span>
+                  <span class="joined-channel-desc">活动跟拍、作品征集和器材交流</span>
+                  <span class="joined-channel-meta"><span>公开频道</span><span>直接加入</span><span>367 人</span></span>
+                </span>
+              </button>
+              <span class="joined-channel-state"><span class="count-pill green">成员</span><span>无新动态</span></span>
+            </article>
+            <article class="joined-channel-row" data-searchable data-channel-id="run">
+              <button class="joined-channel-main" type="button" data-nav="campus-channel-detail.html?channelId=run&role=admin" aria-label="进入校园跑步团频道">
+                <span class="channel-avatar">跑</span>
+                <span class="joined-channel-copy">
+                  <span class="joined-channel-title"><strong>校园跑步团</strong></span>
+                  <span class="joined-channel-desc">跑步打卡、训练路线和赛事约跑</span>
+                  <span class="joined-channel-meta"><span>公开频道</span><span>直接加入</span><span>584 人</span></span>
+                </span>
+              </button>
+              <span class="joined-channel-state"><span class="count-pill blue">管理员</span><span>1 个成员申请</span></span>
+            </article>
+          </div>
+        </section>
+
+        <section data-tab-panel="managed" hidden>
+          <section class="managed-overview">
+            <div class="managed-overview-strip">
+              <div>
+                <h2 class="managed-title">我管理的频道</h2>
+                <p>按频道展示；进入管理前不展开待办和权限细节。</p>
+              </div>
+            </div>
+            <div class="managed-grid" id="managed-channel-grid" aria-label="我管理的频道">
+              <article class="managed-channel-row" data-searchable>
+                <button class="managed-channel-main" type="button" data-nav="campus-channel-detail.html?channelId=csu&role=admin" aria-label="进入校学生会频道">
+                  <span class="managed-card-avatar">学</span>
+                  <span><strong>校学生会 <span data-cert-badge="学生会认证"></span></strong><small>垂直频道 · 1,428 人</small></span>
+                </button>
+                <a class="button tertiary" href="campus-channel-manage.html?channelId=csu&role=admin">管理</a>
+              </article>
+              <article class="managed-channel-row" data-searchable>
+                <button class="managed-channel-main" type="button" data-nav="campus-channel-detail.html?channelId=volunteer&role=creator" aria-label="进入志愿服务中心频道">
+                  <span class="managed-card-avatar">志</span>
+                  <span><strong>志愿服务中心 <span data-cert-badge="学校部门认证"></span></strong><small>垂直频道 · 812 人</small></span>
+                </button>
+                <a class="button tertiary" href="campus-channel-manage.html?channelId=volunteer&role=creator">管理</a>
+              </article>
+              <article class="managed-channel-row" data-searchable>
+                <button class="managed-channel-main" type="button" data-nav="campus-channel-detail.html?channelId=run&role=admin" aria-label="进入校园跑步团频道">
+                  <span class="managed-card-avatar">跑</span>
+                  <span><strong>校园跑步团</strong><small>公开频道 · 584 人</small></span>
+                </button>
+                <a class="button tertiary" href="campus-channel-manage.html?channelId=run&role=admin">管理</a>
+              </article>
+            </div>
+          </section>
+        </section>
+
+        <section data-tab-panel="discover" hidden>
+          <div class="section-heading">
+            <h2>按兴趣发现</h2>
+          </div>
+          <div class="category-grid">
+            <button class="category" data-action-toast="已筛选学术频道"><svg class="i" viewBox="0 0 24 24"><path d="m4 8 8-4 8 4-8 4zM7 11v4c0 3 10 3 10 0v-4"/></svg>学术</button>
+            <button class="category" data-action-toast="已筛选社团频道"><svg class="i" viewBox="0 0 24 24"><path d="M5 19V5h14v14M8 9h8M8 13h5"/></svg>社团</button>
+            <button class="category" data-action-toast="已筛选生活频道"><svg class="i" viewBox="0 0 24 24"><path d="M12 21s7-4 7-10a7 7 0 1 0-14 0c0 6 7 10 7 10Z"/></svg>生活</button>
+            <button class="category" data-action-toast="已筛选公益频道"><svg class="i" viewBox="0 0 24 24"><path d="M12 20s-7-4-7-10a4 4 0 0 1 7-3 4 4 0 0 1 7 3c0 6-7 10-7 10Z"/></svg>公益</button>
+          </div>
+
+          <div class="section-heading discover-heading">
+            <h2>热门频道</h2>
+          </div>
+          <div id="discover-channel-list" class="list">
+            <button class="list-item channel-card" data-nav="campus-channel-detail.html?channelId=run" data-searchable>
+              <span class="channel-avatar">跑</span>
+              <span class="channel-copy">
+                <h3>校园跑步团</h3>
+                <p>晚间跑步打卡与路线分享</p>
+                <span class="channel-meta">584 人 · 公开频道</span>
+              </span>
+              <span class="count-pill">查看</span>
+            </button>
+            <button class="list-item channel-card" data-nav="campus-channel-detail.html?channelId=photo" data-searchable>
+              <span class="channel-avatar">摄</span>
+              <span class="channel-copy">
+                <h3>校园摄影</h3>
+                <p>活动现场、人物故事和照片征集</p>
+                <span class="channel-meta">367 人 · 公开频道</span>
+              </span>
+              <span class="count-pill">查看</span>
+            </button>
+          </div>
+        </section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="bottom-nav" aria-label="主导航">
+    <a class="nav-item" href="campus-home.html"><svg class="i" viewBox="0 0 24 24"><path d="m4 11 8-7 8 7v9H4z"/></svg><span>首页</span></a>
+    <a class="nav-item active" href="campus-channels.html"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 10h8M8 14h5"/></svg><span>频道</span></a>
+    <a class="nav-item publish-btn" href="campus-home.html#publish" aria-label="发布"><span><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></a>
+    <a class="nav-item" href="campus-messages.html"><svg class="i" viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 3z"/></svg><span>消息</span></a>
+    <a class="nav-item" href="campus-profile.html"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg><span>我的</span></a>
+  </nav>
+
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+</body>
+</html>

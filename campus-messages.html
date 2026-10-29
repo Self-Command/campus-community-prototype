@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 消息</title>
+  <link rel="stylesheet" href="campus-native.css">
+</head>
+<body>
+  <div class="app-shell" data-tab-scope>
+    <nav class="tablet-rail" aria-label="主导航"><a class="rail-brand" href="campus-home.html" aria-label="校园社区">校</a><a class="rail-link" href="campus-home.html" aria-label="首页"><svg class="i" viewBox="0 0 24 24"><path d="m4 11 8-7 8 7v9H4z"/></svg></a><a class="rail-link" href="campus-channels.html" aria-label="频道"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 10h8M8 14h5"/></svg></a><a class="rail-link publish-rail" href="campus-home.html#publish" aria-label="发布"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></a><a class="rail-link active" href="campus-messages.html" aria-label="消息"><svg class="i" viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 3z"/></svg></a><a class="rail-link" href="campus-profile.html" aria-label="我的"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></a></nav>
+    <main>
+      <header class="appbar"><div class="appbar-left"><h1>消息</h1></div><div class="appbar-right"><button class="icon-button" data-nav="campus-new-message.html" aria-label="新建私信"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div></header>
+      <section class="page">
+        <div class="page-title"><div><h2>消息</h2><p class="supporting">互动、私信与校园官方通知</p></div><button class="icon-button" data-nav="campus-new-message.html" aria-label="新建私信"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div>
+        <div class="message-tabs" data-tab-group aria-label="消息分类"><button class="message-tab active" data-tab="notices">通知 <span class="unread" style="display:inline-grid;margin-left:3px;vertical-align:middle">3</span></button><button class="message-tab" data-tab="private">私信</button><button class="message-tab" data-tab="official">官方</button></div>
+
+        <section data-tab-panel="notices">
+          <div class="section-heading"><h2>未读通知</h2><button class="text-action" data-action-toast="已全部标为已读">全部已读</button></div>
+          <div class="list">
+            <button class="list-item" data-nav="campus-notification-detail.html"><span class="notice-icon"><svg class="i" viewBox="0 0 24 24"><path d="M7 10v10H4V10h3Zm0 10h10.2a2 2 0 0 0 1.9-1.4l1.6-5A2 2 0 0 0 18.8 11H15l.6-3.3A2.4 2.4 0 0 0 13.2 5L7 10Z"/></svg></span><span class="list-copy"><span class="list-title">陈悦等 12 人赞了你的帖子 <span>12 分钟前</span></span><span class="list-subtitle">“雨后的操场很安静”</span></span><span class="unread">12</span></button>
+            <button class="list-item" data-nav="campus-notification-detail.html"><span class="notice-icon green"><svg class="i" viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 3z"/></svg></span><span class="list-copy"><span class="list-title">苏昕评论了你的动态 <span>34 分钟前</span></span><span class="list-subtitle">“这条路线建议下午五点以后走。”</span></span><span class="unread">1</span></button>
+            <button class="list-item" data-nav="campus-notification-detail.html"><span class="notice-icon amber"><svg class="i" viewBox="0 0 24 24"><path d="M12 3v9l6 3"/><circle cx="12" cy="12" r="9"/></svg></span><span class="list-copy"><span class="list-title">活动报名状态更新 <span>1 小时前</span></span><span class="list-subtitle">毕业季旧物交换：当前名额充足</span></span><span class="unread">1</span></button>
+          </div>
+          <div class="section-heading" style="margin-top:18px"><h2>更早通知</h2></div>
+          <div class="list"><button class="list-item" data-nav="campus-notification-detail.html"><span class="notice-icon"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16v12H4zM8 10h8M8 14h5"/></svg></span><span class="list-copy"><span class="list-title">你的动态已通过审核 <span>昨天</span></span><span class="list-subtitle">内容已向符合可见范围的用户展示</span></span></button><button class="list-item" data-nav="campus-user-home.html"><span class="notice-icon green"><svg class="i" viewBox="0 0 24 24"><path d="M12 20s-7-4-7-10a4 4 0 0 1 7-3 4 4 0 0 1 7 3c0 6-7 10-7 10Z"/></svg></span><span class="list-copy"><span class="list-title">你收到了新的关注 <span>昨天</span></span><span class="list-subtitle">李若川开始关注你</span></span></button></div>
+        </section>
+
+        <section data-tab-panel="private" hidden>
+          <div class="search compact-search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg><input data-message-search="#conversation-list" aria-label="搜索会话" placeholder="搜索会话"></div>
+          <div id="conversation-list" class="list">
+            <button class="list-item" data-nav="campus-chat-detail.html?conversationId=conv_gu_ning&userId=club_member" data-searchable><span class="avatar green">顾</span><span class="list-copy"><span class="list-title">顾宁 <span>10:42</span></span><span class="list-subtitle">活动海报我已经发到频道里了，你看一下。</span></span><span class="unread">3</span></button>
+            <button class="list-item" data-nav="campus-chat-detail.html?conversationId=conv_su_xin&userId=FACULTY_MEMBER" data-searchable><span class="avatar purple">苏</span><span class="list-copy"><span class="list-title">苏昕老师 <span>昨天</span></span><span class="list-subtitle">关于算法设计答疑时间的确认。</span></span></button>
+            <button class="list-item" data-nav="campus-chat-detail.html?conversationId=conv_zhou_yuan&userId=student" data-searchable><span class="avatar warm">周</span><span class="list-copy"><span class="list-title">周予安 <span>周一</span></span><span class="list-subtitle">谢谢你上次分享的照片地点。</span></span></button>
+          </div>
+          <div class="empty" data-search-empty hidden><div class="empty-icon"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg></div><h3>没有匹配的会话</h3><p>可以换个用户名称或消息关键词试试。</p></div>
+          <p class="helper" style="margin:12px 2px 0">文字私信发送后即时投递；图片需要审核后才会展示。学生每日最多发起 50 条私信。</p>
+        </section>
+
+        <section data-tab-panel="official" hidden>
+          <article class="card" style="padding:16px"><div class="author"><span class="avatar system">校</span><div class="author-copy"><div class="author-name">校园官方 <span class="identity teacher">平台管理员</span></div><div class="author-meta">系统公告 · 2 小时前</div></div></div><h3 style="margin:13px 0 7px;font-size:17px">期末周图书馆服务时间调整</h3><p class="post-copy" style="margin:0">6 月 24 日至 7 月 5 日，主馆开放至 22:30；自习室预约规则保持不变。</p><button class="button secondary full" style="margin-top:13px" data-nav="campus-news-detail.html">查看详情</button></article>
+          <article class="card" style="padding:16px;margin-top:12px"><div class="author"><span class="avatar system">校</span><div class="author-copy"><div class="author-name">校园官方</div><div class="author-meta">系统通知 · 昨天</div></div></div><h3 style="margin:13px 0 7px;font-size:17px">关于校园社区内容发布规范</h3><p class="post-copy" style="margin:0">所有用户生成内容将先审核后发布。审核失败的内容会与普通草稿分开保存，支持按原因重新编辑。</p><button class="button tertiary full" style="margin-top:13px" data-action-toast="已阅读发布规范">标记为已读</button></article>
+        </section>
+      </section>
+    </main>
+    <aside class="tablet-aside"><section class="aside-card"><h2>消息设置</h2><p class="helper">未读通知保留 30 天；已读通知保留 7 天；系统公告永久保留。</p><button class="button tertiary full" style="margin-top:12px" data-nav="campus-profile.html">通知与隐私设置</button></section><section class="aside-card"><h2>私信提示</h2><p class="helper">可发送文字和 1 张图片。对方的私信权限或风控状态可能限制发送。</p></section></aside>
+  </div>
+  <nav class="bottom-nav" aria-label="主导航"><a class="nav-item" href="campus-home.html"><svg class="i" viewBox="0 0 24 24"><path d="m4 11 8-7 8 7v9H4z"/></svg><span>首页</span></a><a class="nav-item" href="campus-channels.html"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 10h8M8 14h5"/></svg><span>频道</span></a><a class="nav-item publish-btn" href="campus-home.html#publish" aria-label="发布"><span><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></a><a class="nav-item active" href="campus-messages.html"><svg class="i" viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 3z"/></svg><span>消息</span></a><a class="nav-item" href="campus-profile.html"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg><span>我的</span></a></nav>
+
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div><script src="campus-native.js"></script>
+</body>
+</html>

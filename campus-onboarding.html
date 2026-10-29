@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 资料完善</title>
+  <link rel="stylesheet" href="campus-native.css">
+</head>
+<body>
+  <main class="auth-shell">
+    <section class="auth-stage">
+      <article class="auth-card">
+        <span class="eyebrow">注册成功后</span>
+        <h1 class="auth-title">完善你的资料</h1>
+        <p class="auth-subtitle">注册阶段只采集账号必要字段。这里补齐用户名、头像、学院班级、部门岗位和展示策略，供活动报名、频道身份和个人主页复用。</p>
+        <form class="inline-grid" data-submit-message="资料已保存，欢迎进入校园社区" data-success-nav="campus-home.html">
+          <div class="detail-card">
+            <h3>头像与 Banner</h3>
+            <div class="banner-uploader" aria-label="头像与 Banner 上传">
+              <button class="banner-preview" type="button" data-action-toast="Banner 选择器已打开" aria-label="添加资料 Banner">
+                <span class="banner-action"><svg class="i" viewBox="0 0 24 24"><path d="M6 7h3l1-2h4l1 2h3v12H6z"/><circle cx="12" cy="13" r="3"/></svg> 添加 Banner</span>
+              </button>
+              <div class="banner-avatar-action"><span class="avatar">我</span><button type="button" data-action-toast="头像选择器已打开">添加头像</button></div>
+              <p class="banner-helper">资料 Banner 使用一张主封面展示；头像单独上传。首次自定义用户名不进审核、不占修改次数。</p>
+            </div>
+          </div>
+          <div class="split-fields">
+            <div class="field"><label>用户名</label><input maxlength="20" placeholder="例如：linmo_2023"></div>
+            <div class="field"><label>性别</label><select><option>保密</option><option>男</option><option>女</option></select></div>
+          </div>
+          <div class="split-fields">
+            <div class="field"><label>学院 / 部门</label><input placeholder="例如：计算机学院"></div>
+            <div class="field"><label>班级 / 职位</label><input placeholder="例如：软件工程 2023 级 2 班"></div>
+          </div>
+          <div class="split-fields">
+            <div class="field"><label>年级 / 职称</label><input placeholder="例如：大二 / 讲师"></div>
+            <div class="field"><label>主要身份头衔</label><select><option>默认使用首个频道头衔</option><option>学生会 · 管理员</option><option>摄影社 · 成员</option></select></div>
+          </div>
+          <div class="field"><label>个性签名</label><textarea maxlength="120" placeholder="介绍你的研究方向、兴趣或服务职责"></textarea></div>
+          <div class="menu-group">
+            <div class="menu-title">展示策略</div>
+            <div class="setting"><div class="setting-copy"><strong>主页显示真实姓名</strong><span>认证频道实名策略优先于个人设置</span></div><button class="switch" data-switch="onboarding-real-name" type="button" role="switch"><i></i></button></div>
+            <div class="setting"><div class="setting-copy"><strong>展示加入的频道</strong><span>方便他人判断你的社团和部门身份</span></div><button class="switch on" data-switch="onboarding-channel-list" type="button" role="switch"><i></i></button></div>
+            <div class="setting"><div class="setting-copy"><strong>公开点赞列表</strong><span>默认关闭，仅本人可见</span></div><button class="switch" data-switch="onboarding-likes-public" type="button" role="switch"><i></i></button></div>
+          </div>
+          <button class="button full" type="submit">完成资料</button>
+        </form>
+      </article>
+    </section>
+  </main>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+</body>
+</html>

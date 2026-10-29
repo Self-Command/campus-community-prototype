@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 启动页</title>
+  <link rel="stylesheet" href="campus-native.css">
+</head>
+<body>
+  <main class="auth-shell">
+    <section class="auth-stage">
+      <article class="auth-card">
+        <div class="brand-lockup">
+          <div class="brand-mark"><svg class="i" viewBox="0 0 24 24"><path d="M12 3 4 7v6c0 4.2 2.8 8.1 8 10 5.2-1.9 8-5.8 8-10V7l-8-4Z"/><path d="m9 12 2 2 4-5"/></svg></div>
+          <h1>Campus Link</h1>
+          <p>实名校园社区启动中。优先检查登录态、账号状态、服务公告和待处理审核通知。</p>
+        </div>
+        <div class="detail-stack">
+          <div class="detail-card">
+            <h3>启动检查</h3>
+            <div class="checklist">
+              <div class="check-item"><span class="check-badge done">1</span><div class="check-body"><strong>读取本地登录态</strong><span>校验 access token、refresh token 与设备绑定。</span></div></div>
+              <div class="check-item"><span class="check-badge done">2</span><div class="check-body"><strong>同步账号状态</strong><span>ACTIVE 直接进入首页；BANNED、CANCELLATION_PENDING 进入限制页。</span></div></div>
+              <div class="check-item"><span class="check-badge">3</span><div class="check-body"><strong>拉取未读提醒</strong><span>审核结果、活动提醒、私信和系统公告聚合展示。</span></div></div>
+            </div>
+          </div>
+          <div class="warning-strip"><svg class="i banner-icon" viewBox="0 0 24 24"><path d="M12 3 3 20h18L12 3Z"/><path d="M12 9v4m0 4h.01"/></svg>若检测到账号处于注销冻结期，前台内容立即隐藏且禁止登录，但保留撤销入口。</div>
+          <div class="button-row">
+            <a class="button tertiary" href="campus-login.html" style="flex:1">切换账号</a>
+            <a class="button" href="campus-home.html" style="flex:1">进入社区</a>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+</body>
+</html>

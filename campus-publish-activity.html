@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 发布活动</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <style>
+    .signup-builder { margin-top: 14px; border-top: 1px solid var(--line); }
+    .signup-builder-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0 10px; }
+    .signup-builder-head b { display: block; font-size: 14px; }
+    .signup-builder-head small { display: block; margin-top: 3px; color: var(--muted); line-height: 1.45; }
+    .signup-builder-add { min-height: 36px; padding: 0 11px; display: inline-flex; align-items: center; gap: 5px; border: 1px solid color-mix(in srgb, var(--blue), var(--line) 55%); border-radius: 10px; background: color-mix(in srgb, var(--blue), transparent 94%); color: var(--blue); font: inherit; font-size: 12px; font-weight: 750; }
+    .signup-default-fields, .signup-custom-fields { border-top: 1px solid var(--line); }
+    .signup-default-row, .signup-field-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; min-height: 56px; border-bottom: 1px solid var(--line); }
+    .signup-default-row strong, .signup-field-row strong { display: block; font-size: 14px; }
+    .signup-default-row span, .signup-field-row small { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; line-height: 1.4; }
+    .signup-lock { color: var(--muted); font-size: 11px; white-space: nowrap; }
+    .signup-field-row { display: block; padding: 13px 0; }
+    .signup-field-top, .signup-field-options-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .signup-field-top { margin-bottom: 10px; }
+    .signup-field-tools { display: inline-flex; gap: 4px; }
+    .signup-tool { width: 32px; height: 32px; display: inline-grid; place-items: center; border: 0; border-radius: 8px; background: var(--surface-alt); color: var(--ink-2); }
+    .signup-tool:disabled { opacity: .35; }
+    .signup-field-grid { display: grid; grid-template-columns: minmax(0, 1fr) 116px; gap: 10px; }
+    .signup-field-grid input, .signup-field-grid select, .signup-option input { width: 100%; min-height: 40px; padding: 0 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); font: inherit; font-size: 13px; }
+    .signup-required { min-height: 34px; padding: 0 9px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--muted); font: inherit; font-size: 12px; }
+    .signup-required.active { border-color: color-mix(in srgb, var(--blue), var(--line) 55%); background: color-mix(in srgb, var(--blue), transparent 92%); color: var(--blue); }
+    .signup-options { margin-top: 10px; padding-left: 10px; border-left: 2px solid var(--line); }
+    .signup-field-options-head { margin-bottom: 7px; }
+    .signup-field-options-head span { color: var(--muted); font-size: 12px; }
+    .signup-option { display: grid; grid-template-columns: minmax(0, 1fr) 32px; gap: 6px; margin-top: 7px; }
+    .signup-option button { width: 32px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font-size: 20px; }
+    .signup-add-option { border: 0; background: transparent; color: var(--blue); padding: 7px 0 0; font: inherit; font-size: 12px; font-weight: 750; }
+    .signup-builder-empty { padding: 18px 0; color: var(--muted); font-size: 13px; line-height: 1.55; text-align: center; }
+    .field-type-dialog { width: min(100% - 28px, 420px); margin: auto; padding: 0; border: 0; border-radius: 18px; background: var(--surface); color: var(--ink); box-shadow: 0 18px 48px rgba(15, 23, 42, .22); }
+    .field-type-dialog::backdrop { background: rgba(16, 24, 40, .42); }
+    .field-type-dialog header { display: flex; align-items: center; justify-content: space-between; padding: 18px 18px 12px; border-bottom: 1px solid var(--line); }
+    .field-type-dialog header strong { font-size: 16px; }
+    .field-type-dialog header button { width: 34px; height: 34px; border: 0; border-radius: 50%; background: var(--surface-alt); color: var(--ink-2); font-size: 20px; }
+    .field-type-list { padding: 6px 18px 18px; }
+    .field-type-list button { width: 100%; display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; align-items: center; gap: 10px; min-height: 60px; border: 0; border-bottom: 1px solid var(--line); background: transparent; color: var(--ink); text-align: left; font: inherit; }
+    .field-type-list button:last-child { border-bottom: 0; }
+    .field-type-list svg { color: var(--blue); }
+    .field-type-list strong { display: block; font-size: 14px; }
+    .field-type-list small { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; }
+    .field-type-list em { color: var(--muted); font-size: 18px; font-style: normal; }
+    @media (max-width: 380px) { .signup-field-grid { grid-template-columns: 1fr; } .signup-builder-head { align-items: flex-start; flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <div class="app-shell compose-app" data-tab-scope>
+    <main>
+      <header class="compose-appbar">
+        <a class="compose-close" href="campus-home.html" aria-label="取消发布"><svg class="i" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></a>
+        <div class="compose-appbar-title"><strong>发布活动</strong><span data-draft-status>草稿会自动保存</span></div>
+        <button class="compose-publish" form="activity-form" type="submit">发布</button>
+      </header>
+
+      <section class="publish-page" aria-label="发布活动">
+        <form id="activity-form" class="compose-form" data-compose-root data-compose-kind="activity" data-draft-key="publish-activity-v2" novalidate>
+          <div class="compose-target" aria-label="发布设置">
+            <label class="compose-select"><span>发布到</span><select name="channel" aria-label="发布到"><option value="cs">计算机学院学生会</option><option value="public">公共频道</option><option value="volunteer">志愿服务中心</option></select></label>
+            <span class="compose-role-hint">仅频道管理员及以上可发布活动</span>
+          </div>
+
+          <section class="compose-hero-card" aria-label="发布活动说明">
+            <span class="notice-icon green"><svg class="i" viewBox="0 0 24 24"><path d="M8 7V4m8 3V4M5 10h14M6 6h12v14H6z"/></svg></span>
+            <div><h2>活动发布复用动态外壳</h2><p>活动仍是一条帖子，但会额外带报名、资格、候补、签到和加分模块；详情页按活动状态展示报名结果。</p></div>
+          </section>
+          <div class="publish-guidance" aria-label="活动状态">
+            <span><b>报名前</b><small>校验活动时间、截止时间、名额与资格</small></span>
+            <span><b>报名中</b><small>展示确认、候补、取消和移除状态</small></span>
+            <span><b>进行后</b><small>支持签到、补签、名单导出和活动结束</small></span>
+          </div>
+
+          <button class="cover-upload" type="button" data-media-trigger="activity-cover"><span><svg class="i" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M12 9v6m-3-3h6"/></svg></span><b>添加活动封面</b><small>建议 3:1 横幅，用于信息流与活动详情</small></button>
+          <input id="activity-cover" class="visually-hidden" type="file" accept="image/jpeg,image/png,image/webp" data-media-input data-media-limit="1" data-cover-preview>
+          <div class="media-preview cover-preview" data-media-preview hidden aria-live="polite"></div>
+
+          <div class="compose-field"><input name="title" maxlength="50" required placeholder="活动名称" aria-label="活动名称"><span class="compose-error" data-error-for="title" role="alert"></span></div>
+          <div class="compose-editor">
+            <textarea name="description" rows="5" maxlength="2000" required data-compose-content placeholder="写下活动介绍、流程与报名说明…" aria-label="活动简介"></textarea>
+            <div class="compose-editor-footer"><span class="compose-error" data-error-for="description" role="alert"></span><span><b data-char-count>0</b>/2000</span></div>
+          </div>
+
+          <section class="compose-section" aria-labelledby="activity-basics-title">
+            <h2 id="activity-basics-title">基本信息</h2>
+            <div class="compose-grid two">
+              <label class="compose-field"><span>活动类型</span><select name="activityType" required><option value="">请选择</option><option>公益志愿</option><option>学术</option><option>文艺</option><option>体育</option><option>就业创业</option><option>竞赛</option><option>社会实践</option><option>其他</option></select><span class="compose-error" data-error-for="activityType" role="alert"></span></label>
+              <label class="compose-field"><span>活动性质</span><select name="activityNature" required><option value="">请选择</option><option>校级</option><option>院级</option><option>班级</option><option>社团级</option><option>外部引进</option></select><span class="compose-error" data-error-for="activityNature" role="alert"></span></label>
+            </div>
+            <div class="compose-grid two">
+              <label class="compose-field"><span>开始时间</span><input name="startAt" type="datetime-local" required><span class="compose-error" data-error-for="startAt" role="alert"></span></label>
+              <label class="compose-field"><span>结束时间</span><input name="endAt" type="datetime-local" required><span class="compose-error" data-error-for="endAt" role="alert"></span></label>
+            </div>
+            <label class="compose-field"><span>报名截止</span><input name="signupDeadline" type="datetime-local" required><span class="compose-error" data-error-for="signupDeadline" role="alert"></span></label>
+            <label class="compose-field"><span>活动地点</span><input name="location" required maxlength="100" placeholder="选择校园地点或填写详细地址"><span class="compose-error" data-error-for="location" role="alert"></span></label>
+            <div class="compose-grid two">
+              <label class="compose-field"><span>报名上限</span><input name="capacity" type="number" min="1" required placeholder="例如：200"><span class="compose-error" data-error-for="capacity" role="alert"></span></label>
+              <label class="compose-field"><span>候补名额</span><input name="waitlistCapacity" type="number" min="0" required value="0"><span class="compose-error" data-error-for="waitlistCapacity" role="alert"></span></label>
+            </div>
+            <label class="compose-field"><span>承办方 / 联系人</span><input name="organizer" required maxlength="100" placeholder="例如：计算机学院学生会 / 林墨"><span class="compose-error" data-error-for="organizer" role="alert"></span></label>
+            <div class="compose-grid two">
+              <label class="compose-field"><span>指导老师（可选）</span><input name="advisor" maxlength="50" placeholder="姓名"></label>
+              <label class="compose-field"><span>联系方式</span><input name="contact" required maxlength="50" placeholder="手机号或 QQ"><span class="compose-error" data-error-for="contact" role="alert"></span></label>
+            </div>
+          </section>
+
+          <section class="compose-section compose-collapsible" aria-labelledby="signup-settings-title">
+            <button class="compose-section-toggle" type="button" data-compose-toggle="signup-settings" aria-expanded="false"><span><b id="signup-settings-title">报名设置</b><small>资格限制与自定义报名字段</small></span><svg class="i" viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></svg></button>
+            <div id="signup-settings" hidden>
+              <div class="compose-grid two">
+                <label class="compose-field"><span>资格校验</span><select name="restrictionMode"><option value="NONE">不限</option><option value="ANY">满足任一条件</option><option value="ALL">满足全部条件</option></select></label>
+                <label class="compose-field"><span>指定频道（可选）</span><input name="restrictedChannels" placeholder="例如：摄影社、志愿服务中心"></label>
+              </div>
+              <label class="compose-field"><span>学院 / 班级限制（可选）</span><input name="restrictedGroups" placeholder="例如：计算机学院、软件学院、计算机2024级1班"></label>
+              <input type="hidden" name="signupSchema" data-signup-schema value="[]">
+              <div class="signup-builder" data-signup-builder>
+                <div class="signup-builder-head"><div><b>报名字段</b><small>学生的真实姓名、学号和班级自动带入；手机号默认必填。</small></div><button class="signup-builder-add" type="button" data-field-add><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>添加字段</button></div>
+                <div class="signup-default-fields" aria-label="默认报名字段">
+                  <div class="signup-default-row"><div><strong>真实姓名</strong><span>按身份自动带入</span></div><span class="signup-lock">不可修改</span></div>
+                  <div class="signup-default-row"><div><strong>学号 / 工号</strong><span>按身份自动带入</span></div><span class="signup-lock">不可修改</span></div>
+                  <div class="signup-default-row"><div><strong>学院与班级</strong><span>按身份自动带入</span></div><span class="signup-lock">不可修改</span></div>
+                  <div class="signup-default-row"><div><strong>手机号</strong><span>用于活动联系</span></div><span class="signup-lock">必填</span></div>
+                </div>
+                <div class="signup-custom-fields" data-custom-fields></div>
+                <p class="signup-builder-empty" data-custom-empty>还没有自定义字段。只在需要收集额外信息时添加。</p>
+                <span class="compose-error" data-signup-schema-error role="alert"></span>
+              </div>
+            </div>
+          </section>
+
+          <section class="compose-section compose-collapsible" aria-labelledby="checkin-settings-title">
+            <button class="compose-section-toggle" type="button" data-compose-toggle="checkin-settings" aria-expanded="false"><span><b id="checkin-settings-title">签到设置</b><small>可组合扫码、位置和拍照签到</small></span><svg class="i" viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></svg></button>
+            <div id="checkin-settings" hidden>
+              <input type="hidden" name="checkinMethods" value="">
+              <div class="checkin-methods" data-checkin-methods>
+                <button type="button" data-checkin-toggle="QRCODE" aria-pressed="false"><svg class="i" viewBox="0 0 24 24"><path d="M4 4h5v5H4zm11 0h5v5h-5zM4 15h5v5H4zm11 1h2m-2 4h5v-5h-2"/></svg>扫码</button>
+                <button type="button" data-checkin-toggle="LOCATION" aria-pressed="false"><svg class="i" viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg>位置</button>
+                <button type="button" data-checkin-toggle="PHOTO" aria-pressed="false"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/></svg>拍照</button>
+              </div>
+              <div class="compose-grid two" data-location-checkin hidden>
+                <label class="compose-field"><span>签到中心点</span><input name="checkinLocation" placeholder="校园体育馆"></label>
+                <label class="compose-field"><span>有效范围</span><select name="checkinRadius"><option value="30">30 米</option><option value="100" selected>100 米</option><option value="200">200 米</option><option value="500">500 米</option></select></label>
+              </div>
+            </div>
+          </section>
+
+          <section class="compose-section compose-collapsible" aria-labelledby="credit-settings-title">
+            <button class="compose-section-toggle" type="button" data-compose-toggle="credit-settings" aria-expanded="false"><span><b id="credit-settings-title">加分设置</b><small>可选，仅作展示</small></span><svg class="i" viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></svg></button>
+            <div id="credit-settings" hidden class="compose-grid two">
+              <label class="compose-field"><span>加分类别</span><select name="creditType"><option value="">不设置</option><option>素质学分</option><option>志愿时长</option><option>创新学分</option></select></label>
+              <label class="compose-field"><span>分值</span><input name="creditValue" type="number" min="0" step="0.1" placeholder="例如：2"></label>
+            </div>
+          </section>
+        </form>
+
+        <dialog class="field-type-dialog" data-field-type-dialog aria-labelledby="field-type-title">
+          <header><strong id="field-type-title">添加报名字段</strong><button type="button" data-field-dialog-close aria-label="关闭">×</button></header>
+          <div class="field-type-list">
+            <button type="button" data-new-field-type="TEXT"><svg class="i" viewBox="0 0 24 24"><path d="M5 5h14v14H5zM8 9h8M8 13h5"/></svg><span><strong>单行文本</strong><small>如：紧急联系人、宿舍号</small></span><em>›</em></button>
+            <button type="button" data-new-field-type="TEXTAREA"><svg class="i" viewBox="0 0 24 24"><path d="M5 5h14v14H5zM8 9h8M8 13h8M8 17h5"/></svg><span><strong>多行文本</strong><small>如：报名备注、个人说明</small></span><em>›</em></button>
+            <button type="button" data-new-field-type="SINGLE_SELECT"><svg class="i" viewBox="0 0 24 24"><circle cx="7" cy="8" r="2"/><circle cx="7" cy="16" r="2"/><path d="M11 8h7M11 16h7"/></svg><span><strong>单选</strong><small>仅能选择一个选项</small></span><em>›</em></button>
+            <button type="button" data-new-field-type="MULTI_SELECT"><svg class="i" viewBox="0 0 24 24"><rect x="5" y="6" width="4" height="4"/><rect x="5" y="14" width="4" height="4"/><path d="M12 8h7M12 16h7"/></svg><span><strong>多选</strong><small>可选择多个选项</small></span><em>›</em></button>
+            <button type="button" data-new-field-type="FILE"><svg class="i" viewBox="0 0 24 24"><path d="M7 12.5 12 17l5-4.5M12 3v14"/><path d="M5 21h14"/></svg><span><strong>文件上传</strong><small>如：证明材料或作品文件</small></span><em>›</em></button>
+          </div>
+        </dialog>
+
+        <section class="publish-result" data-publish-result hidden aria-live="polite">
+          <span class="result-mark"><svg class="i" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span>
+          <h1>活动已提交审核</h1>
+          <p>审核通过后将开放报名；活动时间、名额、资格限制和签到设置会随发布内容生效。</p>
+          <div class="result-actions"><a class="button full" href="campus-home.html">返回首页</a><a class="button tertiary full" href="campus-draft-box.html">查看草稿箱</a></div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script>
+    (() => {
+      const form = document.querySelector('#activity-form');
+      const schemaInput = form?.querySelector('[data-signup-schema]');
+      const list = form?.querySelector('[data-custom-fields]');
+      const empty = form?.querySelector('[data-custom-empty]');
+      const dialog = document.querySelector('[data-field-type-dialog]');
+      const error = form?.querySelector('[data-signup-schema-error]');
+      if (!form || !schemaInput || !list || !dialog) return;
+
+      const typeMeta = {
+        TEXT: { label: '单行文本', hint: '填写一行文字' },
+        TEXTAREA: { label: '多行文本', hint: '填写较长说明' },
+        SINGLE_SELECT: { label: '单选', hint: '选择一个选项' },
+        MULTI_SELECT: { label: '多选', hint: '可选择多个选项' },
+        FILE: { label: '文件上传', hint: '上传证明材料或文件' }
+      };
+      const chooseTypes = new Set(['SINGLE_SELECT', 'MULTI_SELECT']);
+      let fields = [];
+      try {
+        const saved = JSON.parse(schemaInput.value || '[]');
+        fields = Array.isArray(saved) ? saved : [];
+      } catch { fields = []; }
+      const makeId = () => `field_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`;
+      const fieldTemplate = (type) => ({ id: makeId(), type, label: '', required: false, options: chooseTypes.has(type) ? ['选项 1', '选项 2'] : [] });
+      const sync = () => {
+        schemaInput.value = JSON.stringify(fields);
+        schemaInput.dispatchEvent(new Event('change', { bubbles: true }));
+        empty.hidden = fields.length > 0;
+      };
+      const icon = (path) => `<svg class="i" viewBox="0 0 24 24"><path d="${path}"/></svg>`;
+      const render = () => {
+        list.replaceChildren();
+        fields.forEach((field, index) => {
+          const row = document.createElement('section');
+          row.className = 'signup-field-row';
+          row.dataset.fieldId = field.id;
+          row.innerHTML = `
+            <div class="signup-field-top"><div><strong>字段 ${index + 1}</strong><small>${typeMeta[field.type].hint}</small></div><div class="signup-field-tools"><button class="signup-tool" type="button" data-field-move="up" aria-label="上移字段" ${index === 0 ? 'disabled' : ''}>${icon('m6 14 6-6 6 6')}</button><button class="signup-tool" type="button" data-field-move="down" aria-label="下移字段" ${index === fields.length - 1 ? 'disabled' : ''}>${icon('m6 10 6 6 6-6')}</button><button class="signup-tool" type="button" data-field-remove aria-label="删除字段">${icon('M6 7h12m-8 4v5m4-5v5M9 7l1-2h4l1 2m-7 0 1 13h6l1-13')}</button></div></div>
+            <div class="signup-field-grid"><input type="text" maxlength="30" data-field-label placeholder="字段名称，例如：是否需要无障碍协助" value="${field.label.replace(/&/g, '&amp;').replace(/"/g, '&quot;')}"><select data-field-type>${Object.entries(typeMeta).map(([value, meta]) => `<option value="${value}" ${value === field.type ? 'selected' : ''}>${meta.label}</option>`).join('')}</select></div>
+            <div style="margin-top:10px"><button class="signup-required ${field.required ? 'active' : ''}" type="button" data-field-required aria-pressed="${field.required}">${field.required ? '必填' : '选填'}</button></div>
+            ${chooseTypes.has(field.type) ? `<div class="signup-options"><div class="signup-field-options-head"><span>选项</span><span>至少保留两个</span></div><div data-field-options>${field.options.map((option, optionIndex) => `<div class="signup-option"><input type="text" maxlength="40" data-field-option="${optionIndex}" value="${option.replace(/&/g, '&amp;').replace(/"/g, '&quot;')}" aria-label="选项 ${optionIndex + 1}"><button type="button" data-option-remove="${optionIndex}" aria-label="删除选项">×</button></div>`).join('')}</div><button class="signup-add-option" type="button" data-option-add>+ 添加选项</button></div>` : ''}`;
+          list.append(row);
+        });
+        sync();
+      };
+      const getField = (target) => fields.find((item) => item.id === target.closest('[data-field-id]')?.dataset.fieldId);
+
+      form.querySelector('[data-field-add]')?.addEventListener('click', () => dialog.showModal());
+      dialog.querySelector('[data-field-dialog-close]')?.addEventListener('click', () => dialog.close());
+      dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+      dialog.querySelectorAll('[data-new-field-type]').forEach((button) => button.addEventListener('click', () => {
+        fields.push(fieldTemplate(button.dataset.newFieldType));
+        dialog.close();
+        render();
+        list.lastElementChild?.querySelector('[data-field-label]')?.focus();
+      }));
+      list.addEventListener('input', (event) => {
+        const field = getField(event.target);
+        if (!field) return;
+        if (event.target.matches('[data-field-label]')) field.label = event.target.value;
+        if (event.target.matches('[data-field-option]')) field.options[Number(event.target.dataset.fieldOption)] = event.target.value;
+        sync();
+      });
+      list.addEventListener('change', (event) => {
+        const field = getField(event.target);
+        if (!field || !event.target.matches('[data-field-type]')) return;
+        field.type = event.target.value;
+        field.options = chooseTypes.has(field.type) ? (field.options.length ? field.options : ['选项 1', '选项 2']) : [];
+        render();
+      });
+      list.addEventListener('click', (event) => {
+        const row = event.target.closest('[data-field-id]');
+        const index = fields.findIndex((item) => item.id === row?.dataset.fieldId);
+        if (index < 0) return;
+        if (event.target.closest('[data-field-remove]')) { fields.splice(index, 1); render(); return; }
+        const move = event.target.closest('[data-field-move]')?.dataset.fieldMove;
+        if (move === 'up' && index > 0) { [fields[index - 1], fields[index]] = [fields[index], fields[index - 1]]; render(); return; }
+        if (move === 'down' && index < fields.length - 1) { [fields[index + 1], fields[index]] = [fields[index], fields[index + 1]]; render(); return; }
+        const field = fields[index];
+        if (event.target.closest('[data-field-required]')) { field.required = !field.required; render(); return; }
+        if (event.target.closest('[data-option-add]')) { field.options.push(`选项 ${field.options.length + 1}`); render(); return; }
+        const removeOption = event.target.closest('[data-option-remove]');
+        if (removeOption && field.options.length > 2) { field.options.splice(Number(removeOption.dataset.optionRemove), 1); render(); }
+      });
+      form.addEventListener('submit', (event) => {
+        const invalid = fields.find((field) => !field.label.trim() || (chooseTypes.has(field.type) && field.options.some((option) => !option.trim())));
+        if (!invalid) { error.textContent = ''; sync(); return; }
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        const panel = form.querySelector('#signup-settings');
+        const toggle = form.querySelector('[data-compose-toggle="signup-settings"]');
+        if (panel?.hidden) { panel.hidden = false; toggle?.setAttribute('aria-expanded', 'true'); }
+        error.textContent = '请为每个自定义字段填写名称；单选和多选还需要填写所有选项。';
+        list.querySelector(`[data-field-id="${invalid.id}"] [data-field-label]`)?.focus();
+      }, true);
+      render();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "campus-topic-detail.html",
+  "entry": "campus-topic-detail.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-21T02:34:30.663Z",
+  "updatedAt": "2026-06-21T02:34:30.663Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

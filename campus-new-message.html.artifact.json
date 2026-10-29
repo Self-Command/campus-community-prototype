@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "campus-new-message.html",
+  "entry": "campus-new-message.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-21T03:07:52.214Z",
+  "updatedAt": "2026-06-21T03:07:52.214Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

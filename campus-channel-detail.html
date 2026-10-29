@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 频道</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-posts.css">
+  <link rel="stylesheet" href="campus-channel.css">
+</head>
+<body>
+  <main class="channel-screen" data-od-id="channel-detail">
+    <section class="channel-cover" aria-label="频道封面">
+      <header class="channel-appbar">
+        <a class="icon-button" href="campus-channels.html" aria-label="返回频道列表">
+          <svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <a class="icon-button" data-channel-link="campus-channel-manage.html" data-role-entry aria-label="频道设置">
+          <svg class="i" viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19 12h3M2 12h3M12 2v3M12 19v3"/></svg>
+        </a>
+      </header>
+    </section>
+
+    <section class="channel-profile" data-channel-runtime>
+      <div class="channel-avatar" data-channel-avatar>学</div>
+      <div class="channel-profile-copy">
+        <div class="channel-title-row">
+          <h1 data-channel-name>校学生会</h1>
+          <span data-cert-node data-channel-cert-badge data-cert-badge="学生会认证"></span>
+        </div>
+        <div class="channel-meta">
+          <span data-channel-type>垂直频道</span>
+          <span data-channel-category>学生组织</span>
+          <span data-channel-certification data-cert-node>学生会认证</span>
+        </div>
+        <p class="channel-summary" data-channel-summary>负责学生事务、志愿服务、活动报名、意见收集和校园公告发布。</p>
+
+        <div class="channel-stats" aria-label="频道统计">
+          <div class="channel-stat"><strong data-channel-members>1,428</strong><span>成员</span></div>
+          <div class="channel-stat"><strong data-channel-post-count>567</strong><span>帖子</span></div>
+          <div class="channel-stat"><strong data-channel-created>2023-09</strong><span>创建</span></div>
+        </div>
+
+        <div class="channel-members">
+          <div class="member-stack">
+            <div class="member-stack-avatars" data-channel-member-preview aria-hidden="true"></div>
+            <span>与频道成员一起讨论</span>
+          </div>
+          <button class="channel-text-link" type="button" data-tab-jump="members">查看成员</button>
+        </div>
+
+        <div class="channel-actions">
+          <button class="channel-action joined" type="button" data-join-channel>已加入</button>
+          <a class="channel-action primary" href="campus-publish-post.html">发动态</a>
+          <a class="channel-action" data-channel-link="campus-channel-manage.html" data-role-entry>管理</a>
+        </div>
+      </div>
+    </section>
+
+    <nav class="channel-tabs" aria-label="频道内容">
+      <button class="active" type="button" data-channel-tab="posts">动态</button>
+      <button type="button" data-channel-tab="members">成员</button>
+      <button type="button" data-channel-tab="album">相册</button>
+      <button type="button" data-channel-tab="about">资料</button>
+    </nav>
+
+    <section class="channel-panel" data-channel-panel="posts" data-channel-runtime>
+      <div class="feed-toolbar"><strong>频道动态</strong></div>
+      <div class="post-categories" aria-label="帖子分类">
+        <button class="active" type="button" data-post-filter="all">全部</button>
+        <button type="button" data-post-filter="NORMAL_GALLERY">图文</button>
+        <button type="button" data-post-filter="ACTIVITY">活动</button>
+        <button type="button" data-post-filter="VOTE">投票</button>
+      </div>
+      <div class="channel-feed" data-channel-posts></div>
+    </section>
+
+    <section class="channel-panel" data-channel-panel="members" hidden data-channel-runtime>
+      <div class="feed-toolbar"><strong>成员</strong></div>
+      <div class="member-list" data-channel-member-list></div>
+    </section>
+
+    <section class="channel-panel" data-channel-panel="album" hidden data-channel-runtime>
+      <div class="feed-toolbar"><strong>相册</strong></div>
+      <div class="album-grid" data-channel-album></div>
+    </section>
+
+    <section class="channel-panel" data-channel-panel="about" hidden data-channel-runtime>
+      <div class="feed-toolbar"><strong>频道资料</strong></div>
+      <dl class="channel-info-list">
+        <div class="info-row"><dt>频道类别</dt><dd data-channel-category>学生组织</dd></div>
+        <div class="info-row"><dt>频道类型</dt><dd data-channel-type>垂直频道</dd></div>
+        <div class="info-row" data-cert-node><dt>官方认证</dt><dd data-channel-certification>学生会认证</dd></div>
+        <div class="info-row"><dt>加入规则</dt><dd data-channel-join-rule>申请审核</dd></div>
+        <div class="info-row"><dt>联系人</dt><dd data-channel-contact>周老师 / 138-0000-1208</dd></div>
+        <div class="info-row"><dt>创建时间</dt><dd data-channel-created>2023-09</dd></div>
+      </dl>
+    </section>
+
+    <section class="state-sheet" data-channel-state hidden aria-live="polite"></section>
+  </main>
+
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+
+  <script src="campus-native.js"></script>
+  <script src="campus-channel-admin-data.js"></script>
+  <script src="campus-posts.js"></script>
+  <script src="campus-post-fixtures.js"></script>
+  <script>
+    (() => {
+      const api = window.CampusChannelAdminData;
+      const postsApi = window.CampusPosts;
+      const fixtureStore = window.CampusPostFixtures;
+      const params = new URLSearchParams(window.location.search);
+      const ctx = api && api.getContext ? api.getContext() : null;
+      if (!api || !postsApi || !fixtureStore || !ctx) return;
+
+      api.applyContext(document, ctx);
+
+      const runtimeNodes = document.querySelectorAll('[data-channel-runtime]');
+      const stateRoot = document.querySelector('[data-channel-state]');
+      const uiState = params.get('uiState');
+      const stateTemplates = {
+        loading: '<div class="skeleton-line"></div><div class="skeleton-line short"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div>',
+        empty: '<h2>还没有频道动态</h2><p>频道创建者可以先发布一条动态，让成员知道这里正在讨论什么。</p>',
+        error: '<h2>频道内容暂时无法加载</h2><p>请检查网络后重试。已加入频道和个人资料不会因此丢失。</p><button type="button" data-retry>重新加载</button>',
+        'no-permission': '<h2>暂时不能查看频道内容</h2><p>这个频道的内容仅对成员开放。加入审核通过后即可查看。</p>'
+      };
+      if (uiState && stateTemplates[uiState]) {
+        runtimeNodes.forEach((node) => { node.hidden = true; });
+        stateRoot.hidden = false;
+        stateRoot.innerHTML = stateTemplates[uiState];
+        const retry = stateRoot.querySelector('[data-retry]');
+        if (retry) retry.addEventListener('click', () => {
+          params.delete('uiState');
+          window.location.search = params.toString();
+        });
+        return;
+      }
+
+      const hasRole = params.has('role');
+      document.querySelectorAll('[data-role-entry]').forEach((node) => { node.hidden = !hasRole; });
+      if (ctx.channel.certification === '未认证') {
+        document.querySelectorAll('[data-cert-node]').forEach((node) => { node.hidden = true; });
+      }
+
+      const showToast = (message) => {
+        const toast = document.querySelector('[data-toast-region]');
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add('show');
+        window.setTimeout(() => toast.classList.remove('show'), 1800);
+      };
+
+      const joinButton = document.querySelector('[data-join-channel]');
+      const wantsJoin = params.get('membership') === 'none';
+      if (wantsJoin) {
+        joinButton.classList.remove('joined');
+        joinButton.textContent = ctx.channel.joinRule === '申请审核' ? '申请加入' : '加入频道';
+      }
+      joinButton.addEventListener('click', () => {
+        if (!wantsJoin) {
+          showToast('当前账号已加入该频道');
+          return;
+        }
+        joinButton.disabled = true;
+        joinButton.classList.add('joined');
+        if (ctx.channel.joinRule === '申请审核') {
+          joinButton.textContent = '申请已提交';
+          showToast('申请已提交，等待频道管理员处理');
+        } else {
+          joinButton.textContent = '已加入';
+          showToast('已加入频道');
+        }
+      });
+
+      const tabs = [...document.querySelectorAll('[data-channel-tab]')];
+      const panels = [...document.querySelectorAll('[data-channel-panel]')];
+      const openTab = (name, updateUrl = true) => {
+        tabs.forEach((tab) => tab.classList.toggle('active', tab.dataset.channelTab === name));
+        panels.forEach((panel) => { panel.hidden = panel.dataset.channelPanel !== name; });
+        if (updateUrl) {
+          const next = new URL(window.location.href);
+          next.searchParams.set('tab', name);
+          window.history.replaceState({}, '', next);
+        }
+      };
+      tabs.forEach((tab) => tab.addEventListener('click', () => openTab(tab.dataset.channelTab)));
+      document.querySelectorAll('[data-tab-jump]').forEach((button) => button.addEventListener('click', () => openTab(button.dataset.tabJump)));
+      const initialTab = params.get('tab');
+      if (tabs.some((tab) => tab.dataset.channelTab === initialTab)) openTab(initialTab, false);
+
+      const linkedPosts = fixtureStore.all
+        .filter((post) => post.channel && post.channel.name === ctx.channel.name)
+        .map((post) => Object.assign({}, post, {
+          sourceScene: 'CHANNEL_FEED',
+          channel: { name: ctx.channel.name, certified: ctx.channel.certification !== '未认证' }
+        }));
+      const fallbackPosts = fixtureStore.all.slice(0, 6).map((post) => Object.assign({}, post, {
+        sourceScene: 'CHANNEL_FEED',
+        channel: { name: ctx.channel.name, certified: ctx.channel.certification !== '未认证' }
+      }));
+      const feedPosts = (linkedPosts.length ? linkedPosts : fallbackPosts).slice(0, 6);
+      const feedTarget = document.querySelector('[data-channel-posts]');
+      const renderPosts = (kind) => {
+        const visiblePosts = kind === 'all' ? feedPosts : feedPosts.filter((post) => post.kind === kind);
+        feedTarget.innerHTML = visiblePosts.length
+          ? visiblePosts.map(postsApi.renderPostCard).join('')
+          : '<section class="state-sheet"><h2>这个分类暂时没有内容</h2><p>频道创建者可以在发布权限里调整可发布的内容类型。</p></section>';
+      };
+      renderPosts('all');
+      document.querySelectorAll('[data-post-filter]').forEach((button) => {
+        button.addEventListener('click', () => {
+          document.querySelectorAll('[data-post-filter]').forEach((item) => item.classList.toggle('active', item === button));
+          renderPosts(button.dataset.postFilter);
+        });
+      });
+
+      const allMembers = (api.memberRows || []).filter((member) => member.channelId === ctx.channelId);
+      const members = allMembers.length ? allMembers : (api.memberRows || []).slice(0, 3);
+      const previewTarget = document.querySelector('[data-channel-member-preview]');
+      previewTarget.innerHTML = members.slice(0, 4).map((member) => '<span>' + member.name.slice(0, 1) + '</span>').join('');
+      document.querySelector('[data-channel-member-list]').innerHTML = members.map((member) =>
+        '<article class="member-row"><div class="member-row-avatar">' + member.name.slice(0, 1) + '</div><div class="member-row-copy"><strong>' + member.name + '</strong><span>' + member.role + '</span></div><span class="member-row-tail">' + member.badge + '</span></article>'
+      ).join('');
+
+      const mediaItems = feedPosts
+        .filter((post) => Array.isArray(post.media) && post.media.length)
+        .flatMap((post) => post.media.slice(0, 2).map((media) => ({ media, post })))
+        .slice(0, 9);
+      document.querySelector('[data-channel-album]').innerHTML = mediaItems.length
+        ? mediaItems.map((item) => '<a class="album-item" href="campus-post-detail.html?postId=' + encodeURIComponent(item.post.id) + '"><span>' + (item.media.label || item.post.summary.title) + '</span></a>').join('')
+        : '<section class="state-sheet"><h2>暂无相册内容</h2><p>频道内发布的图文内容会显示在这里。</p></section>';
+    })();
+  </script>
+</body>
+</html>

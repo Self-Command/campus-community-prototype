@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 帖子审核详情</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-channel.css">
+  <link rel="stylesheet" href="campus-posts.css">
+</head>
+<body>
+  <div class="app-shell">
+    <main>
+      <header class="appbar">
+        <div class="appbar-left">
+          <button class="icon-button" data-channel-link="campus-channel-content.html" aria-label="返回">
+            <svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+        </div>
+        <div class="appbar-center"><strong>帖子审核详情</strong></div>
+        <div class="appbar-right"><span class="channel-tag warn" data-case-status>待审核</span></div>
+      </header>
+
+      <section class="page channel-page">
+        <section class="channel-sheet">
+          <div class="channel-block">
+            <span class="channel-kicker">POST REVIEW</span>
+            <h1 class="channel-headline" data-case-title>迎新志愿者报名提醒</h1>
+            <p class="channel-copy" data-case-report>正文中的报名截止时间与频道置顶公告不一致，需要结合正文、图片和评论问询一起判断。</p>
+            <div class="channel-inline-meta">
+              <span data-case-author>苏澜</span>
+              <span data-channel-name>校学生会</span>
+              <span data-case-status>待审核</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="channel-sheet">
+          <div class="channel-section-head">
+            <div>
+              <h2>帖子预览</h2>
+              <p>审核决定只在这里做，列表页不代替详情页拍板。</p>
+            </div>
+          </div>
+          <div class="channel-post-list" data-post-preview></div>
+        </section>
+
+        <section class="channel-sheet">
+          <div class="channel-section-head">
+            <div>
+              <h2>审核上下文</h2>
+              <p>把举报证据、评论风险和同步状态集中放在一起看。</p>
+            </div>
+          </div>
+          <div class="channel-form" data-case-evidence></div>
+        </section>
+
+        <section class="channel-sheet">
+          <div class="channel-section-head">
+            <div>
+              <h2>处理历史</h2>
+              <p>后端联调时可以据此补审计字段和通知结果。</p>
+            </div>
+          </div>
+          <div class="channel-row-list">
+            <div class="channel-row no-icon">
+              <div class="channel-row-main">
+                <div class="channel-row-title">提交审核</div>
+                <div class="channel-row-sub">今天 08:52 · 作者提交后进入审核队列。</div>
+              </div>
+            </div>
+            <div class="channel-row no-icon">
+              <div class="channel-row-main">
+                <div class="channel-row-title">举报进入待处理</div>
+                <div class="channel-row-sub">今天 09:11 · 评论区用户指出报名截止时间与公告不一致。</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="channel-action-bar">
+          <button class="button tertiary" type="button" data-action-toast="已退回作者并要求修改时间字段">退回修改</button>
+          <button class="button" type="button" data-action-toast="已通过审核并同步频道动态">通过审核</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script src="campus-channel-admin-data.js"></script>
+  <script src="campus-posts.js"></script>
+  <script src="campus-post-fixtures.js"></script>
+  <script>
+    (() => {
+      const channelApi = window.CampusChannelAdminData;
+      const postsApi = window.CampusPosts;
+      const fixtures = window.CampusPostFixtures?.all || [];
+      const ctx = channelApi?.getContext();
+      if (!channelApi || !postsApi || !ctx) return;
+      channelApi.applyContext(document, ctx);
+      const params = new URLSearchParams(window.location.search);
+      const reviewCase = channelApi.getReviewCase(params.get('case'));
+      const post = fixtures.find((item) => item.id === reviewCase.postId) || fixtures[0];
+      const preview = { ...post, sourceScene: 'CHANNEL_FEED', channel: { name: ctx.channel.name, certified: ctx.channel.certification !== '未认证' } };
+      document.querySelectorAll('[data-case-title]').forEach((node) => { node.textContent = reviewCase.title; });
+      document.querySelectorAll('[data-case-status]').forEach((node) => { node.textContent = reviewCase.status; });
+      document.querySelector('[data-case-author]').textContent = reviewCase.author;
+      document.querySelector('[data-case-report]').textContent = reviewCase.report;
+      document.querySelector('[data-post-preview]').innerHTML = postsApi.renderPostCard(preview);
+      document.querySelector('[data-case-evidence]').innerHTML = [
+        ['正文摘要', reviewCase.excerpt],
+        ['举报说明', reviewCase.report],
+        ['同步状态', '当前申请同步公共信息流；若退回修改，同步申请也会一并失效。'],
+        ['评论风险', '评论区已有 3 条问询，主要集中在时间和规则冲突。'],
+        ['证据', reviewCase.evidence.join('；')]
+      ].map(([label, value]) => `
+        <div class="channel-field">
+          <label>${label}</label>
+          <div>${value}</div>
+        </div>`).join('');
+    })();
+  </script>
+</body>
+</html>

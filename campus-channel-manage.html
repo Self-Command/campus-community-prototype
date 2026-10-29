@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 频道设置</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-channel.css">
+  <style>
+    .channel-page { padding: 0 0 28px; }
+    .channel-page .channel-sheet { margin: 0; padding: 0; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; box-shadow: none; }
+    .channel-page .channel-summary { padding: 16px; }
+    .channel-page .channel-kicker { display: none; }
+    .channel-page .channel-headline { font-size: 18px; }
+    .channel-page .channel-copy { margin: 4px 0 0; font-size: 12px; }
+    .channel-page .channel-inline-meta { margin-top: 9px; }
+    .channel-page .channel-stat-row { display: none; }
+    .channel-page .channel-section-head { padding: 14px 16px 7px; }
+    .channel-page .channel-section-head h2 { font-size: 13px; }
+    .channel-page .channel-section-head p { display: none; }
+    .channel-page .channel-row { min-height: 62px; padding: 10px 16px; }
+    .channel-page .channel-row-list + .channel-section-head { border-top: 12px solid var(--bg); }
+    .channel-page .channel-row-sub { margin-top: 3px; }
+    .channel-pending-entry { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 13px 16px; border-top: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; }
+    .channel-pending-entry strong { display: block; font-size: 14px; }
+    .channel-pending-entry span { display: block; margin-top: 3px; color: var(--muted); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-channels.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>频道设置</strong></div>
+        <div class="appbar-right"><span class="channel-tag" data-role-label>频道管理员</span></div>
+      </header>
+      <section class="page channel-page">
+        <section class="channel-sheet">
+          <div class="channel-summary">
+            <div class="channel-avatar" data-channel-avatar>学</div>
+            <div><h1 class="channel-headline" data-channel-name>校学生会</h1><p class="channel-copy" data-role-note>可处理频道日常事务与资料维护。</p><div class="channel-inline-meta"><span data-channel-type>垂直频道</span><span data-channel-certification>学生会认证</span><span data-channel-join-rule>申请审核</span></div></div>
+          </div>
+          <a class="channel-pending-entry" data-channel-link="campus-channel-applications.html"><span><strong>待处理 <b data-channel-pending>4</b></strong><span>入群申请、举报与认证补件</span></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></a>
+        </section>
+
+        <section class="channel-sheet">
+          <div class="channel-section-head"><div><h2>频道运营</h2></div></div>
+          <div class="channel-row-list">
+            <a class="channel-row no-icon" data-channel-link="campus-channel-members.html"><div class="channel-row-main"><div class="channel-row-title">成员与管理员</div><div class="channel-row-sub">成员、管理员名额、禁言与头衔</div></div><div class="channel-row-tail"><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></div></a>
+            <a class="channel-row no-icon" data-channel-link="campus-channel-content.html"><div class="channel-row-main"><div class="channel-row-title">内容管理</div><div class="channel-row-sub">审核队列、举报与内容处理记录</div></div><div class="channel-row-tail"><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></div></a>
+            <a class="channel-row no-icon" data-channel-link="campus-channel-publishing.html"><div class="channel-row-main"><div class="channel-row-title">发布权限</div><div class="channel-row-sub">帖子、视频、活动与投票权限</div></div><div class="channel-row-tail"><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></div></a>
+          </div>
+          <div class="channel-section-head"><div><h2>频道资料</h2></div></div>
+          <div class="channel-row-list">
+            <a class="channel-row no-icon" data-channel-link="campus-channel-settings.html"><div class="channel-row-main"><div class="channel-row-title">频道资料</div><div class="channel-row-sub">名称、简介、封面、联系人与加入规则</div></div><div class="channel-row-tail"><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></div></a>
+            <a class="channel-row no-icon" data-channel-link="campus-channel-certification.html" data-required-roles="creator platform"><div class="channel-row-main"><div class="channel-row-title">官方认证</div><div class="channel-row-sub">认证状态、材料补充与平台复核</div></div><div class="channel-row-tail"><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></div></a>
+          </div>
+          <div class="channel-section-head" data-required-roles="creator platform"><div><h2>高级操作</h2></div></div>
+          <div class="channel-row-list" data-required-roles="creator platform"><a class="channel-row no-icon" data-channel-link="campus-channel-advanced.html"><div class="channel-row-main"><div class="channel-row-title">转让、解散与审计</div><div class="channel-row-sub">仅创建者和平台总管理员可见</div></div><div class="channel-row-tail"><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></div></a></div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <script src="campus-native.js"></script>
+  <script src="campus-channel-admin-data.js"></script>
+  <script>(() => { const ctx = window.CampusChannelAdminData?.getContext(); if (ctx) window.CampusChannelAdminData.applyContext(document, ctx); })();</script>
+</body>
+</html>

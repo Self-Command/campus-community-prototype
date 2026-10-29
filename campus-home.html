@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 首页</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-posts.css">
+  <link rel="stylesheet" href="campus-services.css">
+</head>
+<body>
+  <div class="app-shell" data-tab-scope>
+    <nav class="tablet-rail" aria-label="主导航">
+      <a class="rail-brand" href="campus-home.html" aria-label="校园社区">校</a>
+      <a class="rail-link active" href="campus-home.html" aria-label="首页"><svg class="i" viewBox="0 0 24 24"><path d="m4 11 8-7 8 7v9H4z"/></svg></a>
+      <a class="rail-link" href="campus-channels.html" aria-label="频道"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 10h8M8 14h5"/></svg></a>
+      <button class="rail-link publish-rail" data-open-dialog="publish-sheet" aria-label="发布"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+      <a class="rail-link" href="campus-messages.html" aria-label="消息"><svg class="i" viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 3z"/></svg></a>
+      <a class="rail-link" href="campus-profile.html" aria-label="我的"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></a>
+    </nav>
+
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><strong>校园社区</strong></div>
+        <div class="appbar-right"><button class="icon-button" data-nav="campus-messages.html" aria-label="查看通知"><svg class="i" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><i class="badge-dot"></i></button></div>
+      </header>
+
+      <section class="page">
+        <div class="search compact-search" data-nav="campus-search.html"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg><input aria-label="搜索" placeholder="搜索帖子、用户、频道和活动"></div>
+        <section class="home-banner" data-home-banner aria-label="校园服务推荐">
+          <div class="home-banner-track">
+            <article class="home-banner-slide" data-slide="exchange"><div class="home-banner-kicker">校园服务 · 旧物交换</div><h2>毕业季旧物交换，带走下一个需要它的人。</h2><p>校内面交信息已集中到二手市场，发布前会进行内容审核。</p><span class="home-banner-action" data-nav="campus-secondhand.html">去逛二手市场 <svg class="i" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span></article>
+            <article class="home-banner-slide" data-slide="safety"><div class="home-banner-kicker">校园服务 · 安全提醒</div><h2>失物信息只差一个准确的地点与时间。</h2><p>发布或提供线索时，请核对物品特征，避免泄露不必要的个人信息。</p><span class="home-banner-action" data-nav="campus-lost-found.html">查看失物招领 <svg class="i" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span></article>
+            <article class="home-banner-slide" data-slide="career"><div class="home-banner-kicker">校园服务 · 招聘</div><h2>把合适的校园岗位，留给真正想投入的人。</h2><p>兼职、实习与勤工助学岗位统一展示截止时间和投递方式。</p><span class="home-banner-action" data-nav="campus-jobs.html">浏览招聘 <svg class="i" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span></article>
+          </div>
+          <div class="home-banner-dots" aria-label="轮播切换"><button class="active" type="button" data-banner-slide="0" aria-current="true" aria-label="第 1 条推荐"></button><button type="button" data-banner-slide="1" aria-current="false" aria-label="第 2 条推荐"></button><button type="button" data-banner-slide="2" aria-current="false" aria-label="第 3 条推荐"></button></div>
+        </section>
+
+        <div class="service-row" aria-label="校园服务快捷入口">
+          <button class="service-shortcut" data-nav="campus-secondhand.html"><span class="service-icon"><svg class="i" viewBox="0 0 24 24"><path d="M5 8h14v11H5zM9 8V5h6v3"/></svg></span>二手</button>
+          <button class="service-shortcut" data-nav="campus-lost-found.html"><span class="service-icon"><svg class="i" viewBox="0 0 24 24"><path d="M12 21s7-4.6 7-11a7 7 0 1 0-14 0c0 6.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2"/></svg></span>失物</button>
+          <button class="service-shortcut" data-nav="campus-jobs.html"><span class="service-icon"><svg class="i" viewBox="0 0 24 24"><path d="M5 20V8h14v12M9 8V5h6v3"/></svg></span>招聘</button>
+          <button class="service-shortcut" data-nav="campus-help.html"><span class="service-icon"><svg class="i" viewBox="0 0 24 24"><path d="M12 21s7-4 7-10a7 7 0 1 0-14 0c0 6 7 10 7 10Z"/><path d="M9 10h6M12 7v6"/></svg></span>求助</button>
+          <button class="service-shortcut" data-nav="campus-news.html"><span class="service-icon"><svg class="i" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="1"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>新闻</button>
+        </div>
+
+        <div class="scroll-chips" data-tab-group data-filter-target="#home-feed" aria-label="信息流筛选">
+          <button class="chip active" data-tab="all">全部</button><button class="chip" data-tab="following">关注</button><button class="chip" data-tab="latest">最新</button><button class="chip" data-tab="hot">热门</button><button class="chip" data-tab="academic">学术</button><button class="chip" data-tab="life">生活</button>
+        </div>
+
+        <div class="section-heading"><h2>推荐动态</h2><button class="text-action" data-refresh="#home-feed">刷新</button></div>
+        <div id="home-feed" class="feed" data-post-feed aria-live="polite" aria-label="推荐动态"></div>
+      </section>
+    </main>
+
+    <aside class="tablet-aside">
+      <section class="aside-card"><h2>今日校园</h2><div class="aside-list"><div class="aside-row"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>14:00 · 二手物品交换</div><div class="aside-row"><svg class="i" viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 3z"/></svg>4 条频道新讨论</div></div></section>
+      <section class="aside-card"><h2>发布提示</h2><p class="helper">帖子、评论和校园服务内容会先进入审核；通过后才会公开展示。</p><button class="button full" style="margin-top:12px" data-nav="campus-publish-post.html">发布内容</button></section>
+    </aside>
+  </div>
+
+  <nav class="bottom-nav" aria-label="主导航"><a class="nav-item active" href="campus-home.html"><svg class="i" viewBox="0 0 24 24"><path d="m4 11 8-7 8 7v9H4z"/></svg><span>首页</span></a><a class="nav-item" href="campus-channels.html"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 10h8M8 14h5"/></svg><span>频道</span></a><button class="nav-item publish-btn" data-open-dialog="publish-sheet" aria-label="发布"><span><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></button><a class="nav-item" href="campus-messages.html"><svg class="i" viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 3z"/></svg><span>消息</span></a><a class="nav-item" href="campus-profile.html"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg><span>我的</span></a></nav>
+
+  <dialog id="publish-sheet"><form class="sheet" method="dialog"><div class="sheet-head"><h2>发布内容</h2><button class="dialog-close" type="button" data-close-dialog aria-label="关闭"><svg class="i" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><button class="menu-item" type="button" data-nav="campus-publish-post.html"><span class="menu-icon"><svg class="i" viewBox="0 0 24 24"><path d="M4 19V5h16v14M8 9h8M8 13h5"/></svg></span><span class="menu-copy"><strong>发布动态</strong><span>文字、图片、话题与位置</span></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button><button class="menu-item" type="button" data-nav="campus-publish-activity.html"><span class="menu-icon green"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg></span><span class="menu-copy"><strong>发布活动</strong><span>报名、候补与签到设置</span></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button><button class="menu-item" type="button" data-nav="campus-publish-vote.html"><span class="menu-icon violet"><svg class="i" viewBox="0 0 24 24"><path d="M5 20V10m7 10V4m7 16v-7"/></svg></span><span class="menu-copy"><strong>发布投票</strong><span>最多 10 个选项，投出后不可修改</span></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button></form></dialog>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script src="campus-posts.js"></script>
+  <script src="campus-services.js"></script>
+</body>
+</html>

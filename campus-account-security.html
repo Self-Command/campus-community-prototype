@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>校园社区 · 账号与安全</title><link rel="stylesheet" href="campus-native.css"><link rel="stylesheet" href="campus-personal.css"></head>
+<body><div class="app-shell"><main>
+  <header class="appbar"><div class="appbar-left"><button class="icon-button" data-nav="campus-account-settings.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div><div class="appbar-center"><strong>账号与安全</strong></div><div class="appbar-right"></div></header>
+  <section class="settings-page-clean">
+    <section class="settings-group"><div class="settings-group-title">登录信息</div><a class="settings-row" href="campus-change-phone.html"><span><strong>手机号</strong><small>138****5678 · 用于登录与验证码校验</small></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></a><a class="settings-row" href="campus-change-password.html"><span><strong>修改密码</strong><small>修改后可退出所有其他设备</small></span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></a></section>
+    <section class="settings-group"><div class="settings-group-title">登录设备</div><div class="settings-row"><span><strong>当前设备</strong><small>Android · 重庆 · 刚刚活跃</small></span><span class="pill">当前</span></div><div class="settings-row" data-device-row><span><strong>Windows 浏览器</strong><small>上海 · 2 天前活跃</small></span><button class="personal-action" type="button" data-remove-device>移除</button></div></section>
+  </section>
+</main></div><div class="toast" data-toast-region role="status" aria-live="polite"></div><script src="campus-native.js"></script><script>document.querySelector('[data-remove-device]')?.addEventListener('click',(event)=>{event.currentTarget.closest('[data-device-row]')?.remove();});</script></body>
+</html>

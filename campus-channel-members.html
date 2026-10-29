@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 成员与管理员</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-channel.css">
+</head>
+<body>
+  <div class="app-shell">
+    <main>
+      <header class="appbar">
+        <div class="appbar-left">
+          <button class="icon-button" data-channel-link="campus-channel-manage.html" aria-label="返回">
+            <svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+        </div>
+        <div class="appbar-center"><strong>成员与管理员</strong></div>
+        <div class="appbar-right"><span class="channel-tag" data-role-label>频道管理员</span></div>
+      </header>
+
+      <section class="page channel-page">
+        <section class="channel-sheet">
+          <div class="channel-block">
+            <span class="channel-kicker">MEMBERS</span>
+            <h1 class="channel-headline"><span data-channel-name>校学生会</span>成员与管理员</h1>
+            <p class="channel-copy">成员、管理员和禁言都按线性列表处理。需要操作时进入成员详情或顶部按钮，不在一个块里塞多组按钮。</p>
+          </div>
+          <div class="channel-stat-row">
+            <div class="channel-stat"><strong data-channel-members>1,428</strong><span>成员</span></div>
+            <div class="channel-stat"><strong data-channel-admins>7 / 10</strong><span>管理员</span></div>
+            <div class="channel-stat"><strong>12</strong><span>禁言中</span></div>
+          </div>
+        </section>
+
+        <div class="channel-search">
+          <label class="search">
+            <svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg>
+            <input type="search" data-list-search="#member-row-list" placeholder="搜索成员、头衔、权限">
+          </label>
+        </div>
+
+        <section class="channel-sheet">
+          <div class="channel-section-head">
+            <div>
+              <h2>成员列表</h2>
+              <p>创建者、管理员、成员和禁言对象都在一个列表里看清楚。</p>
+            </div>
+            <button class="text-action" type="button" data-action-toast="已打开添加管理员选择器">添加管理员</button>
+          </div>
+          <div class="channel-row-list" id="member-row-list" data-member-row-list></div>
+        </section>
+
+        <section class="channel-sheet">
+          <div class="channel-section-head">
+            <div>
+              <h2>规则说明</h2>
+              <p>规则只写后端要落地的边界，不堆多余说明。</p>
+            </div>
+          </div>
+          <div class="channel-row-list">
+            <div class="channel-row no-icon">
+              <div class="channel-row-main">
+                <div class="channel-row-title">管理员名额</div>
+                <div class="channel-row-sub">每个频道最多 10 个管理员；频道创建者和平台总管理员不计入普通管理员上限。</div>
+              </div>
+            </div>
+            <div class="channel-row no-icon">
+              <div class="channel-row-main">
+                <div class="channel-row-title">能力边界</div>
+                <div class="channel-row-sub">管理员可处理成员、内容、禁言、活动和投票；转让创建者、申请解散仅创建者或平台总管理员可见。</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <script src="campus-native.js"></script>
+  <script src="campus-channel-admin-data.js"></script>
+  <script>
+    (() => {
+      const api = window.CampusChannelAdminData;
+      const ctx = api?.getContext();
+      if (!api || !ctx) return;
+      api.applyContext(document, ctx);
+      const iconMap = { '创建者': '创', '管理员': '管', '成员': '员' };
+      const rows = api.memberRows.filter((item) => item.channelId === ctx.channelId);
+      document.querySelector('[data-member-row-list]').innerHTML = rows.map((item) => `
+        <a class="channel-row" href="campus-user-home.html">
+          <span class="channel-row-icon">${iconMap[item.role] || '员'}</span>
+          <span class="channel-row-main">
+            <span class="channel-row-title">${item.name}</span>
+            <span class="channel-row-sub">${item.role}</span>
+            <span class="channel-row-note">${item.note}</span>
+          </span>
+          <span class="channel-row-tail"><span class="channel-tag ${item.role === '创建者' ? 'ok' : item.role === '管理员' ? 'warn' : ''}">${item.badge}</span><svg class="i chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span>
+        </a>`).join('');
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 多端 MVP 原型</title>
+  <style>
+    :root{--page:#0d1117;--ink:#142033;--muted:#69778b;--surface:#fff;--canvas:#f5f7fb;--brand:#2563eb;--success:#168460;--serif:"Noto Serif SC","Songti SC",serif;--sans:"PingFang SC","SF Pro Text","Segoe UI",system-ui,sans-serif;--mono:"SF Mono","JetBrains Mono",ui-monospace,monospace}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(900px 500px at 50% -10%,#263c59 0%,transparent 60%),var(--page);color:#f6f8fb;font-family:var(--sans)}button{font:inherit}
+    .stage{min-height:100vh;padding:30px 24px 48px;display:grid;place-items:center;overflow:hidden}.stage-inner{width:min(1220px,100%)}.caption{display:flex;justify-content:space-between;align-items:center;margin:0 auto 24px;max-width:1176px;color:#9eafc2;font:600 11px/1.2 var(--mono);letter-spacing:.12em}.wordmark{color:#eff5ff;letter-spacing:.04em;font-size:13px}
+    .phones{display:flex;justify-content:center;gap:28px;align-items:flex-start;flex-wrap:wrap}.phone{width:360px;height:780px;padding:12px;border-radius:44px;background:#030609;box-shadow:0 34px 75px #0008,0 0 0 1px #4b586833;position:relative}.screen{height:100%;overflow:hidden;border-radius:34px;background:var(--canvas);color:var(--ink);position:relative}.island{position:absolute;z-index:10;width:116px;height:30px;left:50%;top:10px;transform:translateX(-50%);border-radius:999px;background:#020408}.status{height:48px;padding:16px 20px 0;display:flex;justify-content:space-between;align-items:flex-start;font:600 11px var(--mono);letter-spacing:.02em;color:#182033}.status-icons{display:flex;align-items:center;gap:5px}.signal{display:flex;gap:2px;align-items:flex-end;height:10px}.signal i{display:block;width:2px;background:currentColor;border-radius:2px}.signal i:nth-child(1){height:4px}.signal i:nth-child(2){height:6px}.signal i:nth-child(3){height:8px}.signal i:nth-child(4){height:10px}.battery{width:16px;height:9px;border:1.4px solid currentColor;border-radius:2px;position:relative}.battery:after{content:"";position:absolute;inset:2px;background:currentColor;border-radius:1px}
+    .cover{background:linear-gradient(180deg,#e9f3ff 0%,#f8fbff 44%,#eff4fa 100%);padding:0 22px}.cover .status{color:#15233a}.cover-main{padding-top:66px}.orb{width:78px;height:78px;border-radius:24px;display:grid;place-items:center;background:#1e4a8f;box-shadow:inset 0 0 0 7px #ffffff22,0 16px 34px #1c4d9630;margin-bottom:25px}.orb svg{width:44px;height:44px;stroke:white;fill:none;stroke-width:1.8}.eyebrow{color:#56708f;font:600 10px/1.35 var(--mono);letter-spacing:.1em}.cover h1{margin:0;color:#142b49;font:700 43px/.98 var(--serif);letter-spacing:-.06em;text-wrap:balance}.cover h1 span{color:var(--brand)}.cover p{margin:20px 0 0;color:#516681;font-size:15px;line-height:1.65}.cover-note{position:absolute;left:22px;right:22px;bottom:90px;padding:15px 0;border-top:1px solid #cdd9e6;color:#58718e;font:500 10px/1.65 var(--mono);letter-spacing:.02em}.cover-tease{position:absolute;left:0;right:0;bottom:-12px;border-radius:22px 22px 0 0;background:#fff;padding:16px 18px 34px;box-shadow:0 -10px 30px #16335c0e}.tease-line{height:8px;width:48%;background:#dbe7f4;border-radius:10px}.tease-row{display:flex;gap:8px;margin-top:11px}.tease-dot{width:34px;height:34px;border-radius:11px;background:#d5e5fb}.tease-copy{height:8px;flex:1;margin-top:7px;background:#e6edf5;border-radius:10px}
+    .appbar{height:54px;padding:10px 16px 0;display:flex;justify-content:space-between;align-items:center}.appbar h2{margin:0;font-size:16px}.icon-btn{border:0;background:transparent;width:38px;height:38px;border-radius:19px;display:grid;place-items:center;color:#26364d;cursor:pointer}.icon-btn:active{background:#e8edf5}.icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .dash{background:#f7f9fc;padding-bottom:74px}.greeting{padding:6px 18px 0}.greeting h1{margin:0;font:700 27px/1.1 var(--serif);letter-spacing:-.04em}.greeting p{margin:6px 0 0;color:var(--muted);font-size:12px}.level{margin:16px 16px 0;padding:13px 14px 12px;border-radius:17px;background:linear-gradient(110deg,#1d4e9d,#1767ca);color:white;box-shadow:0 10px 21px #2563eb25}.level-top{display:flex;justify-content:space-between;font:600 10px var(--mono);letter-spacing:.02em}.progress{height:6px;margin:10px 0 0;background:#ffffff45;border-radius:999px;overflow:hidden}.progress i{display:block;width:66%;height:100%;background:#fff;border-radius:inherit}.dashboard-summary{display:flex;justify-content:space-between;align-items:center;margin:14px 18px 10px}.dashboard-summary span{font-size:12px;color:#647288}.dashboard-summary button{border:0;background:transparent;padding:0;color:var(--brand);font-size:12px;font-weight:650;cursor:pointer}
+    .quest-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;padding:0 16px}.quest{min-height:118px;border:0;border-radius:18px;padding:12px;text-align:left;position:relative;overflow:hidden;cursor:pointer;color:#172237;transition:transform .15s cubic-bezier(.2,0,0,1),box-shadow .15s}.quest:active{transform:scale(.98)}.quest .glyph{display:grid;place-items:center;width:29px;height:29px;border-radius:10px;background:#fff9;box-shadow:0 1px 2px #00000008}.glyph svg{width:17px;height:17px;stroke-width:2}.quest h3{margin:12px 0 3px;font-size:13px;letter-spacing:-.02em}.quest p{margin:0;font-size:10px;color:#3a526b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.xp{position:absolute;right:10px;bottom:10px;padding:3px 6px;background:#fff9;border:1px solid #fff8;border-radius:999px;font:600 9px var(--mono)}.q1{background:#dcecff}.q2{background:#dff6ec}.q3{background:#fff0cf}.q4{background:#f0e6ff}.q5{background:#dff5f6}.q6{background:#fee7ec}
+    .service-strip{margin:13px 16px 0;display:flex;gap:12px;overflow:auto;scrollbar-width:none}.service{flex:0 0 51px;text-align:center;color:#5f7084;font-size:9px}.service span{width:36px;height:36px;margin:0 auto 5px;border:1px solid #e4eaf1;border-radius:12px;background:#fff;display:grid;place-items:center;color:#416486}.service svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8}
+    .tabbar{position:absolute;z-index:4;bottom:0;left:0;right:0;height:66px;background:#fffffff2;backdrop-filter:blur(14px);border-top:1px solid #e7ebf2;display:flex;justify-content:space-around;align-items:center;padding:5px 9px 7px}.tab{appearance:none;border:0;background:transparent;min-width:42px;height:51px;color:#738196;display:grid;place-items:center;gap:3px;font-size:9px;cursor:pointer}.tab svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8}.tab.active{color:var(--brand);font-weight:700}.publish{width:38px;height:38px;margin-top:-13px;border-radius:14px;background:var(--brand);color:#fff!important;box-shadow:0 8px 15px #2563eb45}.publish svg{width:21px;height:21px}
+    .detail{background:#f7f9fc;padding-bottom:75px}.detail .status{background:#f7f9fc}.detail-head{height:48px;padding:0 10px;display:flex;align-items:center;justify-content:space-between}.detail-title{font-size:15px;font-weight:700}.hero{margin:11px 16px 0;padding:20px 17px 15px;border-radius:20px;background:linear-gradient(140deg,#f2e9ff,#e8dcff);position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:125px;height:125px;right:-40px;top:-50px;border:22px solid #ffffff75;border-radius:50%}.hero .overline{position:relative;z-index:1;color:#6948a9;font:700 10px var(--mono);letter-spacing:.08em}.hero h1{position:relative;z-index:1;max-width:250px;margin:11px 0 9px;font:700 29px/1.03 var(--serif);letter-spacing:-.045em}.hero p{position:relative;z-index:1;margin:0;max-width:260px;color:#59486f;font-size:12px;line-height:1.55}.reward{position:relative;z-index:1;display:inline-block;margin-top:15px;padding:6px 8px;border:1px solid #9b79d9;border-radius:6px;color:#5b369a;font:700 10px var(--mono);letter-spacing:.045em}.steps{padding:18px 18px 0}.section-label{margin:0 0 10px;color:#66758a;font:600 10px var(--mono);letter-spacing:.08em}.step{display:flex;gap:11px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #e7ecf3}.check{width:20px;height:20px;flex:0 0 20px;border:1.5px solid #becada;border-radius:7px;display:grid;place-items:center;color:#fff}.check.done{background:var(--success);border-color:var(--success)}.check svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4}.step strong{display:block;font-size:13px}.step small{display:block;margin-top:3px;color:#718095;font-size:11px}.action{position:absolute;bottom:78px;left:18px;right:18px;height:47px;border:0;border-radius:15px;background:#6f47bd;color:#fff;font-weight:700;box-shadow:0 9px 17px #7045bd35;cursor:pointer}.action:active{transform:scale(.99)}.toast{position:absolute;z-index:20;left:50%;bottom:73px;transform:translate(-50%,12px);padding:10px 12px;background:#18263b;color:#fff;border-radius:11px;box-shadow:0 8px 20px #0004;white-space:nowrap;font-size:12px;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media (max-width:760px){.stage{padding:20px 12px 35px}.caption{margin-bottom:18px}.phones{gap:20px}.phone{transform:scale(.94);margin:-23px -10px}.wordmark{font-size:12px}}@media (prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+  </style>
+</head>
+<body>
+  <main class="stage" data-od-id="campus-prototype-stage">
+    <div class="stage-inner">
+      <header class="caption"><span>高保真原型 · 原生多端体验</span><span class="wordmark">校园社区 / CAMPUS LINK</span></header>
+      <section class="phones" aria-label="校园社区 MVP 三个核心场景">
+        <article class="phone" data-od-id="cover-phone">
+          <div class="screen cover" data-od-id="cover-screen">
+            <div class="island"></div>
+            <div class="status"><span>9:41</span><span class="status-icons"><span class="signal"><i></i><i></i><i></i><i></i></span><span class="battery"></span></span></div>
+            <div class="cover-main" data-od-id="cover-content">
+              <div class="orb"><svg viewBox="0 0 48 48"><path d="M7 18 24 9l17 9-17 9zM14 22v9c0 4 20 4 20 0v-9M41 19v12"/><circle cx="41" cy="33" r="2"/></svg></div>
+              <div class="eyebrow">实名校园社区 · 先审后发</div>
+              <h1>一所学校，<span>一个可信赖</span>的社区。</h1>
+              <p>为学生、教师和后勤人员连接讨论、活动与校园服务；清晰展示身份，妥善处理每一次发布。</p>
+            </div>
+            <div class="cover-note">实名验证 · 内容审核 · 活动签到 · 服务协作</div>
+            <div class="cover-tease"><div class="tease-line"></div><div class="tease-row"><div class="tease-dot"></div><div style="flex:1"><div class="tease-copy"></div><div class="tease-copy" style="width:64%;margin-top:7px"></div></div></div></div>
+          </div>
+        </article>
+
+        <article class="phone" data-od-id="dashboard-phone">
+          <div class="screen dash" data-od-id="dashboard-screen">
+            <div class="island"></div>
+            <div class="status"><span>9:41</span><span class="status-icons"><span class="signal"><i></i><i></i><i></i><i></i></span><span class="battery"></span></span></div>
+            <div class="appbar" data-od-id="dashboard-appbar"><strong>校园社区</strong><button class="icon-btn" data-toast="3 条未读通知" aria-label="查看通知"><svg class="icon" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></button></div>
+            <div class="greeting"><h1>上午好，林同学</h1><p>把今天需要完成的校园事务放在同一个入口。</p></div>
+            <div class="level" data-od-id="contribution-ribbon"><div class="level-top"><span>社区贡献 · LV 14</span><span>1648 / 2480</span></div><div class="progress"><i></i></div></div>
+            <div class="dashboard-summary"><span>8 项待办 · 今日可完成 430 贡献值</span><button data-toast="已展开全部待办">查看全部</button></div>
+            <div class="quest-grid" data-od-id="task-grid">
+              <button class="quest q1" data-open-detail><span class="glyph"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19V5h16v14M8 9h8M8 13h5"/></svg></span><h3>发布校园动态</h3><p>保存草稿并提交审核</p><span class="xp">+60</span></button>
+              <button class="quest q2" data-open-detail><span class="glyph"><svg class="icon" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 16 0A8 8 0 0 0 4 12Zm5 0 2 2 4-5"/></svg></span><h3>活动报名</h3><p>毕业季旧物交换</p><span class="xp">+90</span></button>
+              <button class="quest q3" data-toast="投票已开放"><span class="glyph"><svg class="icon" viewBox="0 0 24 24"><path d="M5 20V10m7 10V4m7 16v-7"/></svg></span><h3>参与投票</h3><p>图书馆开放时间</p><span class="xp">+25</span></button>
+              <button class="quest q4" data-toast="进入计算机学院频道"><span class="glyph"><svg class="icon" viewBox="0 0 24 24"><path d="M7 10h10M7 14h6M5 20l-1-2V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v13l-1 2-3-2H8z"/></svg></span><h3>频道新消息</h3><p>计算机学院 · 4 条</p><span class="xp">+40</span></button>
+              <button class="quest q5" data-toast="二手市场筛选已打开"><span class="glyph"><svg class="icon" viewBox="0 0 24 24"><path d="M6 7h12M4 12h16M7 17h10"/></svg></span><h3>校园服务</h3><p>二手、失物、求助</p><span class="xp">+80</span></button>
+              <button class="quest q6" data-toast="消息中心已同步"><span class="glyph"><svg class="icon" viewBox="0 0 24 24"><path d="M5 5h14v14H5zM8 9h8m-8 4h5"/></svg></span><h3>查看审核结果</h3><p>1 条内容待处理</p><span class="xp">+135</span></button>
+            </div>
+            <div class="service-strip" aria-label="校园服务快捷入口">
+              <div class="service"><span><svg viewBox="0 0 24 24"><path d="M5 7h14v12H5zM9 7V5h6v2"/></svg></span>二手</div>
+              <div class="service"><span><svg viewBox="0 0 24 24"><path d="M12 21s7-4.6 7-11a7 7 0 1 0-14 0c0 6.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2"/></svg></span>失物</div>
+              <div class="service"><span><svg viewBox="0 0 24 24"><path d="M5 20V7h14v13M9 7V4h6v3"/></svg></span>招聘</div>
+              <div class="service"><span><svg viewBox="0 0 24 24"><path d="M12 20s7-4 7-10a7 7 0 1 0-14 0c0 6 7 10 7 10Z"/></svg></span>求助</div>
+              <div class="service"><span><svg viewBox="0 0 24 24"><path d="M6 5h12v14H6zM9 9h6m-6 4h6"/></svg></span>新闻</div>
+            </div>
+            <nav class="tabbar" aria-label="主导航" data-od-id="primary-navigation">
+              <button class="tab active" data-tab="首页"><svg viewBox="0 0 24 24"><path d="m4 11 8-7 8 7v9H4z"/></svg><span>首页</span></button>
+              <button class="tab" data-tab="频道"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4zM8 10h8"/></svg><span>频道</span></button>
+              <button class="tab publish" data-tab="发布" aria-label="发布内容"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+              <button class="tab" data-tab="消息"><svg viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 3z"/></svg><span>消息</span></button>
+              <button class="tab" data-tab="我的"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg><span>我的</span></button>
+            </nav>
+            <div class="toast" role="status" aria-live="polite"></div>
+          </div>
+        </article>
+
+        <article class="phone" data-od-id="detail-phone">
+          <div class="screen detail" data-od-id="detail-screen">
+            <div class="island"></div>
+            <div class="status"><span>9:41</span><span class="status-icons"><span class="signal"><i></i><i></i><i></i><i></i></span><span class="battery"></span></span></div>
+            <header class="detail-head" data-od-id="detail-appbar"><button class="icon-btn" data-toast="返回今日任务" aria-label="返回"><svg class="icon" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button><span class="detail-title">活动任务</span><button class="icon-btn" data-toast="已保存至草稿" aria-label="更多操作"><svg class="icon" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button></header>
+            <section class="hero" data-od-id="activity-hero"><div class="overline">活动 · 校园生活</div><h1>毕业季旧物交换</h1><p>在报名截止前完成信息确认。参与者可在活动当天选择二维码、位置或拍照完成签到。</p><span class="reward">完成可得 +90 贡献值</span></section>
+            <section class="steps" data-od-id="activity-checklist"><p class="section-label">报名流程</p><div class="step"><span class="check done"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></span><div><strong>确认实名资料</strong><small>林墨 · 计算机学院 · 2023110088</small></div></div><div class="step"><span class="check"></span><div><strong>填写报名说明</strong><small>最多 2000 字，提交后进入审核</small></div></div><div class="step"><span class="check"></span><div><strong>设置签到提醒</strong><small>活动前 1 小时发送通知</small></div></div></section>
+            <button class="action" data-start data-toast="报名已提交，等待审核结果">提交报名</button>
+            <nav class="tabbar" aria-label="主导航">
+              <button class="tab active" data-tab="首页"><svg viewBox="0 0 24 24"><path d="m4 11 8-7 8 7v9H4z"/></svg><span>首页</span></button>
+              <button class="tab" data-tab="频道"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4zM8 10h8"/></svg><span>频道</span></button>
+              <button class="tab publish" data-tab="发布" aria-label="发布内容"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+              <button class="tab" data-tab="消息"><svg viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 3z"/></svg><span>消息</span></button>
+              <button class="tab" data-tab="我的"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg><span>我的</span></button>
+            </nav>
+            <div class="toast" role="status" aria-live="polite"></div>
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+  <script>
+    document.querySelectorAll(".tab").forEach(button=>button.addEventListener("click",()=>{
+      const nav=button.closest(".tabbar");
+      nav.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+      if(!button.classList.contains("publish"))button.classList.add("active");
+      showToast(button.closest(".screen"),button.dataset.tab==="发布"?"选择：动态、活动或投票":`已切换到${button.dataset.tab}`);
+    }));
+    document.querySelectorAll("[data-toast]").forEach(button=>button.addEventListener("click",()=>showToast(button.closest(".screen"),button.dataset.toast)));
+    document.querySelectorAll("[data-open-detail]").forEach(button=>button.addEventListener("click",()=>showToast(button.closest(".screen"),"活动详情已准备好")));
+    document.querySelectorAll("[data-start]").forEach(button=>button.addEventListener("click",()=>{button.textContent="已提交 · 审核中";button.disabled=true;button.style.background="#168460";}));
+    function showToast(screen,message){const toast=screen.querySelector(".toast");if(!toast)return;toast.textContent=message;toast.classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>toast.classList.remove("show"),1800)}
+  </script>
+  <script src="campus-native.js"></script>
+</body>
+</html>

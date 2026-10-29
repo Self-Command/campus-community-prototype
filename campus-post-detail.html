@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 帖子详情</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-posts.css">
+  <style>
+    .detail-screen { min-height: 100vh; background: var(--bg); color: var(--ink); padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px)); }
+    .detail-topbar { position: sticky; top: 0; z-index: 20; height: calc(56px + env(safe-area-inset-top, 0px)); display: grid; grid-template-columns: 64px 1fr 64px; align-items: end; padding: env(safe-area-inset-top, 0px) 12px 0; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 94%, transparent); backdrop-filter: blur(18px); }
+    .detail-topbar h1 { margin: 0; align-self: center; text-align: center; font-size: 17px; letter-spacing: -.02em; }
+    .detail-topbar .icon-button { margin-bottom: 8px; }
+    .detail-topbar .end { justify-self: end; }
+    .detail-main { width: min(100%, 760px); margin: 0 auto; }
+    .detail-content { padding: 22px 18px 0; background: var(--surface); }
+    .detail-author { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .detail-author-link { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; color: inherit; text-decoration: none; border-radius: 14px; }
+    .detail-author-link:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 55%, transparent); outline-offset: 2px; }
+    .detail-author .avatar { position: relative; width: 44px; height: 44px; flex: none; font-size: 14px; }
+    .detail-author .avatar::after { content: attr(data-gender); position: absolute; right: -2px; bottom: -2px; display: grid; place-items: center; width: 16px; height: 16px; border: 2px solid var(--surface); border-radius: 50%; background: var(--blue); color: #fff; font-size: 9px; }
+    .detail-author .avatar[data-gender=""]::after { display: none; }
+    .detail-author-copy { min-width: 0; flex: 1; }
+    .detail-author-name { display: flex; align-items: center; gap: 5px; min-width: 0; flex-wrap: wrap; }
+    .detail-author-name strong { overflow: hidden; max-width: 100%; font-size: 15px; text-overflow: ellipsis; white-space: nowrap; }
+    .detail-author-name > span:not(.detail-verified) { color: var(--muted); font-size: 11px; }
+    .detail-author-copy p { overflow: hidden; margin: 3px 0 0; color: var(--muted); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+    .detail-verified { display: inline-flex; align-items: center; gap: 3px; color: var(--blue); font-size: 10px; font-weight: 700; }
+    .detail-verified svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .detail-author-title { color: var(--muted); font-size: 12px; }
+    .detail-follow { min-width: 58px; min-height: 34px; border: 1px solid var(--blue); border-radius: 10px; background: var(--surface); color: var(--blue); font-size: 12px; font-weight: 750; }
+    .detail-follow.is-following { border-color: var(--line); color: var(--muted); }
+    .detail-notice { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; margin-top: 18px; padding: 10px 12px; border-radius: 12px; font-size: 12px; line-height: 1.5; }
+    .detail-notice.pending { background: var(--amber-soft); color: #805d19; }
+    .detail-notice.rejected { background: var(--red-soft); color: var(--red); }
+    .detail-notice a { color: inherit; font-weight: 750; white-space: nowrap; }
+    .detail-article h1 { margin: 20px 0 0; color: var(--ink); font-size: clamp(25px, 7vw, 32px); line-height: 1.28; letter-spacing: -.04em; text-wrap: pretty; }
+    .detail-body-copy { display: grid; gap: 15px; margin-top: 18px; }
+    .detail-body-copy p { margin: 0; color: var(--ink); font-size: 16px; line-height: 1.78; text-wrap: pretty; }
+    .detail-topics { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .detail-topics a { color: var(--blue); font-size: 14px; font-weight: 700; }
+    .detail-gallery-shell { display: grid; gap: 10px; margin: 20px -18px 0; }
+    .detail-gallery-stage { position: relative; overflow: hidden; background: #e8edf4; }
+    .detail-gallery { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .detail-gallery::-webkit-scrollbar { display: none; }
+    .detail-media { position: relative; display: flex; align-items: flex-start; justify-content: space-between; flex: 0 0 100%; aspect-ratio: 4 / 5; min-height: 360px; padding: 12px; border: 0; background: linear-gradient(145deg, #dceafd, #f3f8ff); color: #fff; text-align: left; scroll-snap-align: start; scroll-snap-stop: always; }
+    .detail-media::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 80% 18%, rgba(255,255,255,.46), transparent 32%), linear-gradient(transparent 58%, rgba(18,32,52,.62)); }
+    .detail-media.alt { background: linear-gradient(145deg, #dff3ec, #f3fbf8); }.detail-media.warm { background: linear-gradient(145deg, #fff0d8, #fff9ef); }.detail-media.violet { background: linear-gradient(145deg, #e9e7ff, #f5f4ff); }
+    .detail-media span, .detail-media b { position: relative; z-index: 1; font-weight: 750; }.detail-media span { align-self: flex-end; padding: 4px 7px; border-radius: 999px; background: rgba(17,28,44,.54); font-size: 11px; }.detail-media b { align-self: flex-start; margin-top: auto; max-width: 80%; color: rgba(255,255,255,.96); font-size: 16px; line-height: 1.35; text-shadow: 0 1px 10px rgba(9,15,25,.34); }
+    .detail-gallery-nav { position: absolute; top: 50%; z-index: 2; display: grid; width: 42px; height: 42px; place-items: center; transform: translateY(-50%); border: 1px solid rgba(255,255,255,.4); border-radius: 50%; background: rgba(9,15,25,.36); color: #fff; font-size: 28px; line-height: 1; opacity: 0; transition: opacity 150ms cubic-bezier(.2,0,0,1); }.detail-gallery-stage:hover .detail-gallery-nav, .detail-gallery-stage:focus-within .detail-gallery-nav { opacity: 1; }.detail-gallery-nav.previous { left: 12px; }.detail-gallery-nav.next { right: 12px; }
+    .detail-gallery-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 18px; color: var(--muted); font-size: 12px; }.detail-gallery-caption { overflow: hidden; color: var(--ink-2); font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }.detail-gallery-dots { display: flex; justify-content: center; gap: 5px; min-height: 16px; }.detail-gallery-dot { width: 6px; height: 6px; padding: 0; border-radius: 999px; background: var(--line); transition: width 150ms cubic-bezier(.2,0,0,1), background 150ms cubic-bezier(.2,0,0,1); }.detail-gallery-dot.is-active { width: 18px; background: var(--ink); }
+    .detail-video { position: relative; display: grid; min-height: 220px; width: calc(100% + 36px); margin: 20px -18px 0; padding: 20px; border: 0; background: radial-gradient(circle at 75% 16%, rgba(112,192,255,.42), transparent 27%), linear-gradient(135deg, #182943, #365f98); color: #fff; text-align: left; }.detail-video::after { content: ""; position: absolute; inset: 0; background: linear-gradient(136deg, transparent 47%, rgba(255,255,255,.1) 48% 51%, transparent 52%); }
+    .detail-video-play { z-index: 1; display: grid; place-items: center; width: 54px; height: 54px; border: 1px solid rgba(255,255,255,.72); border-radius: 50%; padding-left: 3px; background: rgba(255,255,255,.14); font-size: 18px; }.detail-video strong, .detail-video small { position: relative; z-index: 1; align-self: end; }.detail-video strong { margin-top: auto; font-size: 16px; }.detail-video small { margin-top: 5px; color: rgba(255,255,255,.82); font-size: 12px; }
+    .detail-link { display: grid; grid-template-columns: 42px minmax(0,1fr); gap: 10px; align-items: center; margin-top: 20px; padding: 13px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--ink); }.detail-link > span { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--blue-soft); color: var(--blue); font-size: 20px; }.detail-link div { min-width: 0; display: grid; gap: 4px; }.detail-link strong, .detail-link small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }.detail-link strong { font-size: 14px; }.detail-link small { color: var(--muted); font-size: 12px; }
+    .detail-business { margin: 22px -18px 0; padding: 20px 18px; border-top: 8px solid var(--bg); border-bottom: 1px solid var(--line); }.detail-business-heading { display: flex; gap: 10px; align-items: center; }.detail-business-heading > span { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: var(--blue-soft); color: var(--blue); }.detail-business-heading svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; }.detail-business h2 { margin: 0; font-size: 18px; letter-spacing: -.025em; }.detail-business-heading p, .detail-help { margin: 3px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .detail-definition-list { margin: 18px 0; border-top: 1px solid var(--line); }.detail-definition-list div { display: grid; grid-template-columns: 72px minmax(0,1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 14px; line-height: 1.5; }.detail-definition-list dt { color: var(--muted); }.detail-definition-list dd { margin: 0; color: var(--ink); text-align: right; }
+    .detail-primary-action { width: 100%; min-height: 46px; border-radius: 12px; background: var(--blue); color: #fff; font-size: 15px; font-weight: 750; }.detail-primary-action:disabled { opacity: .5; }
+    .detail-vote-options { display: grid; gap: 8px; margin-top: 18px; }.detail-vote-option { display: grid; grid-template-columns: 20px minmax(0,1fr) auto; align-items: center; gap: 10px; width: 100%; min-height: 48px; padding: 0 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); text-align: left; }.detail-vote-option.selected { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); }.detail-vote-radio { width: 16px; height: 16px; border: 1.5px solid currentColor; border-radius: 50%; }.detail-vote-option.selected .detail-vote-radio { box-shadow: inset 0 0 0 4px var(--surface), inset 0 0 0 8px currentColor; }.detail-vote-option b { font-size: 12px; }
+    .detail-meta { margin: 0 -18px; padding: 16px 18px 0; border-bottom: 8px solid var(--bg); background: var(--surface); }.detail-meta > p { margin: 0 0 12px; color: var(--muted); font-size: 12px; }.detail-action-bar { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); border-top: 1px solid var(--line); }.detail-action-bar > * { display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-height: 48px; color: var(--muted); font-size: 12px; }.detail-action-bar button.liked, .detail-action-bar button.saved { color: var(--blue); }.detail-action-bar svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+    .detail-comments { padding: 20px 18px 14px; background: var(--surface); }.detail-comments-heading { display: flex; align-items: center; justify-content: space-between; }.detail-comments-heading h2 { margin: 0; font-size: 19px; letter-spacing: -.03em; }.detail-comments-heading button { min-height: 32px; padding: 0 10px; border-radius: 9px; background: var(--surface-alt); color: var(--ink-2); font-size: 12px; }.detail-comment { display: flex; gap: 10px; padding: 18px 0; border-bottom: 1px solid var(--line); }.detail-comment-avatar { flex: none; color: inherit; text-decoration: none; border-radius: 999px; }.detail-comment-avatar:focus-visible, .detail-comment-name-link:focus-visible { outline: 3px solid color-mix(in srgb, var(--blue) 55%, transparent); outline-offset: 2px; }.detail-comment-name-link { color: inherit; text-decoration: none; }.detail-comment .avatar { position: relative; width: 36px; height: 36px; flex: none; font-size: 12px; }.detail-comment > div { min-width: 0; flex: 1; }.detail-comment strong { font-size: 14px; }.detail-comment p { margin: 6px 0 0; color: var(--ink-2); font-size: 14px; line-height: 1.65; }.detail-comment .detail-comment-meta { margin-top: 3px; color: var(--muted); font-size: 11px; }.detail-comment button { margin-top: 8px; color: var(--muted); font-size: 12px; }.detail-comment-empty { display: grid; gap: 5px; padding: 22px 0 8px; text-align: center; }.detail-comment-empty strong { font-size: 14px; }.detail-comment-empty span { color: var(--muted); font-size: 12px; }
+    .detail-comment-replies { display: grid; gap: 12px; margin: 13px 0 0 2px; padding: 0 0 0 12px; border-left: 2px solid var(--line); }.detail-reply { display: flex; gap: 8px; align-items: flex-start; }.detail-reply .avatar { width: 26px; height: 26px; flex: none; font-size: 10px; }.detail-reply > div { min-width: 0; flex: 1; }.detail-reply strong { font-size: 12px; }.detail-reply em { color: var(--muted); font-style: normal; font-weight: 500; }.detail-reply p { margin: 3px 0; color: var(--ink-2); font-size: 13px; line-height: 1.55; }.detail-reply time { color: var(--muted); font-size: 11px; }
+    .detail-state { display: grid; justify-items: start; gap: 12px; min-height: 48vh; padding: 64px 24px; background: var(--surface); }.detail-state h1 { margin: 0; font-size: 24px; }.detail-state p { margin: 0; color: var(--muted); line-height: 1.65; }.detail-state a, .detail-state button { min-height: 42px; padding: 0 15px; border-radius: 11px; background: var(--blue); color: #fff; font-size: 14px; font-weight: 750; }.detail-state.loading { gap: 14px; }.detail-state.loading i { display: block; width: 100%; height: 18px; border-radius: 999px; background: linear-gradient(90deg, #edf2f7 25%, #f8fafc 37%, #edf2f7 63%); background-size: 400% 100%; animation: detail-shimmer 1.25s linear infinite; }.detail-state.loading i:nth-child(2) { width: 76%; }.detail-state.loading i:nth-child(3) { width: 45%; }@keyframes detail-shimmer { to { background-position: -400% 0; } }
+    .detail-composer { position: fixed; right: 0; bottom: 0; left: 0; z-index: 25; display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px; width: min(100%,760px); margin: 0 auto; padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 95%, transparent); backdrop-filter: blur(18px); }.detail-composer textarea { min-height: 42px; max-height: 96px; padding: 11px 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface-alt); color: var(--ink); font: inherit; font-size: 14px; resize: none; }.detail-composer textarea:focus { outline: 2px solid color-mix(in srgb,var(--blue) 30%,transparent); border-color: var(--blue); }.detail-composer button { min-width: 68px; min-height: 42px; border-radius: 12px; background: var(--blue); color: #fff; font-size: 14px; font-weight: 750; }
+    .detail-screen { padding-bottom: calc(86px + env(safe-area-inset-bottom, 0px)); }
+    .detail-content { padding-top: 18px; }
+    .detail-note-body { padding-top: 18px; }
+    .detail-channel-source { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; min-height: 36px; margin-top: 18px; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink-2); font-size: 12px; font-weight: 750; }
+    .detail-channel-source svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; color: var(--blue); }
+    .detail-progress { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 10px; align-items: center; margin: 14px 0; color: var(--muted); font-size: 12px; }
+    .detail-progress::before { content: ""; display: block; grid-column: 1; height: 8px; border-radius: 999px; background: var(--surface-alt); }
+    .detail-progress i { display: block; grid-column: 1; grid-row: 1; width: var(--progress); height: 8px; border-radius: 999px; background: var(--blue); }
+    .detail-progress span { grid-column: 2; }
+    .detail-business-actions { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px; }
+    .detail-business-actions > button:not(.detail-primary-action) { min-height: 46px; padding: 0 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink-2); font-size: 14px; font-weight: 750; }
+    .detail-comments-heading { align-items: flex-start; }
+    .detail-comments-heading p { margin: 5px 0 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .detail-comment-name { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    .detail-comment-name span { color: var(--muted); font-size: 11px; }
+    .detail-comment-tools, .detail-reply-tools { display: flex; gap: 14px; align-items: center; margin-top: 8px; color: var(--muted); font-size: 12px; }
+    .detail-comment-tools button, .detail-reply-tools button, .detail-thread-toggle { display: inline-flex; align-items: center; gap: 4px; min-height: 28px; color: var(--muted); font-size: 12px; }
+    .detail-comment-tools svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+    .detail-thread-toggle { width: fit-content; margin-top: -2px; padding: 0; color: var(--blue); font-weight: 750; }
+    .detail-reply[hidden], .detail-comment.is-collapsed .detail-comment-replies, .detail-comment.is-collapsed > div > p, .detail-comment.is-collapsed .detail-comment-tools button:not([data-thread-collapse]) { display: none; }
+    .detail-comment-empty button { justify-self: center; min-height: 38px; margin-top: 8px; padding: 0 13px; border-radius: 999px; background: var(--blue); color: #fff; font-size: 13px; font-weight: 750; }
+    .detail-composer { grid-template-columns: minmax(0,1fr) repeat(4, 42px); align-items: center; padding-top: 8px; background: color-mix(in srgb, var(--surface) 97%, transparent); }
+    .detail-composer .composer-pill { min-width: 0; min-height: 42px; justify-content: flex-start; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface-alt); color: var(--muted); font-size: 14px; font-weight: 500; }
+    .detail-composer .composer-icon { min-width: 42px; min-height: 42px; display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: var(--ink-2); }
+    .detail-composer svg, .comment-sheet svg, .detail-sheet svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.9; }
+    .detail-sheet-backdrop { position: fixed; inset: 0; z-index: 50; background: rgba(10, 18, 30, .36); }
+    .detail-sheet-backdrop[hidden], .detail-sheet[hidden], .media-viewer[hidden] { display: none; }
+    .detail-sheet, .comment-sheet { position: fixed; right: 0; bottom: 0; left: 0; z-index: 55; width: min(100%, 760px); margin: 0 auto; border-radius: 22px 22px 0 0; background: var(--surface); box-shadow: 0 -20px 50px rgba(20,34,54,.18); }
+    .detail-sheet-handle { width: 42px; height: 4px; margin: 9px auto 4px; border-radius: 999px; background: #cbd5e1; }
+    .comment-sheet-header, .detail-sheet-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 16px 10px; border-bottom: 1px solid var(--line); }
+    .comment-sheet-header strong, .detail-sheet-header strong { font-size: 15px; }
+    .comment-sheet-header button, .detail-sheet-header button { min-width: 36px; min-height: 36px; border-radius: 50%; color: var(--muted); }
+    .comment-sheet-form { display: grid; gap: 10px; padding: 12px 16px calc(14px + env(safe-area-inset-bottom, 0px)); }
+    .comment-sheet-form textarea { min-height: 112px; max-height: 180px; padding: 12px 0; border: 0; border-bottom: 1px solid var(--line); color: var(--ink); font: inherit; font-size: 16px; line-height: 1.6; resize: none; outline: 0; }
+    .comment-tool-row, .comment-extra-panel, .detail-sheet-grid { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 8px; }
+    .comment-tool, .detail-sheet-action { min-height: 58px; display: grid; justify-items: center; align-content: center; gap: 5px; border-radius: 14px; background: var(--surface-alt); color: var(--ink-2); font-size: 11px; font-weight: 650; }
+    .comment-tool.active { background: var(--blue-soft); color: var(--blue); }
+    .comment-extra-panel[hidden] { display: none; }
+    .comment-submit-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px; align-items: center; color: var(--muted); font-size: 12px; }
+    .comment-submit-row button { min-height: 40px; padding: 0 16px; border-radius: 999px; background: var(--blue); color: #fff; font-size: 14px; font-weight: 750; }
+    .detail-sheet-body { padding: 10px 16px calc(16px + env(safe-area-inset-bottom, 0px)); }
+    .media-viewer { position: fixed; inset: 0; z-index: 70; display: grid; grid-template-rows: auto 1fr auto; background: rgba(9, 15, 25, .94); color: #fff; }
+    .media-viewer header, .media-viewer footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: calc(10px + env(safe-area-inset-top,0px)) 16px 12px; }
+    .media-viewer button { min-height: 40px; min-width: 40px; border-radius: 999px; background: rgba(255,255,255,.12); color: #fff; }
+    .media-stage { display: grid; place-items: center; padding: 18px; }
+    .media-stage-inner { width: min(100%, 460px); aspect-ratio: 4 / 5; display: grid; place-items: end start; padding: 18px; border-radius: 22px; background: radial-gradient(circle at 75% 18%, rgba(255,255,255,.42), transparent 28%), linear-gradient(145deg, #dceafd, #f3f8ff); color: #10203a; }
+    .media-stage-inner strong { padding: 7px 9px; border-radius: 10px; background: rgba(255,255,255,.78); font-size: 14px; }
+    @media (min-width: 768px) { .detail-screen { padding-top: 12px; }.detail-topbar { width: min(100% - 24px,760px); margin: 0 auto; border: 1px solid var(--line); border-radius: 16px 16px 0 0; }.detail-main { border-right: 1px solid var(--line); border-left: 1px solid var(--line); }.detail-content, .detail-comments { padding-right: 28px; padding-left: 28px; }.detail-gallery-shell, .detail-video, .detail-business, .detail-meta { margin-right: -28px; margin-left: -28px; }.detail-gallery-meta { padding-right: 28px; padding-left: 28px; }.detail-video { width: calc(100% + 56px); }.detail-composer, .detail-sheet, .comment-sheet { border-right: 1px solid var(--line); border-left: 1px solid var(--line); } }
+    @media (prefers-reduced-motion: reduce) { .detail-state.loading i { animation: none; } }
+    .detail-event-lines { margin-top: 16px; border-top: 1px solid var(--line); }
+    .detail-event-lines > div { display: grid; grid-template-columns: 58px minmax(0,1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 14px; line-height: 1.5; }
+    .detail-event-lines span { color: var(--muted); }.detail-event-lines strong { color: var(--ink); font-weight: 650; text-align: right; }
+    .detail-business-actions { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+    .detail-business-link { display: grid; min-height: 46px; place-items: center; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink-2); font-size: 14px; font-weight: 750; text-decoration: none; }
+    .detail-business-vote .detail-vote-options { gap: 0; overflow: hidden; margin-top: 16px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .detail-business-vote .detail-vote-option { min-height: 54px; border: 0; border-radius: 0; border-bottom: 1px solid var(--line); padding: 0 2px; }.detail-business-vote .detail-vote-option:last-child { border-bottom: 0; }.detail-business-vote .detail-vote-option.selected { background: transparent; color: var(--blue); }
+    .detail-business-vote .detail-vote-option:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+    .detail-business-vote .detail-vote-radio { width: 18px; height: 18px; }.detail-business-vote .detail-help { margin: 12px 0 16px; }
+    .detail-kind-normal_gallery .detail-note-body { padding-top: 20px; }.detail-kind-normal_gallery .detail-body-copy { gap: 12px; }
+    .detail-kind-normal_text .detail-note-body { padding-top: 24px; }.detail-kind-normal_text .detail-body-copy p:first-child { font-size: 17px; line-height: 1.82; }
+    .detail-kind-normal_gallery .detail-gallery + .detail-note-body h1 { margin-top: 0; }
+    .detail-kind-activity .detail-note-body, .detail-kind-vote .detail-note-body { padding-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="detail-screen" data-od-id="post-detail-screen">
+    <header class="detail-topbar">
+      <button class="icon-button" type="button" data-detail-back aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+      <h1>帖子详情</h1>
+      <button class="icon-button end" type="button" data-detail-more aria-label="更多"><svg class="i" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button>
+    </header>
+    <main class="detail-main" data-post-detail-mount tabindex="-1"></main>
+    <div class="detail-composer" data-detail-composer-bar>
+      <button class="composer-pill" type="button" data-composer-open>说点什么，参与讨论…</button>
+      <button class="composer-icon" type="button" data-composer-open data-tool="voice" aria-label="语音评论"><svg viewBox="0 0 24 24"><path d="M12 4a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V7a3 3 0 0 0-3-3Z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+      <button class="composer-icon" type="button" data-composer-open data-tool="image" aria-label="图片评论"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="m8 15 3-3 2 2 2-3 3 4"/><circle cx="9" cy="9" r="1"/></svg></button>
+      <button class="composer-icon" type="button" data-composer-open data-tool="mention" aria-label="艾特同学"><svg viewBox="0 0 24 24"><path d="M16 8v5a3 3 0 1 1-2-2.8V8"/><path d="M16 13a4 4 0 1 0 4 4M12 2a10 10 0 1 0 10 10"/></svg></button>
+      <button class="composer-icon" type="button" data-composer-open data-tool="emoji" aria-label="表情"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 10h.01M16 10h.01M8.5 14a5 5 0 0 0 7 0"/></svg></button>
+    </div>
+  </div>
+  <div class="detail-sheet-backdrop" data-sheet-backdrop hidden></div>
+  <section class="comment-sheet detail-sheet" data-comment-sheet hidden aria-label="发表评论">
+    <div class="detail-sheet-handle"></div>
+    <header class="comment-sheet-header"><strong data-composer-title>发表评论</strong><button type="button" data-sheet-close aria-label="关闭"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
+    <form class="comment-sheet-form" data-detail-composer>
+      <textarea required maxlength="500" placeholder="友善表达，最多 500 字" aria-label="评论输入框"></textarea>
+      <div class="comment-tool-row" aria-label="评论工具">
+        <button class="comment-tool" type="button" data-comment-tool="voice"><svg viewBox="0 0 24 24"><path d="M12 4a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V7a3 3 0 0 0-3-3Z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>语音</span></button>
+        <button class="comment-tool" type="button" data-comment-tool="image"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="m8 15 3-3 2 2 2-3 3 4"/><circle cx="9" cy="9" r="1"/></svg><span>图片</span></button>
+        <button class="comment-tool" type="button" data-comment-tool="mention"><svg viewBox="0 0 24 24"><path d="M16 8v5a3 3 0 1 1-2-2.8V8"/><path d="M16 13a4 4 0 1 0 4 4M12 2a10 10 0 1 0 10 10"/></svg><span>艾特</span></button>
+        <button class="comment-tool" type="button" data-comment-tool="emoji"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 10h.01M16 10h.01M8.5 14a5 5 0 0 0 7 0"/></svg><span>表情</span></button>
+        <button class="comment-tool" type="button" data-comment-extra-toggle aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>更多</span></button>
+      </div>
+      <div class="comment-extra-panel" data-comment-extra-panel hidden>
+        <button class="comment-tool" type="button" data-comment-tool="topic"><span>#</span><span>话题</span></button>
+        <button class="comment-tool" type="button" data-comment-tool="location"><svg viewBox="0 0 24 24"><path d="M12 21s7-4.6 7-11a7 7 0 1 0-14 0c0 6.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2"/></svg><span>位置</span></button>
+        <button class="comment-tool" type="button" data-comment-tool="file"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v5h5"/></svg><span>文件</span></button>
+        <button class="comment-tool" type="button" data-comment-tool="anonymous"><svg viewBox="0 0 24 24"><path d="M4 12s3-5 8-5 8 5 8 5-3 5-8 5-8-5-8-5Z"/><path d="m5 5 14 14"/></svg><span>匿名</span></button>
+        <button class="comment-tool" type="button" data-comment-tool="draft"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h6"/></svg><span>草稿</span></button>
+      </div>
+      <div class="comment-submit-row"><span data-comment-helper>评论会按社区规则审核后展示。</span><button type="submit">发送</button></div>
+    </form>
+  </section>
+  <section class="detail-sheet" data-more-sheet hidden aria-label="更多操作">
+    <div class="detail-sheet-handle"></div>
+    <header class="detail-sheet-header"><strong>更多操作</strong><button type="button" data-sheet-close aria-label="关闭"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
+    <div class="detail-sheet-body"><div class="detail-sheet-grid">
+      <button class="detail-sheet-action" type="button" data-sheet-action="report">举报</button>
+      <button class="detail-sheet-action" type="button" data-sheet-action="mute">不看此作者</button>
+      <button class="detail-sheet-action" type="button" data-sheet-action="copy">复制链接</button>
+      <button class="detail-sheet-action" type="button" data-sheet-action="author">只看作者</button>
+      <button class="detail-sheet-action" type="button" data-sheet-action="channel">进入频道</button>
+    </div></div>
+  </section>
+  <section class="detail-sheet" data-share-sheet hidden aria-label="分享帖子">
+    <div class="detail-sheet-handle"></div>
+    <header class="detail-sheet-header"><strong>分享</strong><button type="button" data-sheet-close aria-label="关闭"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
+    <div class="detail-sheet-body"><div class="detail-sheet-grid">
+      <button class="detail-sheet-action" type="button" data-sheet-action="repost">转发到动态</button>
+      <button class="detail-sheet-action" type="button" data-sheet-action="message">私信同学</button>
+      <button class="detail-sheet-action" type="button" data-sheet-action="poster">生成海报</button>
+      <button class="detail-sheet-action" type="button" data-sheet-action="copy">复制链接</button>
+      <button class="detail-sheet-action" type="button" data-sheet-action="system">系统分享</button>
+    </div></div>
+  </section>
+  <section class="media-viewer" data-media-viewer hidden aria-label="媒体查看器">
+    <header><button type="button" data-media-close aria-label="关闭媒体"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button><strong data-media-title>图片</strong><button type="button" data-detail-share aria-label="分享媒体"><svg viewBox="0 0 24 24"><path d="M14 5h5v5M10 14 19 5M5 19h5v-5"/></svg></button></header>
+    <div class="media-stage"><div class="media-stage-inner"><strong data-media-label>媒体内容</strong></div></div>
+    <footer><button type="button" data-sheet-action="save-media">保存</button><button type="button" data-sheet-action="mark-media">标记问题</button><button type="button" data-media-close>完成</button></footer>
+  </section>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script src="campus-posts.js"></script>
+  <script src="campus-post-fixtures.js"></script>
+  <script src="campus-post-detail.js"></script>
+  <script>
+    (() => {
+      const mount = document.querySelector('[data-post-detail-mount]');
+      const toast = document.querySelector('[data-toast-region]');
+      const backdrop = document.querySelector('[data-sheet-backdrop]');
+      const commentSheet = document.querySelector('[data-comment-sheet]');
+      const moreSheet = document.querySelector('[data-more-sheet]');
+      const shareSheet = document.querySelector('[data-share-sheet]');
+      const mediaViewer = document.querySelector('[data-media-viewer]');
+      const composer = document.querySelector('[data-detail-composer]');
+      const composerInput = composer.querySelector('textarea');
+      const composerTitle = document.querySelector('[data-composer-title]');
+      const composerHelper = document.querySelector('[data-comment-helper]');
+      const params = new URLSearchParams(location.search);
+      const requestedState = params.get('postState');
+      const commentState = params.get('commentState') || 'populated';
+      const postId = params.get('postId') || 'spec-student_member-normal_gallery';
+      const post = window.CampusPostFixtures?.byId[postId] || window.CampusPosts?.getPostById?.(postId);
+      const notify = (message) => { toast.textContent = message; toast.classList.add('show'); clearTimeout(notify.timer); notify.timer = setTimeout(() => toast.classList.remove('show'), 2200); };
+      const escapeHtml = (value = '') => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;');
+      const openSheet = (sheet) => {
+        [commentSheet, moreSheet, shareSheet].forEach((item) => { item.hidden = item !== sheet; });
+        backdrop.hidden = false;
+      };
+      const closeSheets = () => {
+        [commentSheet, moreSheet, shareSheet].forEach((item) => { item.hidden = true; });
+        backdrop.hidden = true;
+      };
+      const openComposer = (replyTo = '', tool = '') => {
+        composerTitle.textContent = replyTo ? `回复 ${replyTo}` : '发表评论';
+        if (replyTo) {
+          composerInput.value = `@${replyTo} `;
+          composerInput.setSelectionRange(composerInput.value.length, composerInput.value.length);
+        }
+        openSheet(commentSheet);
+        if (tool) {
+          document.querySelectorAll('[data-comment-tool]').forEach((item) => item.classList.toggle('active', item.dataset.commentTool === tool));
+          const labels = { voice: '可录入语音评论，提交前会转为可审核内容。', image: '可附加图片评论，最多 3 张。', mention: '输入 @ 后可选择同学或频道成员。', emoji: '表情面板已打开。' };
+          composerHelper.textContent = labels[tool] || '评论会按社区规则审核后展示。';
+        }
+        window.setTimeout(() => composerInput.focus(), 80);
+      };
+      const show = () => {
+        if (requestedState === 'loading' || requestedState === 'error' || requestedState === 'empty') { mount.innerHTML = window.CampusPostDetail.renderState(requestedState); if (requestedState === 'loading') setTimeout(() => { if (mount.dataset.loading !== 'done') mount.insertAdjacentHTML('beforeend', '<p class="detail-loading-late" role="status">加载时间较长，请检查网络或返回信息流。</p>'); }, 15000); return; }
+        mount.dataset.loading = 'done';
+        mount.innerHTML = post ? window.CampusPostDetail.renderPostDetail(post, { commentState }) : window.CampusPostDetail.renderState('empty');
+      };
+      const updateGallery = (gallery, index) => {
+        const track = gallery.querySelector('[data-gallery-track]');
+        const total = Number(gallery.dataset.galleryCount || 0);
+        if (!track || !total) return;
+        const nextIndex = Math.max(0, Math.min(total - 1, index));
+        gallery.dataset.galleryActive = String(nextIndex);
+        const activeSlide = track.querySelector(`[data-gallery-slide][data-gallery-index="${nextIndex}"]`);
+        const counter = gallery.querySelector('[data-gallery-counter]');
+        const caption = gallery.querySelector('[data-gallery-caption]');
+        if (counter) counter.textContent = `${nextIndex + 1} / ${total}`;
+        if (caption) caption.textContent = activeSlide?.dataset.mediaLabel || `图片 ${nextIndex + 1}`;
+        gallery.querySelectorAll('[data-gallery-dot]').forEach((dot) => {
+          const active = Number(dot.dataset.galleryDot) === nextIndex;
+          dot.classList.toggle('is-active', active);
+          dot.setAttribute('aria-current', String(active));
+        });
+      };
+      const bindGalleries = () => {
+        mount.querySelectorAll('[data-gallery]').forEach((gallery) => {
+          const track = gallery.querySelector('[data-gallery-track]');
+          if (!track || track.dataset.galleryBound === 'true') return;
+          track.dataset.galleryBound = 'true';
+          updateGallery(gallery, 0);
+          track.addEventListener('scroll', () => {
+            window.requestAnimationFrame(() => updateGallery(gallery, Math.round(track.scrollLeft / Math.max(track.clientWidth, 1))));
+          }, { passive: true });
+        });
+      };
+      show();
+      bindGalleries();
+      document.addEventListener('click', (event) => {
+        if (event.target.closest('[data-sheet-close]') || event.target.closest('[data-sheet-backdrop]')) { closeSheets(); return; }
+        const sheetAction = event.target.closest('[data-sheet-action]');
+        if (sheetAction) {
+          const copy = {
+            report: '举报原因面板已打开',
+            mute: '后续将减少展示该作者内容',
+            copy: '链接已复制',
+            author: '已切换为只看作者视图',
+            channel: '正在进入来源频道',
+            repost: '转发编辑器已打开',
+            message: '私信选择器已打开',
+            poster: '分享海报正在生成',
+            system: '系统分享面板已打开',
+            'save-media': '媒体已保存到本地相册',
+            'mark-media': '已打开媒体问题标记'
+          };
+          closeSheets();
+          if (sheetAction.dataset.sheetAction === 'channel') { location.href = 'campus-channel-detail.html'; return; }
+          if (sheetAction.dataset.sheetAction === 'author' && post) { location.href = window.CampusPostDetail.profileHref(post); return; }
+          notify(copy[sheetAction.dataset.sheetAction] || '操作已触发');
+          return;
+        }
+        const composerOpen = event.target.closest('[data-composer-open]');
+        if (composerOpen) { openComposer('', composerOpen.dataset.tool || ''); return; }
+        const extraToggle = event.target.closest('[data-comment-extra-toggle]');
+        if (extraToggle) {
+          const panel = document.querySelector('[data-comment-extra-panel]');
+          panel.hidden = !panel.hidden;
+          extraToggle.setAttribute('aria-expanded', String(!panel.hidden));
+          return;
+        }
+        const commentTool = event.target.closest('[data-comment-tool]');
+        if (commentTool) {
+          document.querySelectorAll('[data-comment-tool]').forEach((item) => item.classList.toggle('active', item === commentTool));
+          const labels = { voice: '语音评论会先转文字再进入审核。', image: '图片评论最多 3 张。', mention: '可搜索同学、教师或频道成员。', emoji: '表情面板已打开。', topic: '可插入一个关联话题。', location: '可附加校内位置。', file: '文件仅支持频道成员可见评论。', anonymous: '匿名评论需频道规则允许。', draft: '已打开评论草稿。' };
+          composerHelper.textContent = labels[commentTool.dataset.commentTool] || '评论会按社区规则审核后展示。';
+          if (commentTool.dataset.commentTool === 'mention' && !composerInput.value.includes('@')) composerInput.value += '@';
+          composerInput.focus();
+          return;
+        }
+        const toggleReplies = event.target.closest('[data-replies-toggle]');
+        if (toggleReplies) {
+          const open = toggleReplies.dataset.expanded !== 'true';
+          toggleReplies.closest('.detail-comment-replies').querySelectorAll('[data-reply-extra]').forEach((reply) => { reply.hidden = !open; });
+          toggleReplies.dataset.expanded = String(open);
+          toggleReplies.textContent = open ? '收起回复' : toggleReplies.textContent.replace('收起回复', '展开更多回复');
+          if (!open) {
+            const count = toggleReplies.closest('.detail-comment-replies').querySelectorAll('[data-reply-extra]').length;
+            toggleReplies.textContent = `展开 ${count} 条回复`;
+          }
+          return;
+        }
+        const collapseThread = event.target.closest('[data-thread-collapse]');
+        if (collapseThread) {
+          const comment = collapseThread.closest('.detail-comment');
+          const collapsed = comment.classList.toggle('is-collapsed');
+          collapseThread.textContent = collapsed ? '展开' : '折叠';
+          return;
+        }
+        const commentLike = event.target.closest('[data-comment-like]');
+        if (commentLike) {
+          const count = commentLike.querySelector('span');
+          commentLike.classList.toggle('liked');
+          count.textContent = String(Number(count.textContent) + (commentLike.classList.contains('liked') ? 1 : -1));
+          return;
+        }
+        if (event.target.closest('[data-comment-retry]')) { mount.innerHTML = window.CampusPostDetail.renderPostDetail(post, { commentState: 'populated' }); bindGalleries(); return; }
+        if (event.target.closest('[data-detail-back]')) { location.href = 'campus-home.html'; return; }
+        if (event.target.closest('[data-detail-more]')) { openSheet(moreSheet); return; }
+        const galleryControl = event.target.closest('[data-gallery-prev], [data-gallery-next], [data-gallery-dot]');
+        if (galleryControl) {
+          const gallery = galleryControl.closest('[data-gallery]');
+          const track = gallery?.querySelector('[data-gallery-track]');
+          if (!gallery || !track) return;
+          const current = Number(gallery.dataset.galleryActive || 0);
+          const target = galleryControl.hasAttribute('data-gallery-prev') ? current - 1 : galleryControl.hasAttribute('data-gallery-next') ? current + 1 : Number(galleryControl.dataset.galleryDot);
+          const total = Number(gallery.dataset.galleryCount || 0);
+          const nextIndex = Math.max(0, Math.min(total - 1, target));
+          track.scrollTo({ left: track.clientWidth * nextIndex, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+          updateGallery(gallery, nextIndex);
+          return;
+        }
+        const retry = event.target.closest('[data-detail-retry]'); if (retry) { location.href = location.pathname + (post ? `?postId=${encodeURIComponent(post.id)}` : ''); return; }
+        const follow = event.target.closest('[data-detail-follow]'); if (follow) { follow.classList.toggle('is-following'); follow.textContent = follow.classList.contains('is-following') ? '已关注' : '关注'; return; }
+        const like = event.target.closest('[data-detail-like]'); if (like) { const active = like.classList.toggle('liked'); const count = like.querySelector('[data-detail-like-count]'); if (count) count.textContent = Number(count.textContent) + (active ? 1 : -1); return; }
+        const save = event.target.closest('[data-detail-save]'); if (save) { const active = save.classList.toggle('saved'); const count = save.querySelector('[data-detail-save-count]'); if (count) count.textContent = Number(count.textContent) + (active ? 1 : -1); notify(active ? '已收藏' : '已取消收藏'); return; }
+        if (event.target.closest('[data-detail-share]')) { mediaViewer.hidden = true; openSheet(shareSheet); return; }
+        const media = event.target.closest('[data-detail-media]');
+        if (media) {
+          const label = media.dataset.mediaLabel || '媒体内容';
+          mediaViewer.hidden = false;
+          mediaViewer.querySelector('[data-media-label]').textContent = label;
+          mediaViewer.querySelector('[data-media-title]').textContent = label;
+          return;
+        }
+        if (event.target.closest('[data-media-close]')) { mediaViewer.hidden = true; return; }
+        if (event.target.closest('[data-detail-video]')) { notify('视频播放已开始'); return; }
+        if (event.target.closest('[data-detail-link]')) { event.preventDefault(); notify('链接内容会在应用内安全浏览器中打开'); return; }
+        if (event.target.closest('[data-detail-signup]')) { location.href = `campus-activity-signup.html?postId=${encodeURIComponent(postId)}`; return; }
+        if (event.target.closest('[data-action-sheet="activity"]')) { notify('活动开始前 1 小时提醒已开启'); return; }
+        const option = event.target.closest('[data-detail-vote]');
+        if (option) {
+          const group = option.closest('[data-detail-vote-group]');
+          if (group.dataset.voted === 'true') { notify('已投票，当前规则不支持修改'); return; }
+          group.querySelectorAll('[data-detail-vote]').forEach((item) => { const selected = item === option; item.classList.toggle('selected', selected); item.setAttribute('aria-pressed', String(selected)); });
+          return;
+        }
+        const voteSubmit = event.target.closest('[data-detail-vote-submit]');
+        if (voteSubmit) {
+          const group = mount.querySelector('[data-detail-vote-group]');
+          const selected = group?.querySelector('[data-detail-vote].selected');
+          if (!selected) { notify('请先选择一个选项'); return; }
+          group.dataset.voted = 'true'; voteSubmit.disabled = true; voteSubmit.textContent = '已提交投票';
+          notify('投票已提交，当前规则不支持修改'); return;
+        }
+        const reply = event.target.closest('[data-detail-reply]'); if (reply) { openComposer(reply.dataset.detailReplyTo || ''); }
+      });
+      composer.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const value = composerInput.value.trim();
+        if (!value) return;
+        const list = mount.querySelector('[data-comment-list]');
+        if (list) {
+          list.insertAdjacentHTML('afterbegin', `<article class="detail-comment is-pending"><span class="avatar blue">我</span><div><div class="detail-comment-name"><strong>我</strong><span>刚刚 · 待展示</span></div><p>${escapeHtml(value)}</p><div class="detail-comment-tools"><button type="button" data-comment-like><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.2-7-10a4 4 0 0 1 7-2.7A4 4 0 0 1 19 10c0 5.8-7 10-7 10Z"/></svg><span>0</span></button><button type="button" data-detail-reply data-detail-reply-to="我">回复</button></div></div></article>`);
+        }
+        notify('评论已提交，完成处理后公开展示');
+        composerInput.value = '';
+        closeSheets();
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeSheets();
+          mediaViewer.hidden = true;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 我的帖子</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-posts.css">
+</head>
+<body>
+  <div class="app-shell" data-tab-scope>
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-profile.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>我的帖子</strong></div>
+        <div class="appbar-right"><button class="text-link" data-nav="campus-publish-post.html" style="padding:0 6px">新建</button></div>
+      </header>
+      <section class="page">
+        <div class="segmented" data-tab-group>
+          <button class="active" data-tab="published">已发布</button>
+          <button data-tab="pending">审核中</button>
+          <button data-tab="hidden">已隐藏</button>
+        </div>
+        <section data-tab-panel="published" class="service-board space-top">
+          <div class="feed" data-post-list data-post-ids="spec-student_member-normal_gallery,spec-channel_member-normal_link"></div>
+        </section>
+        <section data-tab-panel="pending" hidden class="service-board space-top">
+          <div class="feed" data-post-list data-post-ids="state-pending"></div>
+        </section>
+        <section data-tab-panel="hidden" hidden class="service-board space-top">
+          <div class="feed" data-post-list data-post-ids="state-rejected,state-deleted"></div>
+          <div class="button-row"><a class="button tertiary" href="campus-draft-box.html" style="flex:1">去草稿箱重编</a><button class="button secondary" style="flex:1" data-action-toast="申诉入口已打开">发起申诉</button></div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script src="campus-post-fixtures.js"></script>
+  <script src="campus-posts.js"></script>
+</body>
+</html>

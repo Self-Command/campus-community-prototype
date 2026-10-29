@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 校园新闻</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-services.css">
+</head>
+<body>
+  <div class="service-app" data-service-theme="news">
+    <main>
+      <header class="appbar"><div class="appbar-left"><button class="icon-button" data-nav="campus-home.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div><div class="appbar-center"><strong>校园新闻</strong></div><div class="appbar-right"></div></header>
+      <section class="service-page" data-state-root>
+        <div class="service-search"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg><input data-list-search="#news-list" data-empty-target="#news-empty" placeholder="搜索标题、来源或关键词"></div>
+        <div class="service-chipbar" data-service-filter-group data-service-filter-target="#news-list" aria-label="新闻分类"><button class="service-chip active" data-service-filter="all" type="button">全部</button><button class="service-chip" data-service-filter="notice" type="button">通知公告</button><button class="service-chip" data-service-filter="dynamic" type="button">校园动态</button><button class="service-chip" data-service-filter="lecture" type="button">学术讲座</button><button class="service-chip" data-service-filter="event" type="button">学生活动</button></div>
+        <p class="section-caption">学校发布</p>
+        <div class="news-list" id="news-list">
+          <a class="news-list-item" href="campus-news-detail.html" data-searchable data-service-item="notice"><span class="news-list-copy"><span class="svc-status">置顶 · 校园公告</span><h2 style="margin-top:7px">图书馆期末周服务时间调整</h2><p>主馆开放时间调整为 07:30—22:30，自习室预约规则保持不变。</p><small>学生处 · 今天 09:00 · 阅读 1,286</small></span><span class="news-thumb"></span></a>
+          <a class="news-list-item" href="campus-news-detail.html" data-searchable data-service-item="event"><span class="news-list-copy"><span class="svc-status">学生活动</span><h2 style="margin-top:7px">毕业季旧物交换活动报名开启</h2><p>支持线上报名、现场签到与志愿者协助，活动地点设在学生活动中心。</p><small>计算机学院学生会 · 昨天 18:40 · 阅读 632</small></span><span class="news-thumb" data-news="event"></span></a>
+          <a class="news-list-item" href="campus-news-detail.html" data-searchable data-service-item="lecture"><span class="news-list-copy"><span class="svc-status">学术讲座</span><h2 style="margin-top:7px">人工智能与可信计算专题讲座</h2><p>面向全校开放，讲座后安排交流答疑与资料领取。</p><small>科研处 · 06-19 15:00 · 阅读 418</small></span><span class="news-thumb" data-news="lecture"></span></a>
+        </div>
+        <div class="empty" id="news-empty" hidden><div class="empty-icon"><svg class="i" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="1"/></svg></div><h3>没有匹配的新闻</h3><p>可换个关键词或切换新闻分类。</p></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script src="campus-services.js"></script>
+</body>
+</html>

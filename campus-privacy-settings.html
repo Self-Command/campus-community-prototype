@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>校园社区 · 隐私与社交</title><link rel="stylesheet" href="campus-native.css"><link rel="stylesheet" href="campus-personal.css"></head>
+<body><div class="app-shell"><main>
+  <header class="appbar"><div class="appbar-left"><button class="icon-button" data-nav="campus-account-settings.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div><div class="appbar-center"><strong>隐私与社交</strong></div><div class="appbar-right"></div></header>
+  <section class="settings-page-clean">
+    <section class="settings-group"><div class="settings-group-title">主页与身份</div><div class="settings-row"><span><strong>个人主页公开</strong><small>关闭后他人无法访问你的主页</small></span><button class="switch on" data-switch="profile-public-setting" type="button" role="switch" aria-label="个人主页公开"><i></i></button></div><div class="settings-row"><span><strong>展示真实姓名</strong><small>认证频道和指定场景仍按身份策略展示</small></span><button class="switch" data-switch="show-real-name" type="button" role="switch" aria-label="展示真实姓名"><i></i></button></div></section>
+    <section class="settings-group"><div class="settings-group-title">私信与屏蔽</div><div class="settings-row"><span><strong>允许陌生人私信</strong><small>关闭后仅关注的人可向你发起私信</small></span><button class="switch on" data-switch="allow-stranger-message" type="button" role="switch" aria-label="允许陌生人私信"><i></i></button></div><div class="settings-row" data-blocked-row><span><strong>@赵航</strong><small>已屏蔽 · 不会出现在推荐和私信中</small></span><button class="personal-action" type="button" data-unblock>解除</button></div></section>
+  </section>
+</main></div><div class="toast" data-toast-region role="status" aria-live="polite"></div><script src="campus-native.js"></script><script>document.querySelector('[data-unblock]')?.addEventListener('click',(event)=>{event.currentTarget.closest('[data-blocked-row]')?.remove();});</script></body>
+</html>

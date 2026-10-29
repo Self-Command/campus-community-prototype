@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 意见反馈</title>
+  <link rel="stylesheet" href="campus-native.css">
+</head>
+<body>
+  <div class="app-shell">
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-profile.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>意见反馈</strong></div>
+        <div class="appbar-right"><a class="text-link" href="campus-feedback-record.html">我的反馈</a></div>
+      </header>
+
+      <section class="page">
+        <form id="feedback-form" class="section-stack" data-submit-message="感谢你的反馈" data-success-nav="campus-feedback-record.html">
+          <div class="detail-card">
+            <h3>反馈类型</h3>
+            <div class="choice-grid columns-2 space-top">
+              <button class="choice-card active" type="button"><strong>Bug 反馈</strong><span>页面空白、按钮失效、跳转错误</span></button>
+              <button class="choice-card" type="button"><strong>功能建议</strong><span>流程、文案、模块优化建议</span></button>
+              <button class="choice-card" type="button"><strong>内容举报</strong><span>违规内容、骚扰私信、风险行为</span></button>
+              <button class="choice-card" type="button"><strong>其他问题</strong><span>账号、安全、审核申诉等</span></button>
+            </div>
+          </div>
+
+          <div class="field"><label>标题</label><input required maxlength="50" placeholder="例如：活动报名页提交后没有返回结果"></div>
+          <div class="field"><label>详细描述</label><textarea required maxlength="500" placeholder="请描述操作路径、期望结果、实际结果、账号身份和复现频率"></textarea></div>
+          <div class="field"><label>截图上传说明</label><textarea maxlength="180" placeholder="最多 3 张，可补充截图编号、时间、设备和网络环境"></textarea></div>
+          <div class="field"><label>联系方式</label><input placeholder="手机号 / 邮箱（选填，便于后续沟通）"></div>
+
+          <div class="detail-card">
+            <h3>工单处理说明</h3>
+            <p>反馈提交后会生成工单，同步到后台处理队列。审核、风控和账号问题会保留处理记录、状态流转和官方回复。</p>
+          </div>
+
+          <button class="button full" type="submit">提交反馈</button>
+        </form>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+</body>
+</html>

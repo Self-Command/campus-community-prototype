@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "campus-about.html",
+  "entry": "campus-about.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-21T02:44:25.852Z",
+  "updatedAt": "2026-06-21T02:44:25.852Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

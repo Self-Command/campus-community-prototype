@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 帖子组件样本</title>
+  <link rel="stylesheet" href="campus-native.css">
+  <link rel="stylesheet" href="campus-posts.css">
+  <style>
+    body { background: var(--bg); color: var(--ink); }
+    .spec-shell { width: min(100%, 1180px); margin: 0 auto; padding: 18px 16px 48px; }
+    .spec-topbar { display: flex; align-items: center; justify-content: space-between; min-height: 48px; margin-bottom: 16px; }.spec-topbar h1 { margin: 0; font-size: 20px; letter-spacing: -.03em; }
+    .spec-intro { padding: 20px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }.spec-intro p { max-width: 720px; margin: 8px 0 0; color: var(--ink-2); line-height: 1.7; }.spec-kicker { color: var(--blue); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; font-weight: 750; letter-spacing: .08em; }
+    .spec-summary { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); margin: 20px 0; border: 1px solid var(--line); }.spec-summary div { padding: 14px; border-right: 1px solid var(--line); }.spec-summary div:last-child { border-right: 0; }.spec-summary strong { display: block; font-size: 20px; font-variant-numeric: tabular-nums; }.spec-summary span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .spec-section { margin-top: 32px; }.spec-section > header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; }.spec-section h2 { margin: 0; font-size: 18px; letter-spacing: -.025em; }.spec-section header p { margin: 0; color: var(--muted); font-size: 12px; text-align: right; }
+    .spec-role { margin-top: 24px; }.spec-role-title { display: flex; align-items: center; gap: 9px; margin-bottom: 10px; }.spec-role-title h3 { margin: 0; font-size: 15px; }.spec-role-title span { color: var(--muted); font-size: 12px; }
+    .spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(285px, 1fr)); gap: 12px; }.spec-grid .post-card-shell { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: none; }
+    .spec-rule-table { width: 100%; border-collapse: collapse; overflow: hidden; border: 1px solid var(--line); font-size: 12px; }.spec-rule-table th, .spec-rule-table td { padding: 10px; border: 1px solid var(--line); text-align: center; }.spec-rule-table th:first-child, .spec-rule-table td:first-child { text-align: left; }.spec-rule-table th { background: var(--surface-alt); color: var(--ink-2); }.ok { color: var(--green); font-weight: 800; }.no { color: var(--muted); }.spec-rule-note { margin: 10px 0 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .toast { position: fixed; right: 16px; bottom: 16px; z-index: 30; transform: translateY(16px); opacity: 0; pointer-events: none; padding: 10px 12px; border-radius: 10px; background: var(--ink); color: #fff; font-size: 12px; transition: opacity 150ms cubic-bezier(.2,0,0,1), transform 150ms cubic-bezier(.2,0,0,1); }.toast.show { transform: translateY(0); opacity: 1; }
+    @media (max-width: 600px) { .spec-shell { padding-right: 12px; padding-left: 12px; }.spec-summary { grid-template-columns: 1fr; }.spec-summary div { border-right: 0; border-bottom: 1px solid var(--line); }.spec-summary div:last-child { border-bottom: 0; }.spec-section > header { align-items: flex-start; flex-direction: column; }.spec-section header p { text-align: left; }.spec-rule-table { display: block; overflow-x: auto; white-space: nowrap; } }
+    @media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+  </style>
+</head>
+<body>
+  <main class="spec-shell" data-od-id="post-card-specimens">
+    <header class="spec-topbar"><button class="icon-button" type="button" data-nav="index.html" aria-label="返回原型入口"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button><h1>帖子组件样本</h1><span></span></header>
+    <section class="spec-intro"><div class="spec-kicker">POSTCARD · FIXTURE MATRIX</div><h2>作者身份、帖子类型、权限和状态的可联调样本</h2><p>每张卡片都由同一个六区 <code>PostCard</code> 渲染。点击内容区域进入同一条数据驱动的详情页；活动、投票和普通内容只替换内容预览插槽，不复制卡片结构。</p></section>
+    <section class="spec-summary" aria-label="样本统计"><div><strong data-valid-count>—</strong><span>有效发布组合</span></div><div><strong>4</strong><span>审核与权限状态样本</span></div><div><strong>1</strong><span>共享 DTO 与详情渲染器</span></div></section>
+    <section class="spec-section"><header><div><h2>有效发布组合</h2></div><p>按作者授权分组；每张卡片均可进入匹配详情页。</p></header><div data-specimen-matrix></div></section>
+    <section class="spec-section"><header><div><h2>状态样本</h2></div><p>待审核、驳回、删除、无权限；真实信息流按可见性规则决定是否返回。</p></header><div class="spec-grid" data-state-matrix></div></section>
+    <section class="spec-section"><header><div><h2>发布权限矩阵</h2></div><p>“—” 表示发布入口不生成对应内容，不伪造用户发布态。</p></header><table class="spec-rule-table"><thead><tr><th>作者身份</th><th>文字</th><th>图文</th><th>链接</th><th>视频</th><th>活动</th><th>投票</th></tr></thead><tbody data-permission-matrix></tbody></table><p class="spec-rule-note">视频：认证频道成员、认证频道管理者/创建者或平台管理员。活动与投票：频道管理员、频道创建者或平台管理员。学生、教职工、后勤为展示身份；授权由 MEMBER/频道角色与服务端能力结果共同决定。</p></section>
+  </main>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+  <script src="campus-posts.js"></script>
+  <script src="campus-post-fixtures.js"></script>
+  <script>
+    (() => {
+      const fixtures = window.CampusPostFixtures;
+      const render = window.CampusPosts?.renderPostCard;
+      if (!fixtures || !render) return;
+      document.querySelector('[data-valid-count]').textContent = fixtures.all.length;
+      document.querySelector('[data-specimen-matrix]').innerHTML = fixtures.profiles.map((profile) => {
+        const posts = fixtures.all.filter((post) => post.specimen.profileKey === profile.key);
+        return `<section class="spec-role"><div class="spec-role-title"><h3>${profile.label}</h3><span>${posts.length} 个有效组合</span></div><div class="spec-grid">${posts.map(render).join('')}</div></section>`;
+      }).join('');
+      document.querySelector('[data-state-matrix]').innerHTML = fixtures.stateExamples.map(render).join('');
+      const order = ['NORMAL_TEXT', 'NORMAL_GALLERY', 'NORMAL_LINK', 'NORMAL_VIDEO', 'ACTIVITY', 'VOTE'];
+      document.querySelector('[data-permission-matrix]').innerHTML = fixtures.profiles.map((profile) => `<tr><td>${profile.label}</td>${order.map((kind) => `<td class="${profile.allowedKinds.includes(kind) ? 'ok' : 'no'}">${profile.allowedKinds.includes(kind) ? '✓' : '—'}</td>`).join('')}</tr>`).join('');
+    })();
+  </script>
+</body>
+</html>

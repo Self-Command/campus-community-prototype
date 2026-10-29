@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园社区 · 通知详情</title>
+  <link rel="stylesheet" href="campus-native.css">
+</head>
+<body>
+  <div class="app-shell">
+    <main>
+      <header class="appbar">
+        <div class="appbar-left"><button class="icon-button" data-nav="campus-messages.html" aria-label="返回"><svg class="i" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button></div>
+        <div class="appbar-center"><strong>通知详情</strong></div>
+        <div class="appbar-right"><button class="icon-button" data-action-toast="删除通知后将返回消息列表" aria-label="删除通知"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M9 7V5h6v2m-7 0 1 12h6l1-12"/></svg></button></div>
+      </header>
+
+      <section class="page notice-detail-page">
+        <article class="notice-article" data-notice-kind="audit-result">
+          <header class="notice-hero">
+            <div class="notice-source">
+              <span class="avatar green">审</span>
+              <div><strong>内容审核服务</strong><small>系统通知 · 今天 09:18 · 已读</small></div>
+            </div>
+            <h1>你的动态已通过审核</h1>
+            <p>《毕业晚会志愿者招募提醒》已完成审核，当前只展示给符合可见范围的用户。后续如发生举报、撤回、删除或管理员处理，会继续通过通知中心同步。</p>
+            <div class="notice-meta-strip"><span class="tag green">审核结果</span><span class="tag">关联动态</span><span class="tag">保留处理记录</span></div>
+          </header>
+
+          <section class="notice-body">
+            <p>你的内容已经进入信息流。若需要修改，请从动态详情页进入“更多”操作；修改后可能重新进入审核流程。</p>
+            <p>如果你认为审核结果异常，可以在详情页提交申诉。申诉会保留原始内容、发布时间、审核结果和处理人记录，供平台复核。</p>
+          </section>
+
+          <section class="notice-section" aria-label="关联内容">
+            <h2>关联内容</h2>
+            <div class="preview-card" data-nav="campus-post-detail.html">
+              <div class="preview-media"></div>
+              <div class="preview-copy">
+                <strong>毕业晚会志愿者招募提醒</strong>
+                <p>需要现场签到、物资发放和秩序引导同学；活动报名与签到规则会在详情页展示。</p>
+                <span>动态详情 · 公共频道 · 2 小时前</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="notice-section" aria-label="处理进度">
+            <h2>处理进度</h2>
+            <div class="notice-timeline">
+              <div class="notice-step"><i>1</i><span><b>提交成功</b><span>今天 08:52，内容已保存并进入审核队列</span></span></div>
+              <div class="notice-step"><i>2</i><span><b>审核完成</b><span>今天 09:18，通过策略审核与人工抽检</span></span></div>
+              <div class="notice-step"><i>3</i><span><b>通知送达</b><span>已通过站内通知和系统消息同步给作者</span></span></div>
+            </div>
+          </section>
+
+          <section class="notice-confirm" aria-label="阅读确认">
+            <span><b>已自动标记为已读</b><small>通知仍会保留在消息中心，方便后续追溯。</small></span>
+            <button class="button tertiary" type="button" data-action-toast="已设为重要通知">标记重要</button>
+          </section>
+        </article>
+      </section>
+    </main>
+  </div>
+  <div class="toast" data-toast-region role="status" aria-live="polite"></div>
+  <script src="campus-native.js"></script>
+</body>
+</html>
